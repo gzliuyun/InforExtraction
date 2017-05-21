@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>知识抽取系统</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- 引入 Bootstrap -->
+      {% load staticfiles %}
+      <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet"> 
+      <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+      <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <nav class="navbar navbar-default" role="navigation"> 
+         <div class="container-fluid"> 
+            <div class="navbar-header"> 
+               <a class="navbar-brand" href="#">菜鸟教程</a> 
+            </div> 
+            <ul class="nav navbar-nav navbar-right"> 
+               <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
+               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
+            </ul> 
+         </div> 
+      </nav>
+ 
+      <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+      <script src="https://code.jquery.com/jquery.js"></script>
+      <!-- 包括所有已编译的插件 -->
+      <script src="{%static 'js/bootstrap.min.js' %}"></script> 
+   </body>
+</html>
