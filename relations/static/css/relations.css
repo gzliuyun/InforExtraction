@@ -1,4 +1,16 @@
-.block-container{
-	width: 80%;
-	margin: 20px auto;
+.contain-content{
+	width: 85%;
+	margin: 0 auto;
 }
+.block-row{
+	margin-right: -15px;
+	margin-left: -15px;
+	margin-top: 30px;  
+}
+.box-contain{
+	margin-bottom: 0px;
+}
+/*.block-container{
+	width: 80%;
+	margin: 0 auto;
+}*/

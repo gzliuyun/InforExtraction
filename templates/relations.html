@@ -5,7 +5,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	    <title>人物关系抽取</title>
-	    
+
 		{% load staticfiles %}
 	    <link rel="shortcut icon" href="{%static 'favicon.ico' %}"> 
 	    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -14,97 +14,137 @@
 	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/relations.css' %}" rel="stylesheet">
 	</head>
-	<body class="gray-bg">
+	<body class="gray-bg top-navigation">
 		<div class="wrapper">
-			<div class="row">
-	            <div class="col-sm-12">
-	                <div class="tabs-container block-container">
-	                    <ul class="nav nav-tabs">
-	                        <li class="active">
-	                        	<a data-toggle="tab" href="#tab-1" aria-expanded="true"> 
-	                        		<i class="fa fa-edit">
-	                        			<strong>关系文本输入</strong>
-	                        		</i>
-	                        	</a>
-	                        </li>
-	                        <li class="">
-	                        	<a data-toggle="tab" href="#tab-2" aria-expanded="false">
-	                        		<i class="fa fa-link">
-	                        			<strong>关系网页URL输入</strong>
-	                        		</i>
-	                        	</a>
-	                        </li>
-	                    </ul>
-	                    <div class="tab-content">
-	                        <div id="tab-1" class="tab-pane active">
-	                            <div class="panel-body">
-	                            	<form class="form-horizontal m-lg" id="textFrom" novalidate="novalidate">
-	                            		<div class="form-group">
-	                            			<div class="col-sm-12">
-	                            				<textarea class="form-control" id="input_textarea" name="input_textarea" style="height: 200px" placeholder="请输入需要分析的中文人物关系文本">
-	                            				</textarea>
-	                            			</div>
-	                            		</div>
-	                            		<div class="form-group">
-	                            			<div class="col-sm-12">
-	                            				<button class="btn btn-primary pull-right" type="button">
-	                            					<i class="fa fa-check"></i>提交
-	                            				</button>
-	                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
-	                            					重置
-	                            				</button>
-	                            			</div>
-	                            		</div>
-	                                </form>
-	                            </div>
-	                        </div>
-	                        <div id="tab-2" class="tab-pane">
-	                            <div class="panel-body">
-	                                <form class="form-horizontal m-lg" id="urlFrom" novalidate="novalidate">
-	                                	<div class="form-group">
-	                                		<div class="col-sm-12">
-	                                			<input type="url" id="input_url" name="input_url" class="form-control" placeholder="请输入需要分析的文本URL">
-	                                		</div>
-	                                	</div>
-	                                	<div class="form-group">
-	                                		<div class="col-sm-12">
-	                                			<button class="btn btn-primary pull-right" type="button">
-	                            					<i class="fa fa-check"></i>提交
-	                            				</button>
-	                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
-	                            					重置
-	                            				</button>
-	                                		</div>	                 
-	                                	</div>
-	                                </form>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
+			<div id="page-wrapper" class="gray-bg">
+				<div class="contain-content">
+					<div class="row block-row">
+			            <div class="col-sm-12">
+			                <div class="tabs-container block-container">
+			                    <ul class="nav nav-tabs">
+			                        <li class="active">
+			                        	<a data-toggle="tab" href="#tab-1" aria-expanded="true"> 
+			                        		<i class="fa fa-edit">
+			                        			<strong>关系文本输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                        <li class="">
+			                        	<a data-toggle="tab" href="#tab-2" aria-expanded="false">
+			                        		<i class="fa fa-link">
+			                        			<strong>关系网页URL输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                    </ul>
+			                    <div class="tab-content">
+			                        <div id="tab-1" class="tab-pane active">
+			                            <div class="panel-body">
+			                            	<form class="form-horizontal m-lg" id="textFrom" novalidate="novalidate">
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<textarea class="form-control" id="input_textarea" name="input_textarea" style="height: 200px" placeholder="请输入需要分析的中文人物关系文本">
+			                            				</textarea>
+			                            			</div>
+			                            		</div>
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<button class="btn btn-primary pull-right" type="button">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                            			</div>
+			                            		</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                        <div id="tab-2" class="tab-pane">
+			                            <div class="panel-body">
+			                                <form class="form-horizontal m-lg" id="urlFrom" novalidate="novalidate">
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<input type="url" id="input_url" name="input_url" class="form-control" placeholder="请输入需要分析的文本URL">
+			                                		</div>
+			                                	</div>
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<button class="btn btn-primary pull-right" type="button">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                                		</div>	                 
+			                                	</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="row block-row">
+			        	<div class="col-sm-12">
+			        		<div class="ibox box-contain">
+			        			<div class="ibox-title">
+			        				<h5>文本信息</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content">
+			        				<p>任国强：5月25日，美国“杜威”号导弹驱逐舰擅自进入中国南沙群岛有关岛礁邻近海域，中国海军“柳州”号导弹护卫舰、“泸州”号导弹护卫舰对美舰进行识别查证，并予以警告驱离。中国对南沙群岛及其附近海域拥有无可争辩的主权。对于美军方这种炫耀武力，推动地区军事化，且极易引发海空意外事件的行径，中国军队表示坚决反对并已向美方提出严正交涉。一段时间以来，在中国和东盟国家共同努力下，南海局势正在趋稳向好。但美方的错误行为使南海趋于好转的局面受到破坏，不利于南海的和平稳定。</p>
+			        				<p>当前，中美两国两军关系处在发展的重要时期。我们认为，健康稳定的中美关系符合双方的共同利益，需要双方的共同努力。我们要求美方采取切实措施改正错误，为两国两军关系的发展增添正能量。美军的错误行为只会促使中国军队进一步加强能力建设，坚定捍卫国家主权和安全。</p>
+			        			</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="row block-row">
+			        	<div class="col-md-8 col-lg-8">
+			        		<div class="ibox ibox-contain">
+			        			<div class="ibox-title">
+			        				<h5>词性标注</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content">
+			        			</div>
+							</div>	        		
+			        	</div>
+			        	<div class="col-md-4 col-lg-4">
+			        		<div class="ibox box-contain">
+				        		<div class="ibox-title">
+			        				<h5>词性标注</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				        		</div>
+				        		<div class="ibox-content">
+
+				        		</div>
+				        	</div>
+			        	</div>
+				    </div>
+		        </div>
 	        </div>
-	        <div class="row">
-	        	<div class="col-sm-12">
-	        		<div class="ibox block-container">
-	        			<div class="ibox-title">
-	        				<h5>文本信息</h5>
-	        				<div class="ibox-tools">
-	        					<a class="collapse-link">
-	        						<i class="fa fa-chevron-up"></i>
-	        					</a>
-	        					<a  class="close-link">
-	        						<i class="fa fa-times"></i>
-	        					</a>
-	        				</div>
-	        			</div>
-	        			<div class="ibox-content">
-	        				<p>任国强：5月25日，美国“杜威”号导弹驱逐舰擅自进入中国南沙群岛有关岛礁邻近海域，中国海军“柳州”号导弹护卫舰、“泸州”号导弹护卫舰对美舰进行识别查证，并予以警告驱离。中国对南沙群岛及其附近海域拥有无可争辩的主权。对于美军方这种炫耀武力，推动地区军事化，且极易引发海空意外事件的行径，中国军队表示坚决反对并已向美方提出严正交涉。一段时间以来，在中国和东盟国家共同努力下，南海局势正在趋稳向好。但美方的错误行为使南海趋于好转的局面受到破坏，不利于南海的和平稳定。</p>
-	        				<p>当前，中美两国两军关系处在发展的重要时期。我们认为，健康稳定的中美关系符合双方的共同利益，需要双方的共同努力。我们要求美方采取切实措施改正错误，为两国两军关系的发展增添正能量。美军的错误行为只会促使中国军队进一步加强能力建设，坚定捍卫国家主权和安全。</p>
-	        			</div>
-	        		</div>
-	        	</div>
-	        </div>
-	        
 	    </div>
 	    <!-- 全局js -->
 	    <script src="{%static 'js/jquery.min.js' %}"></script>
