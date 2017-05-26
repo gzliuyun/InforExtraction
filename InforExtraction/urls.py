@@ -20,5 +20,5 @@ from . import views,settings
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^home/$', views.home),
-    url(r'^relation/', include('relation.urls')),
+    url(r'^relations/', include('relations.urls')),
 ]
