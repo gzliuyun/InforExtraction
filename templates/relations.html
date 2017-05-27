@@ -8,11 +8,15 @@
 
 		{% load staticfiles %}
 	    <link rel="shortcut icon" href="{%static 'favicon.ico' %}"> 
-	    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <!-- <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
+	    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="{%static 'css/font-awesome.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/animate.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/relations.css' %}" rel="stylesheet">
+
+	    <!-- 添加css插件-->
+	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
 	</head>
 	<body class="gray-bg top-navigation">
 		<div class="wrapper">
@@ -107,8 +111,8 @@
 			        	</div>
 			        </div>
 			        <div class="row block-row">
-			        	<div class="col-md-8 col-lg-8">
-			        		<div class="ibox ibox-contain">
+			        	<div class="col-lg-8 col-md-8">
+			        		<div class="ibox box-contain">
 			        			<div class="ibox-title">
 			        				<h5>词性标注</h5>
 			        				<div class="ibox-tools">
@@ -120,7 +124,58 @@
 			        					</a>
 			        				</div>
 			        			</div>
-			        			<div class="ibox-content">
+			        			<div class="ibox-content" style="height: 400px">
+			        				<div class="col-md-8" style="height: 400px">
+			        					<a class="btn btn-xs btn-rounded btn-danger btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：北京<br>实体类型:名词<br>词性缩写NB">北京</a>
+			        					<a class="btn btn-xs btn-rounded btn-primary btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航空<br>实体类型:名词<br>词性缩写NB">航空</a>
+			        					<a class="btn btn-xs btn-rounded btn-success btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航天<br>实体类型:名词<br>词性缩写NB">航天</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">大学</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">北京航空航天大学</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">北京大学</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">中国人民大学</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">海淀区</a>
+			        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型:名词<br>词性缩写NB">学院路</a>
+			        				</div>
+			        				<div class="col-md-4" style="height: 400px">
+			        					<div class="row">
+			        						<div class="col-md-6 col-xs-6">
+			        							<div class="checkbox i-check">
+			        								<input type="checkbox" checked="checked" id="chekbox_1" onchange="add_or_ch_tags()">
+			        								<label for="chekbox_1" style="padding-left: 10px;">
+			        									<a class="btn btn-xs btn-rounded btn-primary">名词</a>
+			        								</label> 
+			        							</div>
+			        							<div class="checkbox i-check">
+			        								<input type="checkbox" checked="checked" id="chekbox_2" onchange="">
+			        								<label for="chekbox_2" style="padding-left: 10px;">
+			        									<a class="btn btn-xs btn-rounded btn-danger">形容词</a>
+			        								</label> 
+			        							</div>
+			        							<div class="checkbox i-check">
+			        								<input type="checkbox" checked="checked" id="chekbox_3" onchange="">
+			        								<label for="chekbox_3" style="padding-left: 10px;">
+			        									<a class="btn btn-xs btn-rounded btn-warning">其他词</a>
+			        								</label> 
+			        							</div>
+			        						</div>
+			        						<div class="col-md-6 col-xs-6">
+			        							<div class="checkbox i-check">
+			        								<input type="checkbox" checked="checked" id="chekbox_4" onchange="">
+			        								<label for="chekbox_4" style="padding-left: 10px;">
+			        									<a class="btn btn-xs btn-rounded btn-success">动词</a>
+			        								</label> 
+			        							</div>
+			        							<div class="checkbox i-check">
+			        								<input type="checkbox" checked="checked" id="chekbox_5" onchange="">
+			        								<label for="chekbox_5" style="padding-left: 10px;">
+			        									<a class="btn btn-xs btn-rounded btn-info">副词</a>
+			        								</label> 
+			        							</div>
+			        						</div>
+			        					</div>
+			        					<div class="row">
+			        					</div>
+			        				</div>
 			        			</div>
 							</div>	        		
 			        	</div>
@@ -149,7 +204,17 @@
 	    <!-- 全局js -->
 	    <script src="{%static 'js/jquery.min.js' %}"></script>
 	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	    <!-- iCheck -->
+	    <script src="{%static 'js/plugins/iCheck/icheck.min.js' %}"></script>
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/content.js' %}"></script>
+	    <script type="text/javascript">
+	    	$(document).ready(function(){
+	    		$('.i-check').iCheck({
+	    			checkboxClass: 'icheckbox_square-green',
+	    			radioClass:'iradio_square-green'
+	    		})
+	    	});
+	    </script>
 	</body>
 </html>
