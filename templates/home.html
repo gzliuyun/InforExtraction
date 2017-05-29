@@ -11,39 +11,50 @@
 	    <link href="{%static 'css/font-awesome.min.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/animate.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+	    <style>
+			#top-div{
+				height: 50px;
+			}
+			/*让bootom占满剩下的屏幕高度*/
+			#bottom-div{ 
+				width: 100%;
+				position: absolute;
+				top: 50px;
+				bottom: 5px;
+			}
+		</style>
 	</head>
 	<body class="gray-bg top-navigation">
-	    <div id="wrapper">
-		    <div  class="gray-bg">
-	            <div class="row border-bottom white-bg">
-	                <nav class="navbar navbar-default navbar-static-top" role="navigation">
-	                	<div class="container-fluid">
-		                    <div class="navbar-header">
-		                        <a href="#" class="navbar-brand">知识抽取系统</a>
-		                    </div>
-		                    <div >
-		                        <ul class="nav navbar-nav">
-		                            <li><a href="#"> 人物属性抽取</a></li>
-		                            <li class="active"><a href="/relations/" target="iframe_a"> 人物关系抽取</a></li>
-		                            <li><a href="#"> 人物观点抽取</a></li>
-		                        </ul>
-		                        <ul class="nav navbar-top-links navbar-right">
-	                            	<li>
-	                                	<a href="/login/">
-	                                    	<i class="fa fa-sign-out"></i> 退出
-	                                	</a>
-	                            	</li>
-	                        	</ul>
-		                    </div>
-		                </div>
-	                </nav>
-	            </div>
-	            <div id="row">
-		    		<iframe name="iframe_a" class="J_iframe" src="/relations/" width="100%" height="100%" frameborder="0">
-		    		</iframe>
-		    	</div> 
-		    </div>
-	    </div>                      
+	    <div  class="gray-bg" style="width: 100%; height:100%">
+            <div class="row white-bg" id="top-div">
+            <!-- row border-bottom white-bg -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                	<div class="container-fluid">
+	                    <div class="navbar-header">
+	                        <a class="navbar-brand" href="#">知识抽取系统</a>
+	                    </div>
+	                    <div >
+	                        <ul class="nav navbar-nav">
+	                            <li><a href="#"> 人物属性抽取</a></li>
+	                            <li class="active"><a href="/relations/" target="iframe_a"> 人物关系抽取</a></li>
+	                            <li><a href="#"> 人物观点抽取</a></li>
+	                        </ul>
+	                        <ul class="nav navbar-top-links navbar-right">
+                            	<li>
+                                	<a href="/login/">
+                                    	<i class="fa fa-sign-out"></i> 退出
+                                	</a>
+                            	</li>
+                        	</ul>
+	                    </div>
+	                </div>
+                </nav>
+            </div>
+            <div id="bottom-div" style="">
+	    		<iframe name="iframe_a" class="J_iframe" src="/relations/" width="100%" height="100%" frameborder="0">
+	    		</iframe>
+	    	</div> 
+	    </div>
 		<!-- 全局js -->
 		<script src="{%static 'js/jquery.min.js' %}"></script>
 	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
