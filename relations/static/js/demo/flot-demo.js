@@ -126,7 +126,7 @@ $(function() {
             }
         },
         grid: {
-            hoverable: false
+            hoverable: true
         },
         tooltip: true,
         tooltipOpts: {

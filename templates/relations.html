@@ -18,6 +18,7 @@
 	    <!-- 添加css插件-->
 	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/plugins/footable/footable.core.css' %} " rel="stylesheet">
+	    
 	</head>
 	<body class="gray-bg top-navigation">
 		<div class="wrapper">
@@ -111,7 +112,7 @@
 			        		</div>
 			        	</div>
 			        </div>
-			        <div class="row block-row">
+			        <div class="row block-row" >
 			        	<div class="col-lg-8 col-md-8">
 			        		<div class="ibox box-contain">
 			        			<div class="ibox-title">
@@ -125,7 +126,7 @@
 			        					</a>
 			        				</div>
 			        			</div>
-			        			<div class="ibox-content" style="height: 450px">
+			        			<div class="ibox-content" style="height: 470px">
 			        				<div class="row" style="height: 400px;">
 				        				<div class="col-md-8">
 				        					<div class="tooltip-demo full-height-scroll" id="tag_result" style="width: auto;height: 100%">
@@ -232,7 +233,7 @@
 			        					</a>
 			        				</div>
 				        		</div>
-				        		<div class="ibox-content" style="height: 450px">
+				        		<div class="ibox-content" style="height: 470px">
 				        			<div class="col-sm-12">
 				        				<input type="text" id="tag_filter" class="form-control input-sm m-b-xs" placeholder="表格搜索...">
 				        				<table id="tag_table" class="footable table table-hover footable-loaded" data-page-size="9" data-filter="#tag_filter">
@@ -355,6 +356,97 @@
 				        	</div>
 			        	</div>
 				    </div>
+				    <div class="row block-row">
+				    	<div class="col-lg-6 col-md-6">
+				    		<div class="ibox box-contain">
+				    			<div class="ibox-title">
+				    				<h5>实体抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" style="height: 350px;">
+					    			<div class="col-sm-12">
+					    				<input type="text" class="form-control input-sm m-b-xs" id="entity_filter" placeholder="表格搜索...">
+					    				<table id="entity_table" class="footable table table-hover table-bordered no-paging footable-loaded" data-filter="#entity_table">
+					    					<thead >
+					    						<tr>
+					    							<th class="footable-sortable">
+					    								实体类型
+					    								<span class="footable-sort-indicator"></span>
+					    							</th>
+					    							<th class="footable-sortable">
+					    								实体列表
+					    								<span class="footable-sort-indicator"></span>
+					    							</th>
+					    						</tr>
+					    					</thead>
+					    					<tbody>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td class="col-md-3">
+					    								<span class="footable-toggle">地名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">北京
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">人名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">刘涛
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">机构名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">人民大会堂
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">数字</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">36
+					    								</a>
+					    							</td>
+					    						</tr>
+					    					</tbody>
+					    				</table>
+					    			</div>	
+					    		</div>
+					    	</div>
+				    	</div>
+				    	<div class="col-lg-6 col-md-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>关系抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+				    			<div class="ibox-content" id="relation_panel" style="height: 350px; ">
+				    			</div> 
+				    		</div>
+				    	</div>
+				   	</div>
 		        </div>
 	        </div>
 	    </div>

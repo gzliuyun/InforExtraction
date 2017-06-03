@@ -36,7 +36,16 @@
 	                    <div >
 	                        <ul class="nav navbar-nav">
 	                            <li><a href="#"> 人物属性抽取</a></li>
-	                            <li class="active"><a href="/relations/" target="iframe_a"> 人物关系抽取</a></li>
+	                            <!-- <li class="active"><a href="/relations/" target="iframe_a"> 人物关系抽取</a></li> -->
+	                            <li class="dropdown active">
+	                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物关系抽取 <span class="caret"></span></a>
+	                                <ul role="menu" class="dropdown-menu">
+	                                    <li><a href="/relations/" target="iframe_a">文本语料抽取</a>
+	                                    </li>
+	                                    <li><a href="#">人物关系库</a>
+	                                    </li>
+	                                </ul>
+                            	</li>
 	                            <li><a href="#"> 人物观点抽取</a></li>
 	                        </ul>
 	                        <ul class="nav navbar-top-links navbar-right">
