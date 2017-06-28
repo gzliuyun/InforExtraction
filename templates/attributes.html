@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	    <title>人物属性抽取</title>
+
+		{% load staticfiles %}
+	    <link rel="shortcut icon" href="{%static 'favicon.ico' %}">
+	    <!-- <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
+	    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="{%static 'css/font-awesome.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/animate.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/relations.css' %}" rel="stylesheet">
+
+	    <!-- 添加css插件-->
+	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/plugins/footable/footable.core.css' %} " rel="stylesheet">
+
+	</head>
+	<body class="gray-bg top-navigation">
+		<div class="wrapper">
+			<div id="page-wrapper" class="gray-bg">
+				<div class="contain-content">
+					<div class="row block-row">
+			            <div class="col-sm-12">
+			                <div class="tabs-container block-container">
+			                    <ul class="nav nav-tabs">
+			                        <li class="active">
+			                        	<a data-toggle="tab" href="#tab-1" aria-expanded="true">
+			                        		<i class="fa fa-edit">
+			                        			<strong>中文文本输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                        <li class="">
+			                        	<a data-toggle="tab" href="#tab-2" aria-expanded="false">
+			                        		<i class="fa fa-link">
+			                        			<strong>中文网页URL输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                    </ul>
+			                    <div class="tab-content">
+			                        <div id="tab-1" class="tab-pane active">
+			                            <div class="panel-body">
+			                            	<form class="form-horizontal m-lg" id="textFrom" novalidate="novalidate">
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<textarea class="form-control" id="input_textarea" name="input_textarea" style="height: 200px" placeholder="请输入需要分析的中文人物属性文本">
+			                            				</textarea>
+			                            			</div>
+			                            		</div>
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<button class="btn btn-primary pull-right" type="button">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                            			</div>
+			                            		</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                        <div id="tab-2" class="tab-pane">
+			                            <div class="panel-body">
+			                                <form class="form-horizontal m-lg" id="urlFrom" novalidate="novalidate">
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<input type="url" id="input_url" name="input_url" class="form-control" placeholder="请输入需要分析的文本URL">
+			                                		</div>
+			                                	</div>
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<button class="btn btn-primary pull-right" type="button">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                                		</div>
+			                                	</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="row block-row">
+			        	<div class="col-sm-12">
+			        		<div class="ibox box-contain">
+			        			<div class="ibox-title">
+			        				<h5>文本信息</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content">
+			        				<p>任国强：5月25日，美国“杜威”号导弹驱逐舰擅自进入中国南沙群岛有关岛礁邻近海域，中国海军“柳州”号导弹护卫舰、“泸州”号导弹护卫舰对美舰进行识别查证，并予以警告驱离。中国对南沙群岛及其附近海域拥有无可争辩的主权。对于美军方这种炫耀武力，推动地区军事化，且极易引发海空意外事件的行径，中国军队表示坚决反对并已向美方提出严正交涉。一段时间以来，在中国和东盟国家共同努力下，南海局势正在趋稳向好。但美方的错误行为使南海趋于好转的局面受到破坏，不利于南海的和平稳定。</p>
+			        				<p>当前，中美两国两军关系处在发展的重要时期。我们认为，健康稳定的中美关系符合双方的共同利益，需要双方的共同努力。我们要求美方采取切实措施改正错误，为两国两军关系的发展增添正能量。美军的错误行为只会促使中国军队进一步加强能力建设，坚定捍卫国家主权和安全。</p>
+			        			</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="row block-row" >
+			        	<div class="col-lg-8 col-md-8">
+			        		<div class="ibox box-contain">
+			        			<div class="ibox-title">
+			        				<h5>词性标注</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content" style="height: 470px">
+			        				<div class="row" style="height: 400px;">
+				        				<div class="col-md-8">
+				        					<div class="tooltip-demo full-height-scroll" id="tag_result" style="width: auto;height: 100%">
+					        					<a class="btn btn-xs btn-rounded btn-danger btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：北京<br>实体类型: 名词<br>词性缩写: NB">北京</a>
+					        					<a class="btn btn-xs btn-rounded btn-primary btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航空<br>实体类型: 名词<br>词性缩写: NB">航空</a>
+					        					<a class="btn btn-xs btn-rounded btn-success btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航天<br>实体类型: 名词<br>词性缩写: NB">航天</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">大学</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">北京航空航天大学</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">北京大学</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">中国人民大学</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">海淀区</a>
+					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">学院路</a>
+					        				</div>
+				        				</div>
+				        				<div class="col-md-4" >
+				        					<div class="row">
+				        						<div class="col-md-6 col-xs-6">
+				        							<div class="checkbox i-check">
+				        								<input id="checkbox_1" type="checkbox" checked="checked" onchange="">
+				        								<label for="checkbox_1" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-primary">名词</a>
+				        								</label>
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="checkbox_2" type="checkbox" checked="checked" onchange="">
+				        								<label for="checkbox_2" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-danger">形容词</a>
+				        								</label>
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="checkbox_3" type="checkbox" checked="checked" onchange="">
+				        								<label for="checkbox_3" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-warning">其他词</a>
+				        								</label>
+				        							</div>
+				        						</div>
+				        						<div class="col-md-6 col-xs-6">
+				        							<div class="checkbox i-check">
+				        								<input id="checkbox_4" type="checkbox" checked="checked" onchange="">
+				        								<label for="checkbox_4" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-success">动词</a>
+				        								</label>
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="checkbox_5" type="checkbox" checked="checked" onchange="">
+				        								<label for="checkbox_5" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-info">副词</a>
+				        								</label>
+				        							</div>
+				        						</div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="hr-line-dashed m-xs"></div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="text-center">
+				        							<h4>词性分布比例</h4>
+	                        						<div id="flot-pie-chart" style="height: 200px; width: 200px; margin: 0 auto;">
+	                        						</div>
+
+				        						</div>
+				        						<div class="text-right" style="margin-right: 10px">
+			        								<small>词总数：</small>
+			        								<span id="tag_words_count">521</span>
+			        							</div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="hr-line-dashed m-xs"></div>
+				        					</div>
+				        					<div class="row">
+				        						<ul class="stat-list m-t-sm">
+				        							<li>
+				        								<p class="no-margins">
+				        									实体词数目:
+				        									<span id="tag_entity_count">42</span>
+				        								</p>
+				        								<div class="progress progress-mini">
+				        									<div id="tag_entity_rate" class="progress-bar progress-bar-entity" style="width: 15%">
+				        									</div>
+				        								</div>
+				        							</li>
+				        						</ul>
+				        					</div>
+				        				</div>
+				        			</div>
+			        				<div class="row">
+			        					<small style="margin: 0 20px;">
+			        						<strong>说明：可查看单词原型、实体类型及词性缩写</strong>
+			        					</small>
+			        				</div>
+			        			</div>
+							</div>
+			        	</div>
+			        	<div class="col-md-4 col-lg-4">
+			        		<div class="ibox box-contain">
+				        		<div class="ibox-title">
+			        				<h5>词性简称说明</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				        		</div>
+				        		<div class="ibox-content" style="height: 470px">
+				        			<div class="col-sm-12">
+				        				<input type="text" id="tag_filter" class="form-control input-sm m-b-xs" placeholder="表格搜索...">
+				        				<table id="tag_table" class="footable table table-hover footable-loaded" data-page-size="9" data-filter="#tag_filter">
+				        					<thead>
+				        						<tr>
+				        							<th data-type="numeric" class="footable-sortable">
+				        								序号
+				        								<span class="footable-sort-indicator"></span>
+				        							</th>
+				        							<th class="footable-sortable">
+				        								词性简称
+				        								<span class="footable-sort-indicator"></span>
+				        							</th>
+				        							<th class="footable-sortable">
+				        								词性描述
+				        								<span class="footable-sort-indicator"></span>
+				        							</th>
+				        						</tr>
+				        					</thead>
+				        					<tbody>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">1</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">2</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">3</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">4</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">5</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">6</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">7</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">8</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        						<tr class="footable-event" style="display: table-row;">
+				        							<td>
+				        								<span class="footable-toggle">9</span>
+				        							</td>
+				        							<td>CC</td>
+				        							<td>连接词</td>
+				        						</tr>
+				        					</tbody>
+				        					<tfoot>
+				        						<tr>
+				        							<td colspan="3">
+				        								<ul class="pagination">
+				        									<li class="footable-page-arrow">
+				        										<a data-page="first" href="#first">«</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="pre" href="#pre">‹</a>
+				        									</li>
+				        									<li class="footable-page-arrow active">
+				        										<a data-page="0" href="#">1</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="1" href="#">2</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="2" href="#">3</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="4" href="#">4</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="next" href="#next">›</a>
+				        									</li>
+				        									<li class="footable-page-arrow">
+				        										<a data-page="last" href="#last">»</a>
+				        									</li>
+				        								</ul>
+				        							</td>
+				        						</tr>
+				        					</tfoot>
+				        				</table>
+				        			</div>
+				        		</div>
+				        	</div>
+			        	</div>
+				    </div>
+				    <div class="row block-row">
+				    	<div class="col-lg-6 col-md-6">
+				    		<div class="ibox box-contain">
+				    			<div class="ibox-title">
+				    				<h5>实体抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" style="height: 350px;">
+					    			<div class="col-sm-12">
+					    				<input type="text" class="form-control input-sm m-b-xs" id="entity_filter" placeholder="表格搜索...">
+					    				<table id="entity_table" class="footable table table-hover table-bordered no-paging footable-loaded" data-filter="#entity_table">
+					    					<thead >
+					    						<tr>
+					    							<th class="footable-sortable">
+					    								实体类型
+					    								<span class="footable-sort-indicator"></span>
+					    							</th>
+					    							<th class="footable-sortable">
+					    								实体列表
+					    								<span class="footable-sort-indicator"></span>
+					    							</th>
+					    						</tr>
+					    					</thead>
+					    					<tbody>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td class="col-md-3">
+					    								<span class="footable-toggle">地名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">北京
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">人名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">刘涛
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">机构名</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">人民大会堂
+					    								</a>
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span class="footable-toggle">数字</span>
+					    							</td>
+					    							<td>
+					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">36
+					    								</a>
+					    							</td>
+					    						</tr>
+					    					</tbody>
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+				    	<div class="col-lg-6 col-md-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>属性抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+				    			<div class="ibox-content" id="relation_panel" style="height: 350px; ">
+				    			</div>
+				    		</div>
+				    	</div>
+				   	</div>
+		        </div>
+	        </div>
+	    </div>
+	    <!-- 全局js -->
+	    <script src="{%static 'js/jquery.min.js' %}"></script>
+	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	    <!-- iCheck -->
+	    <script src="{%static 'js/plugins/iCheck/icheck.min.js' %}"></script>
+	    <!-- sparkline -->
+	    <script src="{%static 'js/plugins/sparkline/jquery.sparkline.min.js' %}"></script>
+
+	    <!-- Flot -->
+	    <script src="{%static 'js/plugins/flot/jquery.flot.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.tooltip.min.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.resize.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.pie.js' %}"></script>
+	    <!-- echarts -->
+	    <script src="{%static 'js/plugins/echarts/echarts-all.js' %}"></script>
+	    <!-- footable -->
+	    <script src="{%static 'js/plugins/footable/footable.all.min.js' %}"></script>
+    	<!-- Flot demo data -->
+   	 	<!-- <script src="{%static 'js/demo/flot-demo.js"></script> -->
+
+	    <!-- 自定义js -->
+	    <script src="{%static 'js/load-data.js' %}" type="text/javascript"></script>
+	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
+
+	    <script type="text/javascript">
+	    	$(document).ready(function(){
+	    		$('.i-check').iCheck({
+	    			checkboxClass: 'icheckbox_square-green',
+	    			radioClass:'iradio_square-green'
+	    		})
+	    	});
+	    </script>
+	</body>
+</html>
