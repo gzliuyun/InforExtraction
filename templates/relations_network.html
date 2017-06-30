@@ -18,76 +18,26 @@
 	    <!-- 添加css插件-->
 	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
 	    <link href="{%static 'css/plugins/footable/footable.core.css' %} " rel="stylesheet">
+	    <style>
+			body{ 
+				width: 100%;
+				position: absolute;
+				bottom: 5px;
+			}
+		</style>
 	</head>
-	<body>
+	<body class="gray-bg top-navigation" style="height: 100%">
 		<div class="wrapper">
 			<div id="page-wrapper" class="gray-bg">
 				<div class="contain-content">
 					<div class="row block-row">
 			            <div class="col-sm-12">
-			                <div class="tabs-container block-container">
-			                    <ul class="nav nav-tabs">
-			                        <li class="active">
-			                        	<a data-toggle="tab" href="#tab-1" aria-expanded="true"> 
-			                        		<i class="fa fa-edit">
-			                        			<strong>关系文本输入</strong>
-			                        		</i>
-			                        	</a>
-			                        </li>
-			                        <li class="">
-			                        	<a data-toggle="tab" href="#tab-2" aria-expanded="false">
-			                        		<i class="fa fa-link">
-			                        			<strong>关系网页URL输入</strong>
-			                        		</i>
-			                        	</a>
-			                        </li>
-			                    </ul>
-			                    <div class="tab-content">
-			                        <div id="tab-1" class="tab-pane active">
-			                            <div class="panel-body">
-			                            	<form class="form-horizontal m-lg" id="textFrom" novalidate="novalidate">
-			                            		<div class="form-group">
-			                            			<div class="col-sm-12">
-			                            				<textarea class="form-control" id="input_textarea" name="input_textarea" style="height: 200px" placeholder="请输入需要分析的中文人物关系文本">
-			                            				</textarea>
-			                            			</div>
-			                            		</div>
-			                            		<div class="form-group">
-			                            			<div class="col-sm-12">
-			                            				<button class="btn btn-primary pull-right" type="button">
-			                            					<i class="fa fa-check"></i>提交
-			                            				</button>
-			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
-			                            					重置
-			                            				</button>
-			                            			</div>
-			                            		</div>
-			                                </form>
-			                            </div>
-			                        </div>
-			                        <div id="tab-2" class="tab-pane">
-			                            <div class="panel-body">
-			                                <form class="form-horizontal m-lg" id="urlFrom" novalidate="novalidate">
-			                                	<div class="form-group">
-			                                		<div class="col-sm-12">
-			                                			<input type="url" id="input_url" name="input_url" class="form-control" placeholder="请输入需要分析的文本URL">
-			                                		</div>
-			                                	</div>
-			                                	<div class="form-group">
-			                                		<div class="col-sm-12">
-			                                			<button class="btn btn-primary pull-right" type="button">
-			                            					<i class="fa fa-check"></i>提交
-			                            				</button>
-			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
-			                            					重置
-			                            				</button>
-			                                		</div>	                 
-			                                	</div>
-			                                </form>
-			                            </div>
-			                        </div>
-			                    </div>
-			                </div>
+			            	<div class="ibox float-e-margins">
+			            		<div class="ibox-content text-center p-md">
+			            			<h2>H+后台主题UI框架</h2>
+			            			<p>所有设置可以点击页面右上侧的绿色齿轮图标查看效果。</p>
+			            		</div>
+			            	</div>
 			            </div>
 			        </div>
 			    </div>
