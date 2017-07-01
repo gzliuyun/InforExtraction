@@ -24,6 +24,23 @@
 				position: absolute;
 				bottom: 5px;
 			}
+			.nodetext {
+			    font-size: 12px ;
+			    font-family: SimSun;
+			    fill:#000000;
+			}
+
+			.linetext {
+			    font-size: 12px ;
+			    font-family: SimSun;
+			    fill:#1f77b4;
+			    fill-opacity:0.0;
+			}
+
+			.circleImg {
+			  stroke: #ff7f0e;
+			  stroke-width: 1.5px;
+			}
 		</style>
 	</head>
 	<body class="gray-bg top-navigation" style="height: 100%">
@@ -32,10 +49,20 @@
 				<div class="contain-content">
 					<div class="row block-row">
 			            <div class="col-sm-12">
-			            	<div class="ibox float-e-margins">
-			            		<div class="ibox-content text-center p-md">
-			            			<h2>H+后台主题UI框架</h2>
-			            			<p>所有设置可以点击页面右上侧的绿色齿轮图标查看效果。</p>
+			            	<div class="panel panel-default">
+			            		<div class="text-center" style="margin-top: 50px">
+			            			<form method="get" action="#">
+			            				<div class="col-sm-4"></div>
+			            				<div class="input-group col-sm-4">
+			            					<input type="text" class="form-control inpust-sm" name="search" placeholder="请输入搜索的中文人名">
+			            					<span class="input-group-btn">
+                        						<button class="btn btn-primary" type="button">Go!</button>
+                    						</span>			     
+			            				</div>
+			            				<div class="col-sm-4"></div>
+			            			</form>
+			            		</div>
+			            		<div class="text-center p-md" id="network">		           
 			            		</div>
 			            	</div>
 			            </div>
@@ -58,7 +85,10 @@
 	    <script src="{%static 'js/plugins/echarts/echarts-all.js' %}"></script>
 	    <!-- footable -->
 	    <script src="{%static 'js/plugins/footable/footable.all.min.js' %}"></script>
+	    <!-- 添加d3.js -->
+	    <script src="{%static 'js/plugins/d3/d3.v3.min.js' %}" charset="utf-8"></script>
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
+	    <script src="{%static 'js/networks.js' %}" type="text/javascript"></script>
 	</body>
 </html>
