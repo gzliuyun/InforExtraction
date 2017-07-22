@@ -8,7 +8,7 @@ var svg = d3.select("#network").append("svg")
                         .attr("width",width)
                         .attr("height",height);
 
-
+// ../../static/json/relation.json
 d3.json("../../static/json/relation.json",function(error,root){
 
     if( error ){
