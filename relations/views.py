@@ -2,6 +2,9 @@
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from relations.models import Peoplelist,Peoplerelation,Relationlist
+from django.http import JsonResponse
+import pynlpir
+from pyltp import SentenceSplitter
 import os,json
 import codecs
 # Create your views here.
@@ -11,6 +14,34 @@ def relations_txt(request):
 
 def relations_network(request):
 	return render_to_response("relations_network.html")
+
+
+def relations_txt_submit(request):
+	request.encoding='utf-8'
+	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
+	txtList = txtInfo.split('\n')
+	pynlpir.open()
+	wordsList = []
+	tagsList = []
+	for paragraph in txtList:
+		sents = SentenceSplitter.split(paragraph)
+		for s in sents:
+			# 分词
+			# words = LTP.cut_words(s)
+			# # 词性标注
+			# tags = LTP.post_tagger(words)
+			word_tag = pynlpir.segment(s)
+			for item in word_tag:
+				wordsList.append(item[0])
+				tagsList.append(item[1])
+			
+	return_json = { 
+		'text': txtList ,
+		'wordsList': wordsList,
+		'tagsList': tagsList
+	}
+	return HttpResponse(json.dumps(return_json),content_type='application/json')
+
 
 def relations_search(request):
 	request.encoding='utf-8'
