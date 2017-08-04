@@ -1,34 +1,66 @@
+// $(document).ready(function(){
 
-// 饼状图的数据
-// $(function() {
-
-    
-
+//     // $('input').iCheck('uncheck')
 // });
 
-// 绘制饼状图
 function drawPie(tagsNum){
-    var wordsInfo = [{
-        label: "名词",
-        data: tagsNum[0],
-        color: "#1ab394",
-    }, {
-        label: "动词",
-        data: tagsNum[1],
-        color: "#1c84c6",
-    }, {
-        label: "形容词",
-        data: tagsNum[2],
-        color: "#ed5565",
-    },{
-        label: "副词",
-        data: tagsNum[3],
-        color: "#23c6c8",
-    },{
-        label: "其它词",
-        data: tagsNum[4],
-        color: "#f8ac59",
-    }];
+    // var wordsInfo = [{
+    //     label: "名词",
+    //     data: tagsNum[0],
+    //     color: "#1ab394",
+    // }, {
+    //     label: "动词",
+    //     data: tagsNum[1],
+    //     color: "#1c84c6",
+    // }, {
+    //     label: "形容词",
+    //     data: tagsNum[2],
+    //     color: "#ed5565",
+    // },{
+    //     label: "副词",
+    //     data: tagsNum[3],
+    //     color: "#23c6c8",
+    // },{
+    //     label: "其它词",
+    //     data: tagsNum[4],
+    //     color: "#f8ac59",
+    // }];
+    var wordsInfo = []
+    if (tagsNum[0] != 0){
+        var item = new Array();
+        item["label"] = "名词";
+        item["data"] = tagsNum[0];
+        item["color"] = "#1ab394";
+        wordsInfo.push(item);
+    } 
+    if (tagsNum[1] != 0){
+        var item = new Array();
+        item["label"] = "动词";
+        item["data"] = tagsNum[1];
+        item["color"] = "#1c84c6";
+        wordsInfo.push(item);
+    } 
+    if (tagsNum[2] != 0){
+        var item = new Array();
+        item["label"] = "形容词";
+        item["data"] = tagsNum[2];
+        item["color"] = "#ed5565";
+        wordsInfo.push(item);
+    } 
+    if (tagsNum[3] != 0){
+        var item = new Array();
+        item["label"] = "副词";
+        item["data"] = tagsNum[3];
+        item["color"] = "#23c6c8";
+        wordsInfo.push(item);
+    } 
+    if (tagsNum[4] != 0){
+        var item = new Array();
+        item["label"] = "其它词";
+        item["data"] = tagsNum[4];
+        item["color"] = "#f8ac59";
+        wordsInfo.push(item);
+    } 
     document.getElementById("flot-pie-chart").innerHTML = "";
     var plotObj = $.plot($("#flot-pie-chart"), wordsInfo, {
         series: {
@@ -171,5 +203,5 @@ function drawRelationCharts(){
     relationChart.setOption(relationOption);
 }
 
-drawPie([50,30,15,15,20]);
+drawPie([50,30,15,15,20])
 drawRelationCharts();
