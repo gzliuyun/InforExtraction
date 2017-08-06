@@ -15,6 +15,8 @@ def relations_txt(request):
 def relations_network(request):
 	return render_to_response("relations_network.html")
 
+def bt_table(request):
+	return render_to_response("bt-table.html")
 
 def relations_txt_submit(request):
 	request.encoding='utf-8'

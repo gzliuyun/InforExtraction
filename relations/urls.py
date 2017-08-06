@@ -6,4 +6,5 @@ urlpatterns =[
 	url(r'^network/$',views.relations_network),
 	url(r'^search/$',views.relations_search),
 	url(r'^txt/submit/$',views.relations_txt_submit),
+	url(r'^bt/table/$',views.bt_table),
 ]
