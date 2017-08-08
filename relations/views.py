@@ -144,18 +144,6 @@ def relations_txt_submit(request):
 			wordsList.extend(words)
 			tagsList.extend(tags)
 
-	for item in placeList:
-		print item
-	print '----------'
-	for item in nameList:
-		print item
-	print '----------'
-	for item in orgList:
-		print item
-	print '----------'
-	for item in timeList:
-		print item
-
 	entityDict = {
 		'places': placeList,
 		'names': nameList,
