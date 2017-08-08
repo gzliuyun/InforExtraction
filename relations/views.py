@@ -3,6 +3,7 @@ from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from relations.models import Peoplelist,Peoplerelation,Relationlist
 from django.http import JsonResponse
+import urllib, urllib2
 import pynlpir
 from pyltp import SentenceSplitter
 import os,json
@@ -18,6 +19,102 @@ def relations_network(request):
 def bt_table(request):
 	return render_to_response("bt-table.html")
 
+def cutWords(sentence):
+	sendData = {}
+	sendData['method'] = "cutWords"
+	sendData['sentence'] = sentence
+
+	message = json.dumps(sendData).decode().encode('utf8')
+	response = urllib2.urlopen('http://localhost:10001/',message)
+	data = response.read()
+	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
+	words = jdata['wordsList']
+	
+	return words
+
+def postTagger(words):
+	sendData = {}
+	sendData['method'] = "postTag"
+	sendData['wordsList'] = words
+
+	message = json.dumps(sendData).decode().encode('utf8')
+	response = urllib2.urlopen('http://localhost:10001/',message)
+	data = response.read()
+	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
+	tags = jdata['postags']
+	
+	return tags
+
+def ner(words,tags):
+	sendData = {}
+	sendData['method'] = "ner"
+	sendData['wordsList'] = words
+	sendData['postags'] = tags
+
+	message = json.dumps(sendData).decode().encode('utf8')
+	response = urllib2.urlopen('http://localhost:10001/',message)
+	data = response.read()
+	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
+	netags = jdata['netags']
+
+	return netags
+
+def extract_entity(words,tags,netags):
+	names = []
+	places = []
+	orgs = []
+	times = []
+
+	for k in range(len(words)):
+		if tags[k] == 'nt' and words[k] not in times:
+			times.append(words[k])
+
+	index = 0
+	while index < len(words):
+		strEntity = ""
+		if netags[index] == "S-Nh":
+			if words[index] not in names:
+				names.append(words[index])
+		elif netags[index] == "S-Ni":
+			if words[index] not in orgs:
+				orgs.append(words[index])
+		elif netags[index] == "S-Ns":
+			if words[index] not in places:
+				places.append(words[index])
+
+		elif netags[index] == "B-Nh":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Nh":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in names:
+				names.append(strEntity)
+
+		elif netags[index] == "B-Ni":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Ni":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in orgs:
+				orgs.append(strEntity)
+
+		elif netags[index] == "B-Ns":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Ns":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in places:
+				places.append(strEntity)
+
+		index += 1
+	return names, places, orgs, times
+
 def relations_txt_submit(request):
 	request.encoding='utf-8'
 	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
@@ -25,22 +122,51 @@ def relations_txt_submit(request):
 	pynlpir.open()
 	wordsList = []
 	tagsList = []
+	
+	placeList = []
+	nameList = []
+	orgList = []
+	timeList = []
+
 	for paragraph in txtList:
 		sents = SentenceSplitter.split(paragraph)
 		for s in sents:
-			# 分词
-			# words = LTP.cut_words(s)
-			# # 词性标注
-			# tags = LTP.post_tagger(words)
-			word_tag = pynlpir.segment(s)
-			for item in word_tag:
-				wordsList.append(item[0])
-				tagsList.append(item[1])
-			
+			words = cutWords(s)
+			tags = postTagger(words)
+			netags = ner(words,tags)
+
+			names, places, orgs, times = extract_entity(words,tags,netags)
+			placeList.extend([x for x in places if x not in placeList])
+			nameList.extend([x for x in names if x not in nameList])
+			orgList.extend([x for x in orgs if x not in orgList])
+			timeList.extend([x for x in times if x not in timeList])
+
+			wordsList.extend(words)
+			tagsList.extend(tags)
+
+	for item in placeList:
+		print item
+	print '----------'
+	for item in nameList:
+		print item
+	print '----------'
+	for item in orgList:
+		print item
+	print '----------'
+	for item in timeList:
+		print item
+
+	entityDict = {
+		'places': placeList,
+		'names': nameList,
+		'orgs': orgList,
+		'times': timeList
+	}		
 	return_json = { 
 		'text': txtList ,
 		'wordsList': wordsList,
-		'tagsList': tagsList
+		'tagsList': tagsList,
+		'entityDict': entityDict
 	}
 	return HttpResponse(json.dumps(return_json),content_type='application/json')
 

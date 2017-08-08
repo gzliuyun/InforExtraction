@@ -40,6 +40,7 @@ $(document).ready(function(){
 
                 var wordsList = ret.wordsList;
                 var tagsList = ret.tagsList;
+                var entityDict = ret.entityDict;
 
                 var tags = document.getElementById("tag_result");
                 tags.innerHTML = "";
@@ -47,33 +48,39 @@ $(document).ready(function(){
                 for (var index = 0; index < wordsList.length; index ++){
                     var labelNode = document.createElement("a");
                     labelNode.innerHTML = wordsList[index];
-
-                    if (tagsList[index] == "noun"){                       
+                    tag = tagsList[index];
+                    // 名词
+                    if (tag == "n" || tag == "nd" || tag =="nh" || tag =="ni"|| tag == "nl" || tag == "ns" || tag == "nt" || tag == "nz"){                       
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-primary btn-style noun");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 名词<br>词性标注: " + tagsList[index]);
                         tagsNum[0] += 1;
                     }
-                    else if (tagsList[index] == "verb"){                       
+                    // 动词
+                    else if (tag == "v"){                       
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-success btn-style verb");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 动词<br>词性标注: " + tagsList[index]);
                         tagsNum[1] += 1;
                     }
-                    else if (tagsList[index] == "adjective"){                       
+                    // 形容词
+                    else if (tag == "a" || tag == "b"){                       
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-danger btn-style adjective");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 形容词<br>词性标注: " + tagsList[index]);
                         tagsNum[2] += 1;
                     }
-                    else if (tagsList[index] == "adverb"){                       
+                    // 副词
+                    else if (tag == "d"){                       
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-info btn-style adverb");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 副词<br>词性标注: " + tagsList[index]);
                         tagsNum[3] += 1;
                     }
-                    else if (tagsList[index] == "punctuation mark" ){
+                    // 标点符号
+                    else if (tag == "wp" ){
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-warning btn-style other");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 其它词<br>词性标注: " + tagsList[index]);
                         punct += 1;
                         tagsNum[4] += 1;
                     }
+                    // 其它
                     else{ 
                         labelNode.setAttribute("class", "btn btn-xs btn-rounded btn-warning btn-style other");
                         labelNode.setAttribute("data-original-title","词性还原：" + wordsList[index] + "<br>实体类型: 其它词<br>词性标注: " + tagsList[index]);
@@ -92,6 +99,53 @@ $(document).ready(function(){
                 drawPie(tagsNum);
                 nowPunct = punct;
                 modNumber(nowNum,punct);
+
+                // 实体抽取--人名抽取 展示
+                namesList = entityDict.names;
+                var row_names = document.getElementById("row_names");
+                row_names.innerHTML = "";
+                for(var index = 0; index < namesList.length; index ++){
+                    var node = document.createElement("a");
+                    node.innerHTML = namesList[index];
+                    node.setAttribute("class","btn btn-xs btn-default");
+                    node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+                    row_names.appendChild(node);
+                }
+                // 实体抽取--地名抽取 展示
+                placesList = entityDict.places;
+                var row_places = document.getElementById("row_places");
+                row_places.innerHTML = "";
+                for(var index = 0; index < placesList.length; index ++){
+                    var node = document.createElement("a");
+                    node.innerHTML = placesList[index];
+                    node.setAttribute("class","btn btn-xs btn-default");
+                    node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+                    row_places.appendChild(node);
+                }
+                // 实体抽取--地名抽取 展示
+                orgsList = entityDict.orgs;
+                var row_orgs = document.getElementById("row_orgs");
+                row_orgs.innerHTML = "";
+                for(var index = 0; index < orgsList.length; index ++){
+                    var node = document.createElement("a");
+                    node.innerHTML = orgsList[index];
+                    node.setAttribute("class","btn btn-xs btn-default");
+                    node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+                    row_orgs.appendChild(node);
+                }
+
+                // 实体抽取--时间抽取 展示
+                timesList = entityDict.times;
+                var row_times = document.getElementById("row_times");
+                row_times.innerHTML = "";
+                for(var index = 0; index < timesList.length; index ++){
+                    var node = document.createElement("a");
+                    node.innerHTML = timesList[index];
+                    node.setAttribute("class","btn btn-xs btn-default");
+                    node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+                    row_times.appendChild(node);
+                }
+
             }
         });
         return false; //不刷新页面

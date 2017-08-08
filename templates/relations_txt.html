@@ -234,15 +234,13 @@
 				        		</div>
 				        		<div class="ibox-content" style="height: 470px">
 				        			<div class="col-sm-12">
-				        				<input type="text" class="form-control input-sm m-b-xs" id="filter"
-                                                   placeholder="搜索表格...">
-
-                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter=#filter>
+				        				<input type="text" class="form-control input-sm m-b-xs" id="tag_filter" placeholder="搜索表格...">
+                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter=#tag_filter>
                                             <thead>
                                             <tr>
                                                 <th data-type="numeric">序号</th>
-                                                <th>词性简称</th>
-                                                <th>描述</th>
+                                                <th>词性标注</th>
+                                                <th>词性描述</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -276,55 +274,41 @@
 				    			</div>
 					    		<div class="ibox-content" style="height: 350px;">
 					    			<div class="col-sm-12">
-					    				<input type="text" class="form-control input-sm m-b-xs" id="entity_filter" placeholder="表格搜索...">
-					    				<table id="entity_table" class="table table-hover table-bordered no-paging" data-filter="#entity_table">
+					    				<input type="text" id="entity_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
+					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter">
 					    					<thead >
 					    						<tr>
-					    							<th class="footable-sortable">
-					    								实体类型
-					    								<span class="footable-sort-indicator"></span>
-					    							</th>
-					    							<th class="footable-sortable">
-					    								实体列表
-					    								<span class="footable-sort-indicator"></span>
-					    							</th>
+					    							<th>实体类型</th>
+					    							<th>实体列表</th>
 					    						</tr>
 					    					</thead>
 					    					<tbody>
 					    						<tr class="footable-event" style="display: table-row;">
 					    							<td class="col-md-3">
-					    								<span >地名</span>
+					    								<span >人名</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">北京
-					    								</a>
+					    							<td id = "row_names">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-old" style="display: table-row;">
 					    							<td>
-					    								<span >人名</span>
+					    								<span >地名</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">刘涛
-					    								</a>
+					    							<td id = "row_places">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-event" style="display: table-row;">
 					    							<td>
 					    								<span >机构名</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">人民大会堂
-					    								</a>
+					    							<td id="row_orgs">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-old" style="display: table-row;">
 					    							<td>
-					    								<span >数字</span>
+					    								<span >时间</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">36
-					    								</a>
+					    							<td id="row_times">
 					    							</td>
 					    						</tr>
 					    					</tbody>
@@ -375,7 +359,6 @@
 
    	 	<!-- 解决ajax提交post请求的csrf.js -->
    	 	<!-- <script src="{%static 'js/csrf.js' %}"></script> -->
-
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/load-data.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
