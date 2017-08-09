@@ -118,8 +118,11 @@ def extract_entity(words,tags,netags):
 def relations_txt_submit(request):
 	request.encoding='utf-8'
 	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
+	if len(txtInfo.strip()) == 0:
+		return 
+		
 	txtList = txtInfo.split('\n')
-	pynlpir.open()
+	
 	wordsList = []
 	tagsList = []
 	

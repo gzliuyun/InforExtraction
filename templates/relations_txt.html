@@ -47,15 +47,14 @@
 			                        <div id="tab-1" class="tab-pane active">
 			                            <div class="panel-body">
 			                            	<form class="form-horizontal m-lg" method="get" id="textFrom" >
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <textarea id="input_textarea" style="height: 200px" name="text" placeholder="请输入需要分析的新闻文本" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
 			                            		<div class="form-group">
 			                            			<div class="col-sm-12">
-			                            				<textarea class="form-control" id="input_textarea" name="input_textarea" style="height: 200px" placeholder="请输入需要分析的中文人物关系文本">
-			                            				</textarea>
-			                            			</div>
-			                            		</div>
-			                            		<div class="form-group">
-			                            			<div class="col-sm-12">
-			                            				<button class="btn btn-primary pull-right" type="submit">
+			                            				<button class="btn btn-primary pull-right" type="button" id="txtSubmit" onclick ="sbt_txt();">
 			                            					<i class="fa fa-check"></i>提交
 			                            				</button>
 			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
@@ -106,7 +105,7 @@
 			        				</div>
 			        			</div>
 			        			<div class="ibox-content">
-			        				<span id='passage_txt'>任国强：5月25日，美国“杜威”号导弹驱逐舰擅自进入中国南沙群岛有关岛礁邻近海域，中国海军“柳州”号导弹护卫舰、“泸州”号导弹护卫舰对美舰进行识别查证，并予以警告驱离。中国对南沙群岛及其附近海域拥有无可争辩的主权。对于美军方这种炫耀武力，推动地区军事化，且极易引发海空意外事件的行径，中国军队表示坚决反对并已向美方提出严正交涉。一段时间以来，在中国和东盟国家共同努力下，南海局势正在趋稳向好。但美方的错误行为使南海趋于好转的局面受到破坏，不利于南海的和平稳定。</span>
+			        				<span id='passage_txt'></span>
 			        			</div>
 			        		</div>
 			        	</div>
@@ -351,9 +350,16 @@
    	 	<!-- 解决ajax提交post请求的csrf.js -->
    	 	<!-- <script src="{%static 'js/csrf.js' %}"></script> -->
 	    <!-- 自定义js -->
-	    <script src="{%static 'js/load-data.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
+	    <script src="{%static 'js/load-data.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/txt-submit.js' %}" type="text/javascript"></script>
 	    <!-- icheck加载初始化 -->
+	    <script >
+	    	$(document).ready(function(){
+    			document.getElementById('input_textarea').innerHTML = "境外媒体称，北京和新德里一个多月来剑拔弩张，双方官员都担心发生军事冲突。据德国之声电台网站7月20日报道，印度政府20日表示，已准备就双方撤回边境部队与中国展开谈判，以结束两国在喜马拉雅高原地区的边界对峙。印度外交部长苏什玛·斯瓦拉杰20日表示，印中2012年达成的一项协议规定，印中两国应与不丹协商解决边境争议问题。在中国要求印度撤军后，印度已准备与中国展开谈判。中方则多次重申，中国在洞朗地区修路合理合法，完全是在本国领土展开正常建设工程。斯瓦拉杰20日在出席议会会议时，指中国军队使用推土机和挖掘机在洞朗地区兴建设施，意图改变现状。过去，中国人曾在该地区修建临时道路。印度外长说：“如果中国单方面改变三国边境的现状，便关系到印度的‘安全考量’。”斯瓦拉杰说，中国一直要求印度从该地区撤军。她说：“如果中国想讨论该问题，双方都应撤回自己的军队，然后开展对话。”新近的军事对峙发生在西藏最南端，印度称有关地区属不丹领土，不丹也对该地区提出主权声索。印度从东北锡金邦派遣军队越界进入不丹。中国以关闭附近的一个边境口岸作为反制。7月26日至28日，印度国家安全顾问阿吉特·多瓦尔将前往中国，出席在北京举行的金砖国家安全顾问会议。与会国家包括巴西、俄罗斯、印度、中国和南非。估计，中印边境危机也是此次会议讨论的议题。";
+    			sbt_txt();     
+    			document.getElementById('input_textarea').innerHTML = "";  
+			});
+	    </script>
 	</body>
 </html>

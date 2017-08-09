@@ -220,7 +220,7 @@ function tag_description() {
         {"num":"13","abbr":"nd","chn":"方位名词","en":"direction noun"},
         {"num":"14","abbr":"nh","chn":"人名","en":"person name"},
         {"num":"15","abbr":"ni","chn":"机构名称","en":"organization name"},
-        {"num":"16","abbr":"nl","chn":"城郊","en":"location noun"},
+        {"num":"16","abbr":"nl","chn":"位置名词","en":"location noun"},
         {"num":"17","abbr":"ns","chn":"地理名称","en":"geographical name"},
         {"num":"18","abbr":"nt","chn":"时间名称","en":"temporal noun"},
         {"num":"19","abbr":"nz","chn":"其它专有名词","en":"other proper noun"},
