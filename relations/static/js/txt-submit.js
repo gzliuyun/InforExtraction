@@ -42,11 +42,16 @@ function sbt_txt(){
                 text += paragraphList[i] ;
             }
             $('#passage_txt').html(text);
-
+            // 获取分词列表
             var wordsList = ret.wordsList;
+            // 获取词性标注列表
             var tagsList = ret.tagsList;
+            // 获取词频统计列表
+            var topWordsCountList = ret.topWordsCount;
+            // 获取实体抽取字典，包含人名，地名等
             var entityDict = ret.entityDict;
-
+            // 获取关系语句列表，其元素为字典，每个字典包含一条关系语句senence和一个人名列表。
+            var relSentenceList =  ret.relSentenceList
             var tags = document.getElementById("tag_result");
             tags.innerHTML = "";
             
@@ -104,7 +109,8 @@ function sbt_txt(){
             drawPie(tagsNum);
             nowPunct = punct;
             modNumber(nowNum,punct);
-
+            // 词频统计部分展示
+            wordsCountShow(topWordsCountList);
             // 实体抽取--人名抽取 展示
             namesList = entityDict.names;
             var row_names = document.getElementById("row_names");
@@ -150,69 +156,10 @@ function sbt_txt(){
                 node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
                 row_times.appendChild(node);
             }
+            // 关系语句抽取，展示
+            // 已在视图中写入json文件，自动加载
+            relSenTable();
         }
     });
 }
 
-
-// checkbox选择，取消监听
-$('input').on('ifChecked', function(event){
-    var eventId = this.id;
-    // 按照类名选择
-    var aList = document.querySelectorAll("." + eventId);
-    for (var i = 0; i < aList.length; i++){
-        aList[i].style.display="";
-    }
-    if (eventId == "noun")
-        nowNum[0] += tagsNum[0];
-    else if (eventId == "verb")
-        nowNum[1] += tagsNum[1];
-    else if (eventId == "adjective")
-        nowNum[2] += tagsNum[2];
-    else if (eventId == "adverb")
-        nowNum[3] += tagsNum[3];
-    else if (eventId == "other"){
-        nowNum[4] += tagsNum[4];
-        nowPunct += punct; 
-    }
-    // 绘制饼状图，并修改实体词数量
-    drawPie(nowNum);
-    modNumber(nowNum,nowPunct);
-
-});
-
-$('input').on('ifUnchecked', function(event){
-    // alert(this.id + " isUnchecked");
-    var eventId = this.id;
-    // 按照类名选择
-    var aList = document.querySelectorAll("." + eventId);
-    for (var i = 0; i < aList.length; i++){
-        aList[i].style.display="none";
-    }
-    // 重绘制饼状图
-    if (eventId == "noun")
-        nowNum[0] -= tagsNum[0];
-    else if (eventId == "verb")
-        nowNum[1] -= tagsNum[1];
-    else if (eventId == "adjective")
-        nowNum[2] -= tagsNum[2];
-    else if (eventId == "adverb")
-        nowNum[3] -= tagsNum[3];
-    else if (eventId == "other"){
-        nowNum[4] -= tagsNum[4];
-        nowPunct -= punct; 
-    }
-    // 绘制饼状图，并修改实体词数量
-    drawPie(nowNum);
-    modNumber(nowNum,nowPunct);
-});
-
-$(document).ready(function(){
-    // iCheck初始化 
-    $('.i-check').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass:'iradio_square-green'
-    })
-});
-
-            // });
