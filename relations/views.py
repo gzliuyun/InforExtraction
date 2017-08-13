@@ -207,15 +207,15 @@ def relations_txt_submit(request):
 	# 词频排序
 	wordsCount = sorted(wordsCount.items(), key = lambda item: item[1], reverse = True)
 	topWordsCount = []
-	ct  = 0
-
+	ct  =  1
 	for item in wordsCount:
-		ct += 1
-		if ct <=10:
+		if ct <=10 and len(item[0]) > 1:
 			wc = [item[0],item[1]]
 			topWordsCount.append(wc)
-		else:
+			ct += 1
+		elif ct > 10:
 			break
+
 	entityDict = {
 		'places': placeList,
 		'names': nameList,
