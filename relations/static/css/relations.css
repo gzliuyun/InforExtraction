@@ -13,11 +13,6 @@
 #relation_sentence_table tr th{
 	text-align:center;
 }
-
-#entity_extract_table  tbody{
-	height: 320px;
-	overflow-y:scroll;
-}
 /*.block-container{
 	width: 80%;
 	margin: 0 auto;

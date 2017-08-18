@@ -59,6 +59,20 @@ def ner(words,tags):
 
 	return netags
 
+# 关系抽取，http请求服务求，用训练好的深度学习模型抽取人物关系
+def extract_relation(wordsList, name1, name2):
+	send = {}
+	send["wordsList"] = wordsList
+	send["name1"] = name1
+	send["name2"] = name2
+	message =  json.dumps(send).decode().encode('utf8')
+	response = urllib2.urlopen('http://192.168.1.11:10002',message)
+	data = response.read()
+	jdata =  json.loads(data,encoding="utf8") #jdata即为返回的json数据
+	relation = jdata["relation"]
+
+	return relation
+
 def extract_entity(words,tags,netags):
 	names = []
 	places = []
@@ -125,8 +139,9 @@ def relations_sentence(relSentenceList):
 	jsonData = []
 	idx = 1
 	for item in relSentenceList:
-		sentence = item["sentence"]
+		wordsList = item["wordsList"]
 		names = item["names"]
+		sentence = "".join(wordsList)
 		i = 0
 		j = 0
 		while (i < len(names)):
@@ -146,7 +161,11 @@ def relations_sentence(relSentenceList):
 				if isinstance(name2,unicode):
 					name2 = name2.encode('utf8')
 				lineItem["name2"] = name2
-				lineItem["relation"] = ""
+				# 获取深度学习模型抽取的人物关系
+				relation = extract_relation(wordsList,name1,name2)
+				if isinstance(relation,unicode):
+					relation = relation.encode('utf8')
+				lineItem["relation"] = relation
 				jsonData.append(lineItem)
 				j += 1
 			i += 1
@@ -190,7 +209,7 @@ def relations_txt_submit(request):
 			# 添加关系语句抽取部分传回的数据
 			if len(names) >= 2 :
 				sentNames = {}
-				sentNames["sentence"] = s
+				sentNames["wordsList"] = words
 				sentNames["names"] = names
 				relSentenceList.append(sentNames)
 			# 添加实体抽取部分传回的数据
