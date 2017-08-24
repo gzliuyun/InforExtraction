@@ -8,6 +8,7 @@ import pynlpir
 from pyltp import SentenceSplitter
 import os,json
 import codecs
+from jieba import analyse
 # Create your views here.
 
 def relations_txt(request):
@@ -234,6 +235,11 @@ def relations_txt_submit(request):
 			ct += 1
 		elif ct > 10:
 			break
+	#关键词抽取
+	keyWords = analyse.textrank(txtInfo,topK=20, withWeight=False)
+	for idx in range(len(keyWords)):
+		if isinstance(keyWords[idx],unicode):
+			keyWords[idx] = keyWords[idx].encode('utf8')
 
 	entityDict = {
 		'places': placeList,
@@ -247,7 +253,8 @@ def relations_txt_submit(request):
 		'tagsList': tagsList,
 		'topWordsCount': topWordsCount,
 		'entityDict': entityDict,
-		'relSentenceList': relSentenceList
+		'relSentenceList': relSentenceList,
+		'keyWords': keyWords
 	}
 	return HttpResponse(json.dumps(return_json),content_type='application/json')
 

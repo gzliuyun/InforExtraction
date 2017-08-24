@@ -51,7 +51,11 @@ function sbt_txt(){
             // 获取实体抽取字典，包含人名，地名等
             var entityDict = ret.entityDict;
             // 获取关系语句列表，其元素为字典，每个字典包含一条关系语句senence和一个人名列表。
-            var relSentenceList =  ret.relSentenceList
+            var relSentenceList =  ret.relSentenceList;
+            // 获取关键词列表
+            var keyWords = ret.keyWords;
+
+
             var tags = document.getElementById("tag_result");
             tags.innerHTML = "";
             
@@ -159,6 +163,34 @@ function sbt_txt(){
             // 关系语句抽取，展示
             // 已在视图中写入json文件，自动加载
             relSenTable();
+
+            // 关键词云
+            var wordCloud = document.getElementById("wordCloud");
+            wordCloud.innerHTML="";
+            for(var index = 0; index < keyWords.length; index ++){
+                var li_tag = document.createElement("li");
+                var a_tag = document.createElement("a");
+                if (index % 5 == 0 ){
+                    a_tag.setAttribute("rel","20");
+                }
+                else if  (index % 5 == 3 || index % 5 == 4 ){
+                    a_tag.setAttribute("rel","15");
+                }
+                else{
+                    a_tag.setAttribute("rel","5");
+                }
+                a_tag.setAttribute("style","color:#f00");
+                a_tag.innerHTML = keyWords[index];
+                li_tag.appendChild(a_tag);
+                wordCloud.appendChild(li_tag);
+                // console.log(keyWords[index]);
+            }
+            $('#keyWords').tagcloud({
+                centrex:250, 
+                centrey:150, 
+                init_motion_x:10, 
+                init_motion_y:10,
+            });
         }
     });
 }

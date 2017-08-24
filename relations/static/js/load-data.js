@@ -258,7 +258,7 @@ function relSenTable(){
             showRefresh:"true",
             showToggle:"true",
             showColumns:"true",
-
+            pageList: [5],
             pageSize:"5",
             columns: [{
                 field: 'idx',
@@ -276,6 +276,9 @@ function relSenTable(){
                 field: 'relation',
                 title: '关系'
             }]
+    });
+    $('.bootstrap-table .fixed-table-toolbar').find("button").each(function () {
+        $(this).attr('class','btn btn-primary')
     });
 }
 // 词频统计展示
