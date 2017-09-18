@@ -201,6 +201,7 @@ function drawRelationCharts(){
         ]
     };
     relationChart.setOption(relationOption);
+    // relationDiv.setAttribute("style","height: 380px;")
 }
 // 词性说明函数
 function tag_description() {
@@ -244,10 +245,150 @@ function tag_description() {
         $(childdiv).appendTo(tbody);
     })
 }
+// 人物关系语句展示
+function relSenTable(relTableData){
+    // 在重新载入数据之前，需要先注销表
+    $("#relation_sentence_table").bootstrapTable('destroy'); 
+    $('#relation_sentence_table').bootstrapTable({
+            data: relTableData,
+            queryParams:"queryParams",
+            striped: true,
+            sortable: true,               
+            sortOrder: "asc",
+            pagination:"true",
+            search:"true",
+            showRefresh:"true",
+            showToggle:"true",
+            showColumns:"true",
+            pageList: [5],
+            pageSize:"5",
+            columns: [{
+                field: 'idx',
+                title: '序号'
+            }, {
+                field: 'sentence',
+                title: '关系语句'
+            }, {
+                field: 'name1',
+                title: '姓名1'
+            }, {
+                field: 'name2',
+                title: '姓名2'
+            },{
+                field: 'relation',
+                title: '关系'
+            }]
+    });
+    $('.bootstrap-table .fixed-table-toolbar').find("button").each(function () {
+        $(this).attr('class','btn btn-primary')
+    });
+}
+// 词频统计展示
+function wordsCountShow(topWordsCountList){
+    var chart = echarts.init(document.getElementById("wordsCount"));
+    var words = [];
+    var counts = [];
+    for (var idx = 0; idx < topWordsCountList.length; idx++){
+        var wc = topWordsCountList[idx]; 
+        words.push(wc[0]);
+        counts.push(wc[1]);
+    }
+    var option = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : {
+                data :words
+        },
+        yAxis : {},
+        series : [
+            {
+                name:'词频',
+                type:'bar',
+                data:counts,
+            }
+        ]
+    };
+    chart.setOption(option);
 
-drawPie([50,30,15,15,20])
-drawRelationCharts();
-tag_description();
-// 使用footable插件
-$('#tag_discription_table').footable();
-$('#entity_extract_table').footable();
+}
+
+$('input').on('ifUnchecked', function(event){
+    // alert(this.id + " isUnchecked");
+    var eventId = this.id;
+    // 按照类名选择
+    var aList = document.querySelectorAll("." + eventId);
+    for (var i = 0; i < aList.length; i++){
+        aList[i].style.display="none";
+    }
+    // 重绘制饼状图
+    if (eventId == "noun")
+        nowNum[0] -= tagsNum[0];
+    else if (eventId == "verb")
+        nowNum[1] -= tagsNum[1];
+    else if (eventId == "adjective")
+        nowNum[2] -= tagsNum[2];
+    else if (eventId == "adverb")
+        nowNum[3] -= tagsNum[3];
+    else if (eventId == "other"){
+        nowNum[4] -= tagsNum[4];
+        nowPunct -= punct; 
+    }
+    // 绘制饼状图，并修改实体词数量
+    drawPie(nowNum);
+    modNumber(nowNum,nowPunct);
+});
+// checkbox选择，取消监听
+$('input').on('ifChecked', function(event){
+    var eventId = this.id;
+    // 按照类名选择
+    var aList = document.querySelectorAll("." + eventId);
+    for (var i = 0; i < aList.length; i++){
+        aList[i].style.display="";
+    }
+    if (eventId == "noun")
+        nowNum[0] += tagsNum[0];
+    else if (eventId == "verb")
+        nowNum[1] += tagsNum[1];
+    else if (eventId == "adjective")
+        nowNum[2] += tagsNum[2];
+    else if (eventId == "adverb")
+        nowNum[3] += tagsNum[3];
+    else if (eventId == "other"){
+        nowNum[4] += tagsNum[4];
+        nowPunct += punct; 
+    }
+    // 绘制饼状图，并修改实体词数量
+    drawPie(nowNum);
+    modNumber(nowNum,nowPunct);
+
+});
+
+$(document).ready(function(){
+    // iCheck初始化 
+    $('.i-check').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass:'iradio_square-green'
+    })
+    
+    drawPie([50,30,15,15,20])
+    drawRelationCharts();
+    tag_description();
+    // relSenTable();
+    // wordsCountShow();
+
+    // 使用footable插件,展示词性标注和实体抽取部分
+    $('#tag_discription_table').footable();
+    $('#entity_extract_table').footable();
+});

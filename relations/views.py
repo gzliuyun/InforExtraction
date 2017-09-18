@@ -8,6 +8,7 @@ import pynlpir
 from pyltp import SentenceSplitter
 import os,json
 import codecs
+from jieba import analyse
 # Create your views here.
 
 def relations_txt(request):
@@ -25,7 +26,7 @@ def cutWords(sentence):
 	sendData['sentence'] = sentence
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://localhost:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	words = jdata['wordsList']
@@ -38,7 +39,7 @@ def postTagger(words):
 	sendData['wordsList'] = words
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://localhost:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	tags = jdata['postags']
@@ -52,36 +53,54 @@ def ner(words,tags):
 	sendData['postags'] = tags
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://localhost:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	netags = jdata['netags']
 
 	return netags
 
+# 关系抽取，http请求服务求，用训练好的深度学习模型抽取人物关系
+def extract_relation(wordsList, name1, name2):
+	send = {}
+	send["wordsList"] = wordsList
+	send["name1"] = name1
+	send["name2"] = name2
+	message =  json.dumps(send).decode().encode('utf8')
+	response = urllib2.urlopen('http://192.168.1.11:10002',message)
+	data = response.read()
+	jdata =  json.loads(data,encoding="utf8") #jdata即为返回的json数据
+	relation = jdata["relation"]
+
+	return relation
+
 def extract_entity(words,tags,netags):
 	names = []
 	places = []
 	orgs = []
 	times = []
-
+	# 通过词性标注获取时间词汇
 	for k in range(len(words)):
 		if tags[k] == 'nt' and words[k] not in times:
 			times.append(words[k])
-
+    # 通过命名实体识别获取人名，地名，机构名 
 	index = 0
 	while index < len(words):
 		strEntity = ""
+		# 这个词单独构成人名
 		if netags[index] == "S-Nh":
 			if words[index] not in names:
 				names.append(words[index])
+		#这个词单独构成地名 
 		elif netags[index] == "S-Ni":
 			if words[index] not in orgs:
 				orgs.append(words[index])
+		# 这个词单独构成机构名
 		elif netags[index] == "S-Ns":
 			if words[index] not in places:
 				places.append(words[index])
 
+		# 这个词是人名的开始词汇
 		elif netags[index] == "B-Nh":
 			strEntity += words[index]
 			index += 1
@@ -91,7 +110,7 @@ def extract_entity(words,tags,netags):
 			strEntity += words[index]
 			if strEntity not in names:
 				names.append(strEntity)
-
+		# 这个词是地名的开始词汇
 		elif netags[index] == "B-Ni":
 			strEntity += words[index]
 			index += 1
@@ -101,7 +120,7 @@ def extract_entity(words,tags,netags):
 			strEntity += words[index]
 			if strEntity not in orgs:
 				orgs.append(strEntity)
-
+		# 这个词是机构名的开始词汇
 		elif netags[index] == "B-Ns":
 			strEntity += words[index]
 			index += 1
@@ -114,6 +133,46 @@ def extract_entity(words,tags,netags):
 
 		index += 1
 	return names, places, orgs, times
+
+# 关系语句抽取模块bootstrap-table展示部分json写入
+def relations_sentence(relSentenceList):
+	path = os.path.split(os.path.realpath(__file__))[0] + '/static/json/relSentence.json'
+	relTableData = []
+	idx = 1
+	for item in relSentenceList:
+		wordsList = item["wordsList"]
+		names = item["names"]
+		sentence = "".join(wordsList)
+		i = 0
+		j = 0
+		while (i < len(names)):
+			j = i + 1
+			while (j < len(names)):
+				name1 = names[i]
+				name2 = names[j]
+				lineItem = {}
+				lineItem["idx"] = idx
+				idx += 1
+				if isinstance(sentence,unicode):
+					sentence = sentence.encode('utf8')
+				lineItem["sentence"] = sentence
+				if isinstance(name1,unicode):
+					name1 = name1.encode('utf8')
+				lineItem["name1"] = name1
+				if isinstance(name2,unicode):
+					name2 = name2.encode('utf8')
+				lineItem["name2"] = name2
+				# 获取深度学习模型抽取的人物关系
+				relation = extract_relation(wordsList,name1,name2)
+				if isinstance(relation,unicode):
+					relation = relation.encode('utf8')
+				lineItem["relation"] = relation
+				relTableData.append(lineItem)
+				j += 1
+			i += 1
+	return relTableData
+	# with codecs.open(path,'w','utf-8') as json_file:
+	# 	json_file.write(json.dumps(jsonData,ensure_ascii=False).decode('utf8'))
 
 def relations_txt_submit(request):
 	request.encoding='utf-8'
@@ -130,22 +189,59 @@ def relations_txt_submit(request):
 	nameList = []
 	orgList = []
 	timeList = []
-
+	#关系语句抽取部分传回数据 
+	relSentenceList = []
+	# 词频统计
+	wordsCount = {}
 	for paragraph in txtList:
 		sents = SentenceSplitter.split(paragraph)
 		for s in sents:
 			words = cutWords(s)
+			# 词频统计部分
+			for word in words:
+				if word in wordsCount.keys():
+					wordsCount[word] += 1
+				else:
+					wordsCount[word] = 1
+
 			tags = postTagger(words)
 			netags = ner(words,tags)
 
 			names, places, orgs, times = extract_entity(words,tags,netags)
+			# 添加关系语句抽取部分传回的数据
+			if len(names) >= 2 :
+				sentNames = {}
+				sentNames["wordsList"] = words
+				sentNames["names"] = names
+				relSentenceList.append(sentNames)
+			# 添加实体抽取部分传回的数据
 			placeList.extend([x for x in places if x not in placeList])
 			nameList.extend([x for x in names if x not in nameList])
 			orgList.extend([x for x in orgs if x not in orgList])
 			timeList.extend([x for x in times if x not in timeList])
-
+			# 添加词性标注部分传回的数据
 			wordsList.extend(words)
+			# 添加词性说明部分传回的数据
 			tagsList.extend(tags)
+	# 关系语句抽取模块bootstrap-table展示部分数据写入调用
+	relTableData = relations_sentence(relSentenceList)
+
+	# 词频排序
+	wordsCount = sorted(wordsCount.items(), key = lambda item: item[1], reverse = True)
+	topWordsCount = []
+	ct  =  1
+	for item in wordsCount:
+		if ct <=10 and len(item[0]) > 1:
+			wc = [item[0],item[1]]
+			topWordsCount.append(wc)
+			ct += 1
+		elif ct > 10:
+			break
+	#关键词抽取
+	keyWords = analyse.textrank(txtInfo,topK=20, withWeight=False)
+	for idx in range(len(keyWords)):
+		if isinstance(keyWords[idx],unicode):
+			keyWords[idx] = keyWords[idx].encode('utf8')
 
 	entityDict = {
 		'places': placeList,
@@ -157,7 +253,10 @@ def relations_txt_submit(request):
 		'text': txtList ,
 		'wordsList': wordsList,
 		'tagsList': tagsList,
-		'entityDict': entityDict
+		'topWordsCount': topWordsCount,
+		'entityDict': entityDict,
+		'relTableData': relTableData,
+		'keyWords': keyWords
 	}
 	return HttpResponse(json.dumps(return_json),content_type='application/json')
 

@@ -19,6 +19,7 @@
 	    
 	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
 	    <link href="{% static 'css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/plugins/bootstrap-table/bootstrap-table.min.css' %}" rel="stylesheet">
 	</head>
 	<body class="gray-bg top-navigation">
 		<div class="wrapper">
@@ -224,8 +225,8 @@
 				        		</div>
 				        		<div class="ibox-content" style="height: 470px">
 				        			<div class="col-sm-12">
-				        				<input type="text" class="form-control input-sm m-b-xs" id="tag_filter" placeholder="搜索表格...">
-                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter=#tag_filter>
+				        				<input type="text" class="form-control input-sm m-b-xs" id="tag_filter" placeholder="表格搜索...">
+                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter="#tag_filter">
                                             <thead>
                                             <tr>
                                                 <th data-type="numeric">序号</th>
@@ -249,8 +250,26 @@
 			        	</div>
 				    </div>
 				    <div class="row block-row">
-				    	<div class="col-lg-6 col-md-6">
-				    		<div class="ibox box-contain">
+				    	<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>词频统计</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+				    			<div class="ibox-content" id="wordsCountBox">
+				    				<div id="wordsCount" style="height:400px;"></div>
+				    			</div> 
+				    		</div>
+				    	</div>
+				    	<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
 				    			<div class="ibox-title">
 				    				<h5>实体抽取</h5>
 				    				<div class="ibox-tools">
@@ -262,10 +281,10 @@
 			        					</a>
 			        				</div>
 				    			</div>
-					    		<div class="ibox-content" style="height: 350px;">
+					    		<div class="ibox-content" id="entityTable" style="height: 400px;">
 					    			<div class="col-sm-12">
 					    				<input type="text" id="entity_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
-					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter">
+					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
 					    					<thead >
 					    						<tr>
 					    							<th>实体类型</th>
@@ -307,7 +326,33 @@
 					    		</div>
 					    	</div>
 				    	</div>
-				    	<div class="col-lg-6 col-md-6">
+				   	</div>
+				   	<div class="row block-row" style="margin-top: 5px;">
+				    	<div class="col-lg-12 col-md-12">
+				    		<div class="ibox box-contain">
+				    			<div class="ibox-title">
+				    				<h5>关系语句抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" id="relSen_btBox">
+					    			<div class="col-sm-12" >
+					    				<!-- <input type="text" id="sentence_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索..."> -->
+					    				<table id="relation_sentence_table" data-page-size="5">
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+				    </div>
+				    <div class="row block-row">
+				    	<div class="col-md-6 col-lg-6">
 				    		<div class="ibox ibox-contain">
 				    			<div class="ibox-title">
 				    				<h5>关系抽取</h5>
@@ -320,11 +365,49 @@
 			        					</a>
 			        				</div>
 				    			</div>
-				    			<div class="ibox-content" id="relation_panel" style="height: 350px; ">
+				    			<div class="ibox-content" id="relation_panel" style="height: 400px;">
 				    			</div> 
 				    		</div>
 				    	</div>
-				   	</div>
+					    <div class="col-md-6 col-lg-6">
+				    		<div class="ibox box-contain">
+				    			<div class="ibox-title">
+				    				<h5>关键词抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" style="height: 400px;">
+					    			<div id="keyWords" style="height: 400px; width: 400px; margin-top: -90px;">
+					    				<ul id="wordCloud" list-style-type:none>
+<!-- 					    					<li><a  style="color:#f00;" rel="20">HTML</a></li>
+											<li><a  rel="15">CSS</a></li>
+											<li><a  rel="10">Javascript</a></li>
+											<li><a  rel="5">jQuery</a></li>
+											<li><a  rel="1">jQuery plugin</a></li>
+											<li><a  rel="5">jQuery tutorial</a></li>
+											<li><a  rel="10">jQuery howto</a></li>
+											<li><a  rel="15">jQuery plugins</a></li>
+											<li><a  style="color:#f00" rel="20">jQuery mobile</a></li>
+											<li><a  rel="15">java</a></li>
+											<li><a  rel="10">SEO</a></li>
+											<li><a  rel="5">Quiz</a></li>
+											<li><a  rel="1">News</a></li>
+											<li><a  rel="5">People</a></li>
+											<li><a  rel="10">Mobile</a></li>
+											<li><a  rel="15">Photoshop</a></li>
+											<li><a  style="color:#f00" rel="20">Design</a></li> -->
+					    				</ul>
+					    			</div>
+					    		</div>
+					    	</div>
+					    </div>
+				    </div>
 		        </div>
 	        </div>
 	    </div>
@@ -346,13 +429,19 @@
 	    <script src="{%static 'js/plugins/echarts/echarts-all.js' %}"></script>
 	    <!-- footable -->
 	    <script src="{%static 'js/plugins/footable/footable.all.min.js' %}" type="text/javascript"></script>
-
+	    <!-- bootstap-table -->
+	    <script src="{%static 'js/plugins/bootstrap-table/bootstrap-table.min.js' %}"></script>
+		<script src="{%static 'js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js' %}"></script>
+		<!-- 词云插件 -->
+	    <script src="{%static 'js/plugins/wordcloud/jquery.mousewheel.min.js' %}" type="text/javascript"></script>
+	    <script src="{%static 'js/plugins/wordcloud/jquery.tagsphere.min.js' %}" type="text/javascript"></script>
    	 	<!-- 解决ajax提交post请求的csrf.js -->
    	 	<!-- <script src="{%static 'js/csrf.js' %}"></script> -->
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/load-data.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/txt-submit.js' %}" type="text/javascript"></script>
+	    
 	    <!-- icheck加载初始化 -->
 	    <script >
 	    	$(document).ready(function(){
