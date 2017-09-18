@@ -137,7 +137,7 @@ def extract_entity(words,tags,netags):
 # 关系语句抽取模块bootstrap-table展示部分json写入
 def relations_sentence(relSentenceList):
 	path = os.path.split(os.path.realpath(__file__))[0] + '/static/json/relSentence.json'
-	jsonData = []
+	relTableData = []
 	idx = 1
 	for item in relSentenceList:
 		wordsList = item["wordsList"]
@@ -167,11 +167,12 @@ def relations_sentence(relSentenceList):
 				if isinstance(relation,unicode):
 					relation = relation.encode('utf8')
 				lineItem["relation"] = relation
-				jsonData.append(lineItem)
+				relTableData.append(lineItem)
 				j += 1
 			i += 1
-	with codecs.open(path,'w','utf-8') as json_file:
-		json_file.write(json.dumps(jsonData,ensure_ascii=False).decode('utf8'))
+	return relTableData
+	# with codecs.open(path,'w','utf-8') as json_file:
+	# 	json_file.write(json.dumps(jsonData,ensure_ascii=False).decode('utf8'))
 
 def relations_txt_submit(request):
 	request.encoding='utf-8'
@@ -222,8 +223,9 @@ def relations_txt_submit(request):
 			wordsList.extend(words)
 			# 添加词性说明部分传回的数据
 			tagsList.extend(tags)
-	# 关系语句抽取模块bootstrap-table展示部分json写入调用
-	relations_sentence(relSentenceList)
+	# 关系语句抽取模块bootstrap-table展示部分数据写入调用
+	relTableData = relations_sentence(relSentenceList)
+
 	# 词频排序
 	wordsCount = sorted(wordsCount.items(), key = lambda item: item[1], reverse = True)
 	topWordsCount = []
@@ -253,7 +255,7 @@ def relations_txt_submit(request):
 		'tagsList': tagsList,
 		'topWordsCount': topWordsCount,
 		'entityDict': entityDict,
-		'relSentenceList': relSentenceList,
+		'relTableData': relTableData,
 		'keyWords': keyWords
 	}
 	return HttpResponse(json.dumps(return_json),content_type='application/json')

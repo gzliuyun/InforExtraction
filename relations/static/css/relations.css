@@ -18,11 +18,12 @@
 	margin: 0 auto;
 }*/
 
-/*#keyWords ul {
-	list-style-type:none;
-}*/
+#keyWords{
+	height: 400px; 
+	width: 400px; 
+	margin-top: -90px;
+}
 #keyWords li a{
     text-decoration:none;
     color:white;
 }
-ul {list-style-type:none;}

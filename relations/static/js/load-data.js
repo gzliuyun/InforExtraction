@@ -246,9 +246,11 @@ function tag_description() {
     })
 }
 // 人物关系语句展示
-function relSenTable(){
+function relSenTable(relTableData){
+    // 在重新载入数据之前，需要先注销表
+    $("#relation_sentence_table").bootstrapTable('destroy'); 
     $('#relation_sentence_table').bootstrapTable({
-            url: '"../../../../../static/json/relSentence.json',
+            data: relTableData,
             queryParams:"queryParams",
             striped: true,
             sortable: true,               
@@ -319,6 +321,7 @@ function wordsCountShow(topWordsCountList){
         ]
     };
     chart.setOption(option);
+
 }
 
 $('input').on('ifUnchecked', function(event){
@@ -382,7 +385,7 @@ $(document).ready(function(){
     drawPie([50,30,15,15,20])
     drawRelationCharts();
     tag_description();
-    relSenTable();
+    // relSenTable();
     // wordsCountShow();
 
     // 使用footable插件,展示词性标注和实体抽取部分
