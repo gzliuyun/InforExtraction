@@ -338,7 +338,8 @@ def relations_search(request):
 			dt["relation"] = rType
 			jsonData["edges"].append(dt)
 
-		with codecs.open(path,'w','utf-8') as json_file:
-			json_file.write(json.dumps(jsonData,ensure_ascii=False))
+		# with codecs.open(path,'w','utf-8') as json_file:
+		# 	json_file.write(json.dumps(jsonData,ensure_ascii=False))
 
-	return render_to_response("relations_network.html")
+	# return render_to_response("relations_network.html")
+	return HttpResponse(json.dumps(jsonData),content_type='application/json')

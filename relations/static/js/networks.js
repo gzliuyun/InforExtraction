@@ -1,5 +1,13 @@
 $(function() {
-    drawNetwork()
+
+    // 加载进来时，先绘制json文件中的人物关系
+    d3.json("../../static/json/relation.json",function(error,root){
+        if( error ){
+            return console.log(error);
+        }
+        drawNetwork(root);
+    });
+    // search提交ajax
     $("#search_form").submit(function(){
         var search_name = $("#search_name").val();  
         $.ajax({
@@ -9,32 +17,34 @@ $(function() {
             data: {
                 'search_name': search_name
             },
-            success:function(data){ //提交成功的回调函数
-                $('#network').empty();
-                drawNetwork()
+            success:function(jsonData){ //提交成功的回调函数
+                var networkData = eval("("+jsonData+")");
+                drawNetwork(networkData);
             }
         });
         return false; //不刷新页面
     });
 });
 
-function drawNetwork(){
+function drawNetwork(networkData){
     var width = 900;
     var height = 600;
     var img_w = 77;
     var img_h = 90;
     var radius = 35;    //圆形半径
 
+    document.getElementById('network').innerHTML = "";
     var svg = d3.select("#network").append("svg")
                             .attr("width",width)
                             .attr("height",height);
 
     // ../../static/json/relation.json
-    d3.json("../../static/json/relation.json",function(error,root){
+    var root = networkData;
+    // d3.json("../../static/json/relation.json",function(error,root){
 
-        if( error ){
-            return console.log(error);
-        }
+        // if( error ){
+        //     return console.log(error);
+        // }
         console.log(root);
 
         //D3力导向布局
@@ -154,5 +164,5 @@ function drawNetwork(){
              nodes_text.attr("x",function(d){ return d.x });
              nodes_text.attr("y",function(d){ return d.y + img_w/2; });
         });
-    });
+    // });
 }
