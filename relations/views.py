@@ -9,6 +9,7 @@ from pyltp import SentenceSplitter
 import os,json
 import codecs
 from jieba import analyse
+from time import strftime, gmtime
 # Create your views here.
 
 def relations_txt(request):
@@ -179,9 +180,7 @@ def relations_txt_submit(request):
 	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
 	if len(txtInfo.strip()) == 0:
 		return 
-		
 	txtList = txtInfo.split('\n')
-	
 	wordsList = []
 	tagsList = []
 	
@@ -203,10 +202,8 @@ def relations_txt_submit(request):
 					wordsCount[word] += 1
 				else:
 					wordsCount[word] = 1
-
 			tags = postTagger(words)
 			netags = ner(words,tags)
-
 			names, places, orgs, times = extract_entity(words,tags,netags)
 			# 添加关系语句抽取部分传回的数据
 			if len(names) >= 2 :
@@ -225,7 +222,6 @@ def relations_txt_submit(request):
 			tagsList.extend(tags)
 	# 关系语句抽取模块bootstrap-table展示部分数据写入调用
 	relTableData = relations_sentence(relSentenceList)
-
 	# 词频排序
 	wordsCount = sorted(wordsCount.items(), key = lambda item: item[1], reverse = True)
 	topWordsCount = []
@@ -258,6 +254,7 @@ def relations_txt_submit(request):
 		'relTableData': relTableData,
 		'keyWords': keyWords
 	}
+	# print 'dasdasd',   return_json['keyWords']
 	return HttpResponse(json.dumps(return_json),content_type='application/json')
 
 
