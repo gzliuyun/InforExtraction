@@ -222,7 +222,6 @@ function sbt_txt() {
             if (relTableData.length > 0){
                 relSenTable(relTableData);
                 // 高度设置
-                console.log(relTableData.length);
                 var btTable = document.getElementById("relation_sentence_table");
                 var tableHeight = btTable.offsetHeight;
                 var relTabBox = document.getElementById("relSen_btBox");
