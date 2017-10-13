@@ -141,6 +141,7 @@ function show_words_cloud(keyWords){
         else{
             a_tag.setAttribute("rel","5");
         }
+        li_tag.setAttribute("style","list-style-type:none");
         a_tag.setAttribute("style","color:#f00");
         a_tag.innerHTML = keyWords[index];
         li_tag.appendChild(a_tag);
@@ -155,7 +156,8 @@ function show_words_cloud(keyWords){
     });
 }
 
-function sbt_txt(){
+function sbt_txt() {
+    console.log("####################");
     variable_init();
     var input_textarea = $("#input_textarea").val();  
     $.ajax({
@@ -166,8 +168,6 @@ function sbt_txt(){
             'input_textarea': input_textarea
         },
         success:function(result){ //提交成功的回调函数
-
-            // var result = eval(ret);
             var ret = eval("("+result+")");
             var paragraphList = ret.text;
             var text = "";
@@ -222,21 +222,23 @@ function sbt_txt(){
             if (relTableData.length > 0){
                 relSenTable(relTableData);
                 // 高度设置
-                console.log(relTableData.length);
                 var btTable = document.getElementById("relation_sentence_table");
                 var tableHeight = btTable.offsetHeight;
                 var relTabBox = document.getElementById("relSen_btBox");
                 relTabBox.style.height =  tableHeight + 150 + "px";
             }
             else{
-                // alert("dasdas");
+                
                 relSenTable([]);
                 var relTabBox = document.getElementById("relSen_btBox");
                 relTabBox.style.height =  200 + "px";
             }
+
+            // 绘制关系力导向图
+            drawRelationCharts(relTableData);
+
             // 词云展示
-            show_words_cloud(keyWords);
-            
+            show_words_cloud(keyWords);  
         }
     });
 }

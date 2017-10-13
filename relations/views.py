@@ -9,8 +9,32 @@ from pyltp import SentenceSplitter
 import os,json
 import codecs
 from jieba import analyse
+from time import strftime, gmtime
 # Create your views here.
-
+relWords = [
+	# man_and_wife
+	"妻子","结婚","婚礼","丈夫","夫人","婚姻","夫妻","相识","老公","举行","夫妇","认识",
+	"爱情","工作","感情","相恋","生活","太太","女儿","老婆","太太妻","夫",
+	# parent_children
+	"父亲","儿子","母亲","女儿","长子","出生","家庭","次子","子女","长女","祖父","世家","次女","三子","原配","去世","生于",
+	"父母","夫人","妈妈","爸爸","母子","父女","子","三儿子","四子父","爸","爹","母","妈","娘","儿","女",
+	# teacher_and_pupil
+	"弟子","先生","师从","老师","学习","艺术","学生","教授","名家","传人","大师","演出","考入","相声","京剧","徒弟","得到",
+	"拜师","指导","表演艺术家","师父","师傅","恩师","导师","师","徒",
+	# cooperate
+	"冠军","演出","世界","合作","组合","决赛","主演","获得","搭档","编剧","沙滩","公开赛","排球","小品","队友","黄希庭",
+	"比赛","羽毛球","导演","同事","同僚","女双搭档","小品搭档","男双搭档","沙排搭档","羽毛球混双搭档","羽毛球女双搭档",
+	"队友及搭档","双人滑搭档",
+	# friends
+	"热力","筱桂花","环球","好友","兄弟","静农","电影","影音","加盟","鼓票界","八角","邀请","农君","导演","灌篮","友谊",
+	"出版","创作","主演","发表","朋友","挚友","友人","密友友",
+	# brother
+	"弟弟","哥哥","兄长","兄弟","胞弟","亲兄弟","手足","老二","带入","母弟","关羽","中立","堂兄弟","结盟","同盟会","袁术",
+	"电影圈","大哥","兄","长兄","三哥","三弟","二哥哥","弟",
+	# sweetheart
+	"分手","恋情","女友","男友","媒体","绯闻","传出","感情","恋爱","照片","交往","相恋","报道","承认","曝光","朋友","超云",
+	"关系","传闻","女星","前女友","前男友","绯闻男友","恋人","男朋友","初恋男友","初恋"
+]
 def relations_txt(request):
 	return render_to_response("relations_txt.html")
 
@@ -179,9 +203,7 @@ def relations_txt_submit(request):
 	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
 	if len(txtInfo.strip()) == 0:
 		return 
-		
 	txtList = txtInfo.split('\n')
-	
 	wordsList = []
 	tagsList = []
 	
@@ -198,18 +220,25 @@ def relations_txt_submit(request):
 		for s in sents:
 			words = cutWords(s)
 			# 词频统计部分
+			inRelWords = False
 			for word in words:
+				if isinstance(word,unicode):
+					word = word.encode('utf8')
 				if word in wordsCount.keys():
 					wordsCount[word] += 1
 				else:
 					wordsCount[word] = 1
 
+				# 判断句子中是否存在关系关键词
+				if inRelWords == False:
+					if word in relWords:
+						inRelWords = True
+
 			tags = postTagger(words)
 			netags = ner(words,tags)
-
 			names, places, orgs, times = extract_entity(words,tags,netags)
 			# 添加关系语句抽取部分传回的数据
-			if len(names) >= 2 :
+			if inRelWords and (len(names) >= 2) :   #存在关系关键词 并且两个以上人名，才进行关系抽取。
 				sentNames = {}
 				sentNames["wordsList"] = words
 				sentNames["names"] = names
@@ -225,7 +254,6 @@ def relations_txt_submit(request):
 			tagsList.extend(tags)
 	# 关系语句抽取模块bootstrap-table展示部分数据写入调用
 	relTableData = relations_sentence(relSentenceList)
-
 	# 词频排序
 	wordsCount = sorted(wordsCount.items(), key = lambda item: item[1], reverse = True)
 	topWordsCount = []
@@ -258,6 +286,7 @@ def relations_txt_submit(request):
 		'relTableData': relTableData,
 		'keyWords': keyWords
 	}
+	# print 'dasdasd',   return_json['keyWords']
 	return HttpResponse(json.dumps(return_json),content_type='application/json')
 
 
