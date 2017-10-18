@@ -259,13 +259,13 @@ def relations_txt_submit(request):
 	topWordsCount = []
 	ct  =  1
 	for item in wordsCount:
-		if ct <=10 and len(item[0]) > 1:
+		if len(item[0].decode("utf8")) >=2 and ct <=10:
 			wc = [item[0],item[1]]
 			topWordsCount.append(wc)
 			ct += 1
 		elif ct > 10:
 			break
-	#关键词抽取
+	# 关键词抽取
 	keyWords = analyse.textrank(txtInfo,topK=20, withWeight=False)
 	for idx in range(len(keyWords)):
 		if isinstance(keyWords[idx],unicode):
