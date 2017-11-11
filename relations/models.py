@@ -15,7 +15,7 @@ class Notyperel(models.Model):
         return self.n_id
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Notyperel'
 
 
@@ -30,7 +30,7 @@ class Peoplelist(models.Model):
         return self.name
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Peoplelist'
 
 
@@ -44,7 +44,7 @@ class Peoplerelation(models.Model):
         return self.n_id
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Peoplerelation'
         unique_together = (('p1_id', 'p2_id'),)
 
@@ -57,7 +57,7 @@ class Relationlist(models.Model):
         return self.r_id
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Relationlist'
 
 
@@ -75,15 +75,7 @@ class Relinsentence(models.Model):
         return self.s_id
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'Relinsentence'
 
 
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
