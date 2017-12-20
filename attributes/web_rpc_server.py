@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-import pyjsonrpc
 import codecs
 import commands
 from pyltp import Segmentor
@@ -17,13 +15,13 @@ def segmentor(sentence):
     sendData['sentence'] = sentence
 
     message = json.dumps(sendData).decode().encode('utf8')
-    #response = urllib2.urlopen('http://192.168.1.11:10001/', message)
-    #data = response.read()
-    #jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
-    #words = jdata['wordsList']
+    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    data = response.read()
+    jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
+    words = jdata['wordsList']
 
     #########for test######
-    words = ["测试"]
+    #words = ["测试"]
 
     return words
 
@@ -32,15 +30,15 @@ def postagger(words):
     sendData['method'] = "postTag"
     sendData['wordsList'] = words
 
-    # message = json.dumps(sendData).decode().encode('utf8')
-    # response = urllib2.urlopen('http://192.168.1.11:10001/', message)
-    # data = response.read()
-    # jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
-    # postags = jdata['postags']
+    message = json.dumps(sendData).decode().encode('utf8')
+    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    data = response.read()
+    jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
+    postags = jdata['postags']
     ######### for test
-    postags = ['nh']
+    #postags = ['nh']
 
-    file = codecs.open('test.data','w','utf-8')
+    file = codecs.open('/home/pengbin/attribute_extraction/bishe/test.data','w','utf-8')
     result = []
     for word,tag in zip(words,postags):
         pair = []
@@ -50,17 +48,17 @@ def postagger(words):
 
     for pa in result:
         for x in pa[0].decode('utf-8'):
-            #file.write(x.encode('utf-8') + "\t")
-            file.write(x + "\t")
+            file.write(x.encode('utf-8') + "\t")
+            #file.write(x + "\t")
             file.write(pa[1] + "\n")
     file.close()
 def text_to_story(text):
     print "#######" + str(text)
     postagger(segmentor(text))
     ##执行shell命令，开始跑模型，
-    commands.getstatusoutput('cd /bishe/xxxxx && ./crf_test -m 6.model test.data > test.rst ')
+    commands.getstatusoutput('cd /home/pengbin/attribute_extraction/bishe/ && ./crf_test -m 6.model test.data > test.rst ')
     ##执行结束，结果存在了test.rst里面
-    file = open('/bishe/xxxxx/test.rst','r')
+    file = open('/home/pengbin/attribute_extraction/bishe/test.rst','r')
     result = {
         'name':[],
         'university':[],

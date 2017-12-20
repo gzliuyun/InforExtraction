@@ -1,5 +1,5 @@
 
-
+import json
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -16,7 +16,10 @@ def text_upload(request):
     print text
     result = {}
     result = text_to_story(text)
-    return HttpResponse("<h1>result</h1>")
+    return_json = {
+        'attributeDict': result
+    }
+    return HttpResponse(json.dumps(return_json),content_type='application/json')
 
 # def index(request):
 #     testlo = {'a': 1, 'b': 2}

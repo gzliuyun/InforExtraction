@@ -13,8 +13,7 @@ function sbt_txt() {
         },
         success:function(result){ //提交成功的回调函数
             var ret = eval("("+result+")");
-            var paragraphList = ret.text;
-            var text = "";
+            var attributes = ret.attributeDict;//属性列表
 
         }
     });
