@@ -1,6 +1,6 @@
 
 
-function sbt_txt() {
+function sbt_txt(){
     console.log("####################");
     variable_init();
     var input_textarea = $("#input_textarea").val();  

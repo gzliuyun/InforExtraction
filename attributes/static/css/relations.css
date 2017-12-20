@@ -1,0 +1,29 @@
+.contain-content{
+	width: 1100px;
+	margin: 0 auto;
+}
+.block-row{
+	margin-right: -15px;
+	margin-left: -15px;
+	margin-top: 30px;  
+}
+.box-contain{
+	margin-bottom: 0px;
+}
+#relation_sentence_table tr th{
+	text-align:center;
+}
+/*.block-container{
+	width: 80%;
+	margin: 0 auto;
+}*/
+
+#keyWords{
+	height: 400px; 
+	width: 400px; 
+	margin-top: -90px;
+}
+#keyWords li a{
+    text-decoration:none;
+    color:white;
+}
