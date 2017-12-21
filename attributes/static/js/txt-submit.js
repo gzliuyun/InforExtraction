@@ -48,7 +48,7 @@ function show_attribute_extract(attributeDict){
 
 function sbt_txt(){
     console.log("####################");
-    variable_init();
+    //variable_init();
     var input_textarea = $("#input_textarea").val();  
     $.ajax({
         type:"get",  //提交方式
