@@ -357,8 +357,26 @@
 			        	</div>
 				    </div>
 				    <div class="row block-row">
-				    	<div class="col-lg-6 col-md-6">
-				    		<div class="ibox box-contain">
+				    	<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>词频统计</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+				    			<div class="ibox-content" id="wordsCountBox">
+				    				<div id="wordsCount" style="height:400px;"></div>
+				    			</div> 
+				    		</div>
+				    	</div>
+				    	<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
 				    			<div class="ibox-title">
 				    				<h5>实体抽取</h5>
 				    				<div class="ibox-tools">
@@ -370,57 +388,71 @@
 			        					</a>
 			        				</div>
 				    			</div>
-					    		<div class="ibox-content" style="height: 350px;">
+					    		<div class="ibox-content" id="entityTable" style="height: 400px;">
 					    			<div class="col-sm-12">
-					    				<input type="text" class="form-control input-sm m-b-xs" id="entity_filter" placeholder="表格搜索...">
-					    				<table id="entity_table" class="footable table table-hover table-bordered no-paging footable-loaded" data-filter="#entity_table">
+					    				<input type="text" id="entity_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
+					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
 					    					<thead >
 					    						<tr>
-					    							<th class="footable-sortable">
-					    								属性类型
-					    								<span class="footable-sort-indicator"></span>
-					    							</th>
-					    							<th class="footable-sortable">
-					    								属性列表
-					    								<span class="footable-sort-indicator"></span>
-					    							</th>
+					    							<th>属性类型</th>
+					    							<th>属性列表</th>
 					    						</tr>
 					    					</thead>
 					    					<tbody>
 					    						<tr class="footable-event" style="display: table-row;">
 					    							<td class="col-md-3">
-					    								<span class="footable-toggle">name（姓名）</span>
+					    								<span >人名</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">赵黎平
-					    								</a>
+					    							<td id = "row_names">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-old" style="display: table-row;">
 					    							<td>
-					    								<span class="footable-toggle">education（学历）</span>
+					    								<span >毕业院校</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">在职研究生
-					    								</a>
+					    							<td id = "row_university">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-event" style="display: table-row;">
 					    							<td>
-					    								<span class="footable-toggle">job(工作、职位)</span>
+					    								<span >专业</span>
 					    							</td>
-					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">内蒙古自治区人民政府副主席、自治区公安厅党委书记、厅长、内蒙古自治区政协副主席
-					    								</a>
+					    							<td id="row_major">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-old" style="display: table-row;">
 					    							<td>
-					    								<span class="footable-toggle">birthplace(籍贯、出生地)</span>
+					    								<span >学历</span>
 					    							</td>
+					    							<td id="row_education">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
 					    							<td>
-					    								<a class="btn btn-xs btn-default" style="margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);">河北玉田
-					    								</a>
+					    								<span >职务</span>
+					    							</td>
+					    							<td id="row_job">
+					    							</td>
+					    						</tr>
+												<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >出生地</span>
+					    							</td>
+					    							<td id="row_birthplace">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >民族</span>
+					    							</td>
+					    							<td id="row_nation">
+					    							</td>
+					    						</tr>
+												<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >性别</span>
+					    							</td>
+					    							<td id="row_gender">
 					    							</td>
 					    						</tr>
 					    					</tbody>

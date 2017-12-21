@@ -14,9 +14,13 @@ def text_upload(request):
     #request.encoding = 'utf-8'
     text = request.GET.get('input_textarea', None)
     print text
+    if len(text.strip()) == 0:
+        return
+    txtList = text.split('\n')
     result = {}
     result = text_to_story(text)
     return_json = {
+        'text':txtList,
         'attributeDict': result
     }
     return HttpResponse(json.dumps(return_json),content_type='application/json')
