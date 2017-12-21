@@ -13,6 +13,7 @@ def attributes_home(request):
 def text_upload(request):
     #request.encoding = 'utf-8'
     text = request.GET.get('input_textarea', None)
+    print "peng###############bin"
     print text
     if len(text.strip()) == 0:
         return
