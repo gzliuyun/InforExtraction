@@ -15,7 +15,7 @@ def segmentor(sentence):
     sendData['sentence'] = sentence
 
     message = json.dumps(sendData).decode().encode('utf8')
-    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    response = urllib2.urlopen('http://localhost:10001/', message)
     data = response.read()
     jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
     words = jdata['wordsList']
@@ -31,7 +31,7 @@ def postagger(words):
     sendData['wordsList'] = words
 
     message = json.dumps(sendData).decode().encode('utf8')
-    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    response = urllib2.urlopen('http://localhost:10001/', message)
     data = response.read()
     jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
     postags = jdata['postags']
