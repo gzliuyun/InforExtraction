@@ -22,7 +22,7 @@ def segmentor(sentence):
 
     #########for test######
     #words = ["测试"]
-
+    print words
     return words
 
 def postagger(words):
@@ -37,7 +37,7 @@ def postagger(words):
     postags = jdata['postags']
     ######### for test
     #postags = ['nh']
-
+    print postags
     file = codecs.open('/home/pengbin/attribute_extraction/bishe/test.data','w','utf-8')
     result = []
     for word,tag in zip(words,postags):
