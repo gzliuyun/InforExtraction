@@ -10,6 +10,8 @@ from web_rpc_server import text_to_story
 def attributes_home(request):
 	return render_to_response("attributes.html")
 
+def attributes_network(request):
+	return render_to_response("attributes_network.html")
 def text_upload(request):
     #request.encoding = 'utf-8'
     text = request.GET.get('input_textarea', None)
