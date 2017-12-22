@@ -47,7 +47,7 @@ def postagger(words):
         result.append(pair)
 
     for pa in result:
-        for x in pa[0].decode('utf-8'):
+        for x in pa[0]:
             file.write(x.encode('utf-8') + "\t")
             #file.write(x + "\t")
             file.write(pa[1] + "\n")
