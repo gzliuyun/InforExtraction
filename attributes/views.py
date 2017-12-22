@@ -17,6 +17,7 @@ def text_upload(request):
     text = request.GET.get('input_textarea', None)
     print "peng###############bin"
     print text
+    print type(text)
     if len(text.strip()) == 0:
         return
     txtList = text.split('\n')
