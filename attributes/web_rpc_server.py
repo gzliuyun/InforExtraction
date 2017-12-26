@@ -264,6 +264,8 @@ def text_to_story(text):
                 result['gender'].append(tmp_str)
                 tmp_str = ""
     file.close()
+    for key in result:
+        result[key] = list(set(result[key]))
     print result
     return result
 # class RequestHandler(pyjsonrpc.HttpRequestHandler):
