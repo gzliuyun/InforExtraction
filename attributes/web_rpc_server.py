@@ -74,6 +74,7 @@ def text_to_story(text):
         'nation':[],
         'gender':[]
     }
+
     tmp_str = ""
     for line in file.readlines():
         line_list = line.split('\t')
@@ -81,7 +82,7 @@ def text_to_story(text):
         if curr_char[0] == 'N':
             continue
         ##name属性
-        elif 'name' in curr_char[0]:
+        elif 'name' in curr_char:
             if curr_char[0] == 'S':
                 result['name'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -95,7 +96,7 @@ def text_to_story(text):
                 result['name'].append(tmp_str)
                 tmp_str = ""
         ##university属性
-        elif 'university' in curr_char[0]:
+        elif 'university' in curr_char:
             if curr_char[0] == 'S':
                 result['university'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -109,7 +110,7 @@ def text_to_story(text):
                 result['university'].append(tmp_str)
                 tmp_str = ""
         ##major属性
-        elif 'major' in curr_char[0]:
+        elif 'major' in curr_char:
             if curr_char[0] == 'S':
                 result['major'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -123,7 +124,7 @@ def text_to_story(text):
                 result['major'].append(tmp_str)
                 tmp_str = ""
         ##education属性
-        elif 'education' in curr_char[0]:
+        elif 'education' in curr_char:
             if curr_char[0] == 'S':
                 result['education'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -137,7 +138,7 @@ def text_to_story(text):
                 result['education'].append(tmp_str)
                 tmp_str = ""
         ##school属性
-        elif 'school' in curr_char[0]:
+        elif 'school' in curr_char:
             if curr_char[0] == 'S':
                 result['school'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -151,7 +152,7 @@ def text_to_story(text):
                 result['school'].append(tmp_str)
                 tmp_str = ""
         ##party属性
-        elif 'party' in curr_char[0]:
+        elif 'party' in curr_char:
             if curr_char[0] == 'S':
                 result['party'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -165,7 +166,7 @@ def text_to_story(text):
                 result['party'].append(tmp_str)
                 tmp_str = ""
         ##birthday属性
-        elif 'birthday' in curr_char[0]:
+        elif 'birthday' in curr_char:
             if curr_char[0] == 'S':
                 result['birthday'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -179,7 +180,7 @@ def text_to_story(text):
                 result['birthday'].append(tmp_str)
                 tmp_str = ""
         ##jointime属性
-        elif 'jointime' in curr_char[0]:
+        elif 'jointime' in curr_char:
             if curr_char[0] == 'S':
                 result['jointime'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -193,7 +194,7 @@ def text_to_story(text):
                 result['jointime'].append(tmp_str)
                 tmp_str = ""
         ##job属性
-        elif 'job' in curr_char[0]:
+        elif 'job' in curr_char:
             if curr_char[0] == 'S':
                 result['job'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -207,7 +208,7 @@ def text_to_story(text):
                 result['job'].append(tmp_str)
                 tmp_str = ""
         ##birthplace属性
-        elif 'birthplace' in curr_char[0]:
+        elif 'birthplace' in curr_char:
             if curr_char[0] == 'S':
                 result['birthplace'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -221,7 +222,7 @@ def text_to_story(text):
                 result['birthplace'].append(tmp_str)
                 tmp_str = ""
         ##workplace属性
-        elif 'workplace' in curr_char[0]:
+        elif 'workplace' in curr_char:
             if curr_char[0] == 'S':
                 result['workplace'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -235,7 +236,7 @@ def text_to_story(text):
                 result['workplace'].append(tmp_str)
                 tmp_str = ""
         ##nation属性
-        elif 'nation' in curr_char[0]:
+        elif 'nation' in curr_char:
             if curr_char[0] == 'S':
                 result['nation'].append(line_list[0])
             elif curr_char[0] == 'B':
@@ -249,7 +250,7 @@ def text_to_story(text):
                 result['nation'].append(tmp_str)
                 tmp_str = ""
         ##gender属性
-        elif 'gender' in curr_char[0]:
+        elif 'gender' in curr_char:
             if curr_char[0] == 'S':
                 result['gender'].append(line_list[0])
             elif curr_char[0] == 'B':
