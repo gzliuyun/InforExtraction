@@ -52,6 +52,80 @@ def postagger(words):
             #file.write(x + "\t")
             file.write(pa[1] + "\n")
     file.close()
+
+def ner(words,tags):
+	sendData = {}
+	sendData['method'] = "ner"
+	sendData['wordsList'] = words
+	sendData['postags'] = tags
+
+	message = json.dumps(sendData).decode().encode('utf8')
+	response = urllib2.urlopen('http://192.168.1.6:10001/',message)
+	data = response.read()
+	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
+	netags = jdata['netags']
+
+	return netags
+
+def extract_entity(words,tags,netags):
+	names = []
+	places = []
+	orgs = []
+	times = []
+	# 通过词性标注获取时间词汇
+	for k in range(len(words)):
+		if tags[k] == 'nt' and words[k] not in times:
+			times.append(words[k])
+    # 通过命名实体识别获取人名，地名，机构名
+	index = 0
+	while index < len(words):
+		strEntity = ""
+		# 这个词单独构成人名
+		if netags[index] == "S-Nh":
+			if words[index] not in names:
+				names.append(words[index])
+		#这个词单独构成地名
+		elif netags[index] == "S-Ni":
+			if words[index] not in orgs:
+				orgs.append(words[index])
+		# 这个词单独构成机构名
+		elif netags[index] == "S-Ns":
+			if words[index] not in places:
+				places.append(words[index])
+
+		# 这个词是人名的开始词汇
+		elif netags[index] == "B-Nh":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Nh":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in names:
+				names.append(strEntity)
+		# 这个词是地名的开始词汇
+		elif netags[index] == "B-Ni":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Ni":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in orgs:
+				orgs.append(strEntity)
+		# 这个词是机构名的开始词汇
+		elif netags[index] == "B-Ns":
+			strEntity += words[index]
+			index += 1
+			while netags[index] != "E-Ns":
+				strEntity += words[index]
+				index += 1
+			strEntity += words[index]
+			if strEntity not in places:
+				places.append(strEntity)
+
+		index += 1
+	return names, places, orgs, times
 def text_to_story(text):
     print "#######" + text.encode('utf-8').decode('utf-8')
     postagger(segmentor(text))

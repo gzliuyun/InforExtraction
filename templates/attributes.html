@@ -126,54 +126,45 @@
 			        				</div>
 			        			</div>
 			        			<div class="ibox-content" style="height: 470px">
-			        				<div class="row" style="height: 400px;">
+			        				<div class="row" style="height: 410px;">
 				        				<div class="col-md-8">
-				        					<div class="tooltip-demo full-height-scroll" id="tag_result" style="width: auto;height: 100%">
-					        					<a class="btn btn-xs btn-rounded btn-danger btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：北京<br>实体类型: 名词<br>词性缩写: NB">北京</a>
-					        					<a class="btn btn-xs btn-rounded btn-primary btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航空<br>实体类型: 名词<br>词性缩写: NB">航空</a>
-					        					<a class="btn btn-xs btn-rounded btn-success btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：航天<br>实体类型: 名词<br>词性缩写: NB">航天</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">大学</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">北京航空航天大学</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">北京大学</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">中国人民大学</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">海淀区</a>
-					        					<a class="btn btn-xs btn-rounded btn-warning btn-style" data-toggle="tooltip" data-placement="top" data-html="true" title style="margin: 0px 2px 5px 2px" data-original-title="词性还原：大学<br>实体类型: 名词<br>词性缩写: NB">学院路</a>
+				        					<div class="tooltip-demo full-height-scroll" id="tag_result" style="width: auto;height:400px; overflow:auto">
 					        				</div>
 				        				</div>
 				        				<div class="col-md-4" >
 				        					<div class="row">
 				        						<div class="col-md-6 col-xs-6">
 				        							<div class="checkbox i-check">
-				        								<input id="checkbox_1" type="checkbox" checked="checked" onchange="">
-				        								<label for="checkbox_1" style="padding-left: 10px;">
+				        								<input id="noun" type="checkbox" checked="checked" >
+				        								<label for="noun" style="padding-left: 10px;">
 				        									<a class="btn btn-xs btn-rounded btn-primary">名词</a>
-				        								</label>
+				        								</label> 
 				        							</div>
 				        							<div class="checkbox i-check">
-				        								<input id="checkbox_2" type="checkbox" checked="checked" onchange="">
-				        								<label for="checkbox_2" style="padding-left: 10px;">
+				        								<input id="adjective" type="checkbox" checked="checked" >
+				        								<label for="adjective" style="padding-left: 10px;">
 				        									<a class="btn btn-xs btn-rounded btn-danger">形容词</a>
-				        								</label>
+				        								</label> 
 				        							</div>
 				        							<div class="checkbox i-check">
-				        								<input id="checkbox_3" type="checkbox" checked="checked" onchange="">
-				        								<label for="checkbox_3" style="padding-left: 10px;">
+				        								<input id="other" type="checkbox" checked="checked" >
+				        								<label for="other" style="padding-left: 10px;">
 				        									<a class="btn btn-xs btn-rounded btn-warning">其他词</a>
-				        								</label>
+				        								</label> 
 				        							</div>
 				        						</div>
 				        						<div class="col-md-6 col-xs-6">
 				        							<div class="checkbox i-check">
-				        								<input id="checkbox_4" type="checkbox" checked="checked" onchange="">
-				        								<label for="checkbox_4" style="padding-left: 10px;">
+				        								<input id="verb" type="checkbox" checked="checked" >
+				        								<label for="verb" style="padding-left: 10px;">
 				        									<a class="btn btn-xs btn-rounded btn-success">动词</a>
-				        								</label>
+				        								</label> 
 				        							</div>
 				        							<div class="checkbox i-check">
-				        								<input id="checkbox_5" type="checkbox" checked="checked" onchange="">
-				        								<label for="checkbox_5" style="padding-left: 10px;">
+				        								<input id="adverb" type="checkbox" checked="checked" >
+				        								<label for="adverb" style="padding-left: 10px;">
 				        									<a class="btn btn-xs btn-rounded btn-info">副词</a>
-				        								</label>
+				        								</label> 
 				        							</div>
 				        						</div>
 				        					</div>
@@ -185,7 +176,7 @@
 				        							<h4>词性分布比例</h4>
 	                        						<div id="flot-pie-chart" style="height: 200px; width: 200px; margin: 0 auto;">
 	                        						</div>
-
+	                        						
 				        						</div>
 				        						<div class="text-right" style="margin-right: 10px">
 			        								<small>词总数：</small>
@@ -217,12 +208,12 @@
 			        					</small>
 			        				</div>
 			        			</div>
-							</div>
+							</div>	        		
 			        	</div>
 			        	<div class="col-md-4 col-lg-4">
 			        		<div class="ibox box-contain">
 				        		<div class="ibox-title">
-			        				<h5>词性简称说明</h5>
+			        				<h5>词性标注说明</h5>
 			        				<div class="ibox-tools">
 			        					<a class="collapse-link">
 			        						<i class="fa fa-chevron-up"></i>
@@ -234,122 +225,25 @@
 				        		</div>
 				        		<div class="ibox-content" style="height: 470px">
 				        			<div class="col-sm-12">
-				        				<input type="text" id="tag_filter" class="form-control input-sm m-b-xs" placeholder="表格搜索...">
-				        				<table id="tag_table" class="footable table table-hover footable-loaded" data-page-size="9" data-filter="#tag_filter">
-				        					<thead>
-				        						<tr>
-				        							<th data-type="numeric" class="footable-sortable">
-				        								序号
-				        								<span class="footable-sort-indicator"></span>
-				        							</th>
-				        							<th class="footable-sortable">
-				        								词性简称
-				        								<span class="footable-sort-indicator"></span>
-				        							</th>
-				        							<th class="footable-sortable">
-				        								词性描述
-				        								<span class="footable-sort-indicator"></span>
-				        							</th>
-				        						</tr>
-				        					</thead>
-				        					<tbody>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">1</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">2</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">3</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">4</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">5</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">6</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">7</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">8</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        						<tr class="footable-event" style="display: table-row;">
-				        							<td>
-				        								<span class="footable-toggle">9</span>
-				        							</td>
-				        							<td>CC</td>
-				        							<td>连接词</td>
-				        						</tr>
-				        					</tbody>
-				        					<tfoot>
-				        						<tr>
-				        							<td colspan="3">
-				        								<ul class="pagination">
-				        									<li class="footable-page-arrow">
-				        										<a data-page="first" href="#first">«</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="pre" href="#pre">‹</a>
-				        									</li>
-				        									<li class="footable-page-arrow active">
-				        										<a data-page="0" href="#">1</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="1" href="#">2</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="2" href="#">3</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="4" href="#">4</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="next" href="#next">›</a>
-				        									</li>
-				        									<li class="footable-page-arrow">
-				        										<a data-page="last" href="#last">»</a>
-				        									</li>
-				        								</ul>
-				        							</td>
-				        						</tr>
-				        					</tfoot>
-				        				</table>
+				        				<input type="text" class="form-control input-sm m-b-xs" id="tag_filter" placeholder="表格搜索...">
+                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter="#tag_filter">
+                                            <thead>
+                                            <tr>
+                                                <th data-type="numeric">序号</th>
+                                                <th>词性标注</th>
+                                                <th>词性描述</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
 				        			</div>
 				        		</div>
 				        	</div>
@@ -374,10 +268,10 @@
 				    			</div> 
 				    		</div>
 				    	</div>
-				    	<div class="col-md-6 col-lg-6">
+						<div class="col-md-6 col-lg-6">
 				    		<div class="ibox ibox-contain">
 				    			<div class="ibox-title">
-				    				<h5>属性抽取</h5>
+				    				<h5>实体抽取</h5>
 				    				<div class="ibox-tools">
 			        					<a class="collapse-link">
 			        						<i class="fa fa-chevron-up"></i>
@@ -393,6 +287,66 @@
 					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
 					    					<thead >
 					    						<tr>
+					    							<th>实体类型</th>
+					    							<th>实体列表</th>
+					    						</tr>
+					    					</thead>
+					    					<tbody>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td class="col-md-3">
+					    								<span >人名</span>
+					    							</td>
+					    							<td id = "row_names">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >地名</span>
+					    							</td>
+					    							<td id = "row_places">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >机构名</span>
+					    							</td>
+					    							<td id="row_orgs">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >时间</span>
+					    							</td>
+					    							<td id="row_times">
+					    							</td>
+					    						</tr>
+					    					</tbody>
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+				   	</div>
+					<div class="row block-row">
+						<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>属性抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" id="attributeTable" style="height: 400px;">
+					    			<div class="col-sm-12">
+					    				<input type="text" id="attribute_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
+					    				<table id="attribute_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
+					    					<thead >
+					    						<tr>
 					    							<th>属性类型</th>
 					    							<th>属性列表</th>
 					    						</tr>
@@ -402,7 +356,7 @@
 					    							<td class="col-md-3">
 					    								<span >人名</span>
 					    							</td>
-					    							<td id = "row_names">
+					    							<td id = "row_name">
 					    							</td>
 					    						</tr>
 					    						<tr class="footable-old" style="display: table-row;">
@@ -460,24 +414,7 @@
 					    		</div>
 					    	</div>
 				    	</div>
-				    	<div class="col-lg-6 col-md-6">
-				    		<div class="ibox ibox-contain">
-				    			<div class="ibox-title">
-				    				<h5>关系抽取</h5>
-				    				<div class="ibox-tools">
-			        					<a class="collapse-link">
-			        						<i class="fa fa-chevron-up"></i>
-			        					</a>
-			        					<a  class="close-link">
-			        						<i class="fa fa-times"></i>
-			        					</a>
-			        				</div>
-				    			</div>
-				    			<div class="ibox-content" id="relation_panel" style="height: 350px; ">
-				    			</div>
-				    		</div>
-				    	</div>
-				   	</div>
+					</div>
 		        </div>
 	        </div>
 	    </div>
