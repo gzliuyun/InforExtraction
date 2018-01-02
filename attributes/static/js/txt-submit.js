@@ -202,7 +202,17 @@ function sbt_txt(){
             // 获取关键词列表
             //var keyWords = ret.keyWords;
             var attributes = ret.attributeDict;//属性列表
-
+            
+            {
+                // 属性抽取展示
+                show_attribute_extract(attributes);
+                //属性展示模块，高度设置
+                var entieyTable = document.getElementById("attribute_extract_table");
+                var tableHeight = entieyTable.offsetHeight;
+                // document.getElementById("relSen_btBox").style.height = tableHeight + 'px';
+                var entityTabBox = document.getElementById("attributeTable");
+                entityTabBox.style.height =  tableHeight + 90 + "px";
+            }
             // 词性标注展示
             show_word_tag(wordsList,tagsList);
 
@@ -232,16 +242,7 @@ function sbt_txt(){
                 var entityTabBox = document.getElementById("entityTable");
                 entityTabBox.style.height =  tableHeight + 90 + "px";
             }
-            {
-                // 属性抽取展示
-                show_attribute_extract(attributes);
-                //属性展示模块，高度设置
-                var entieyTable = document.getElementById("attribute_extract_table");
-                var tableHeight = entieyTable.offsetHeight;
-                // document.getElementById("relSen_btBox").style.height = tableHeight + 'px';
-                var entityTabBox = document.getElementById("attributeTable");
-                entityTabBox.style.height =  tableHeight + 90 + "px";
-            }
+
         }
     });
 }
