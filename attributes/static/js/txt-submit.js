@@ -186,6 +186,7 @@ function show_entity_extract(entityDict){
         row_times.appendChild(node);
     }
 }
+
 function show_attribute_extract(attributeDict){
     // 属性人名抽取 展示
     namesList = attributeDict.name;
@@ -265,6 +266,10 @@ function sbt_txt(){
             //var keyWords = ret.keyWords;
             var attributes = ret.attributeDict;//属性列表
             console.log(attributes);
+            console.log(wordsList);
+            console.log(tagsList);
+            console.log(topWordsCountList);
+            console.log(entityDict);
             {
                 // 属性抽取展示
                 show_attribute_extract(attributes);
@@ -277,7 +282,7 @@ function sbt_txt(){
             }
             // 词性标注展示
             show_word_tag(wordsList,tagsList);
-
+            console.log("if u see this, it means show_word_tag success!!!!")
             // 修改饼状图数据，调用load-data.js中的drawPie绘图函数。
             // 数组深度克隆，使用slice(0)函数，绘制饼状图，并修改实体词数量
             nowNum = tagsNum.slice(0);
