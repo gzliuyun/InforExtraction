@@ -1,5 +1,67 @@
 // 修改词性标注模块中实体词数量
 
+function drawPie(tagsNum){
+    var wordsInfo = []
+    if (tagsNum[0] != 0){
+        var item = new Array();
+        item["label"] = "名词";
+        item["data"] = tagsNum[0];
+        item["color"] = "#1ab394";
+        wordsInfo.push(item);
+    }
+    if (tagsNum[1] != 0){
+        var item = new Array();
+        item["label"] = "动词";
+        item["data"] = tagsNum[1];
+        item["color"] = "#1c84c6";
+        wordsInfo.push(item);
+    }
+    if (tagsNum[2] != 0){
+        var item = new Array();
+        item["label"] = "形容词";
+        item["data"] = tagsNum[2];
+        item["color"] = "#ed5565";
+        wordsInfo.push(item);
+    }
+    if (tagsNum[3] != 0){
+        var item = new Array();
+        item["label"] = "副词";
+        item["data"] = tagsNum[3];
+        item["color"] = "#23c6c8";
+        wordsInfo.push(item);
+    }
+    if (tagsNum[4] != 0){
+        var item = new Array();
+        item["label"] = "其它词";
+        item["data"] = tagsNum[4];
+        item["color"] = "#f8ac59";
+        wordsInfo.push(item);
+    }
+    document.getElementById("flot-pie-chart").innerHTML = "";
+    var plotObj = $.plot($("#flot-pie-chart"), wordsInfo, {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        grid: {
+            hoverable: true
+        },
+        legend: {
+            show: false,
+            location: 'e'
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+            shifts: {
+                x: 20,
+                y: 0
+            },
+            defaultTheme: false
+        }
+    });
+}
 var tagsNum = [0,0,0,0,0];
 // 当前展示的tag数量
 var nowNum = [0,0,0,0,0];
