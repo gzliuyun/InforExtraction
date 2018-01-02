@@ -202,7 +202,7 @@ function sbt_txt(){
             // 获取关键词列表
             //var keyWords = ret.keyWords;
             var attributes = ret.attributeDict;//属性列表
-
+            console.log(attributes);
             {
                 // 属性抽取展示
                 show_attribute_extract(attributes);

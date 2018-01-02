@@ -15,7 +15,7 @@ def attributes_home(request):
 def attributes_network(request):
 	return render_to_response("attributes_network.html")
 def text_upload(request):
-    request.encoding = 'utf-8'
+    #request.encoding = 'utf-8'
     text = request.GET.get('input_textarea', None)
     print "peng###############bin"
     print text
