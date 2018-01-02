@@ -71,10 +71,10 @@ def text_upload(request):
         elif ct > 10:
             break
     # 关键词抽取
-    keyWords = analyse.textrank(text, topK=20, withWeight=False)
-    for idx in range(len(keyWords)):
-        if isinstance(keyWords[idx], unicode):
-            keyWords[idx] = keyWords[idx].encode('utf-8')
+    # keyWords = analyse.textrank(text, topK=20, withWeight=False)
+    # for idx in range(len(keyWords)):
+    #     if isinstance(keyWords[idx], unicode):
+    #         keyWords[idx] = keyWords[idx].encode('utf-8')
 
     entityDict = {
         'places': placeList,
