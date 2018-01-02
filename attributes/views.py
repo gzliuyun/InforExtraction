@@ -24,6 +24,8 @@ def text_upload(request):
     if len(text.strip()) == 0:
         return
     txtList = text.split('\n')
+    result = {}
+    result = text_to_story(text1)
     wordsList = []
     tagsList = []
 
@@ -81,8 +83,7 @@ def text_upload(request):
         'orgs': orgList,
         'times': timeList
     }
-    result = {}
-    result = text_to_story(text1)
+
     return_json = {
         'text':txtList,
         'attributeDict': result,
