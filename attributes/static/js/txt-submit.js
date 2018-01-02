@@ -202,16 +202,16 @@ function sbt_txt(){
             // 获取关键词列表
             //var keyWords = ret.keyWords;
             var attributes = ret.attributeDict;//属性列表
-            
+
             {
                 // 属性抽取展示
                 show_attribute_extract(attributes);
                 //属性展示模块，高度设置
-                var entieyTable = document.getElementById("attribute_extract_table");
-                var tableHeight = entieyTable.offsetHeight;
+                var attributeTable = document.getElementById("attribute_extract_table");
+                var tableHeight1 = attributeTable.offsetHeight;
                 // document.getElementById("relSen_btBox").style.height = tableHeight + 'px';
-                var entityTabBox = document.getElementById("attributeTable");
-                entityTabBox.style.height =  tableHeight + 90 + "px";
+                var attributeTabBox = document.getElementById("attributeTable");
+                attributeTabBox.style.height =  tableHeight1 + 90 + "px";
             }
             // 词性标注展示
             show_word_tag(wordsList,tagsList);
