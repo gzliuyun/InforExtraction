@@ -15,8 +15,8 @@ def attributes_home(request):
 def attributes_network(request):
 	return render_to_response("attributes_network.html")
 def text_upload(request):
-    request.encoding = 'utf-8'
-    text = request.GET.get('input_textarea', None).encode('utf8')
+    #request.encoding = 'utf-8'
+    text = request.GET.get('input_textarea', None)
     print "peng###############bin"
     print text
     print type(text)
@@ -33,7 +33,7 @@ def text_upload(request):
     # 词频统计
     wordsCount = {}
     for paragraph in txtList:
-        sents = SentenceSplitter.split(paragraph)
+        sents = SentenceSplitter.split(unicode(paragraph))
         for s in sents:
             words = segmentor(s)
             # 词频统计部分
