@@ -15,8 +15,9 @@ def attributes_home(request):
 def attributes_network(request):
 	return render_to_response("attributes_network.html")
 def text_upload(request):
-    #request.encoding = 'utf-8'
-    text = request.GET.get('input_textarea', None)
+    request.encoding = 'utf-8'
+    text = request.GET.get('input_textarea', None).encode('utf-8')
+    text1 = request.GET.get('input_textarea', None)
     print "peng###############bin"
     print text
     print type(text)
@@ -33,14 +34,14 @@ def text_upload(request):
     # 词频统计
     wordsCount = {}
     for paragraph in txtList:
-        sents = SentenceSplitter.split(unicode(paragraph))
+        sents = SentenceSplitter.split(paragraph)
         for s in sents:
             words = segmentor(s)
             # 词频统计部分
             inRelWords = False
             for word in words:
                 if isinstance(word, unicode):
-                    word = word.encode('utf8')
+                    word = word.encode('utf-8')
                 if word in wordsCount.keys():
                     wordsCount[word] += 1
                 else:
@@ -72,7 +73,7 @@ def text_upload(request):
     keyWords = analyse.textrank(text, topK=20, withWeight=False)
     for idx in range(len(keyWords)):
         if isinstance(keyWords[idx], unicode):
-            keyWords[idx] = keyWords[idx].encode('utf8')
+            keyWords[idx] = keyWords[idx].encode('utf-8')
 
     entityDict = {
         'places': placeList,
@@ -81,7 +82,7 @@ def text_upload(request):
         'times': timeList
     }
     result = {}
-    result = text_to_story(text)
+    result = text_to_story(text1)
     return_json = {
         'text':txtList,
         'attributeDict': result,
