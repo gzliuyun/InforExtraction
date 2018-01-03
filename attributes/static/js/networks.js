@@ -20,8 +20,8 @@ $(function() {
             success:function(jsonData){ //提交成功的回调函数
                 var networkData = eval("("+jsonData+")");
                 //drawNetwork(networkData);
-                console.log(networkData)
-                document.append(networkData)
+                console.log(networkData);
+                document.append(networkData);
             }
         });
         return false; //不刷新页面
