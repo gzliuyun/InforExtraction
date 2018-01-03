@@ -115,6 +115,7 @@ def people_search(request):
     print name
     print "--------"
     url = "https://zh.wikipedia.org/wiki/" + str(name)
+    print url
     response = urllib2.urlopen(url)
     bs = BeautifulSoup(response.read(), "html.parser")
     table = bs.find('table', attrs={'class': 'infobox'})
