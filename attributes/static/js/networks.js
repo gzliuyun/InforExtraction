@@ -31,7 +31,7 @@
 
 function sbt_people(){
     var search_name = $("#search_peoplename").val();
-        console.log(search_name)
+        console.log(search_name);
         $.ajax({
             type:"get",  //提交方式
             dataType:"text", //数据类型
