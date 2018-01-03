@@ -114,10 +114,12 @@ def people_search(request):
     name = request.GET.get('search_name', None).encode('utf8')
     print name
     print "--------"
-    url = "https://zh.wikipedia.org/wiki/" + str(name)
-    print url
-    response = urllib2.urlopen(url)
+    url_wiki = "https://zh.wikipedia.org/wiki/" + str(name)
+    url_baidu = "https://baike.baidu.com/item/" + str(name)
+    print url_baidu
+    response = urllib2.urlopen(url_baidu)
     bs = BeautifulSoup(response.read(), "html.parser")
-    table = bs.find('table', attrs={'class': 'infobox'})
-    print table
-    return HttpResponse(json.dumps(table), content_type='application/json')
+    table_wiki = bs.find('table', attrs={'class': 'infobox'})
+    table_baidu = bs.find('div', attrs={'class': 'basic-info'})
+    print table_baidu
+    return HttpResponse(json.dumps(table_baidu), content_type='application/json')
