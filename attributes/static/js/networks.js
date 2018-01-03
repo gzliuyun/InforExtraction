@@ -13,7 +13,7 @@ $(function() {
         $.ajax({
             type:"get",  //提交方式
             dataType:"text", //数据类型
-            url:"/attributes/search/", //请求url
+            url:"/attributes/peoplesearch/", //请求url
             data: {
                 'search_name': search_name
             },
