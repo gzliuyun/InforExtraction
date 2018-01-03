@@ -1,15 +1,36 @@
-$(function() {
-
-    // 加载进来时，先绘制json文件中的人物关系
-//    d3.json("../../static/json/relation.json",function(error,root){
-//        if( error ){
-//            return console.log(error);
-//        }
-//        drawNetwork(root);
+//$(function() {
+//
+//    // 加载进来时，先绘制json文件中的人物关系
+////    d3.json("../../static/json/relation.json",function(error,root){
+////        if( error ){
+////            return console.log(error);
+////        }
+////        drawNetwork(root);
+////    });
+//    // search提交ajax
+//    $("#search_people").submit(function(){
+//        var search_name = $("#search_peoplename").val();
+//        console.log(search_name)
+//        $.ajax({
+//            type:"get",  //提交方式
+//            dataType:"text", //数据类型
+//            url:"/attributes/peoplesearch/", //请求url
+//            data: {
+//                'search_name': search_name
+//            },
+//            success:function(jsonData){ //提交成功的回调函数
+//                var networkData = eval("("+jsonData+")");
+//                //drawNetwork(networkData);
+//                console.log(networkData);
+//                document.append(networkData);
+//            }
+//        });
+//        return false; //不刷新页面
 //    });
-    // search提交ajax
-    $("#search_people").submit(function(){
-        var search_name = $("#search_peoplename").val();
+//});
+
+function sbt_people(){
+    var search_name = $("#search_peoplename").val();
         console.log(search_name)
         $.ajax({
             type:"get",  //提交方式
@@ -26,9 +47,7 @@ $(function() {
             }
         });
         return false; //不刷新页面
-    });
-});
-
+}
 function drawNetwork(networkData){
     var width = 900;
     var height = 600;

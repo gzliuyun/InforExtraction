@@ -57,7 +57,7 @@
 			            				<div class="input-group col-sm-4">
 			            					<input type="text" class="form-control inpust-sm" id = "search_peoplename" name="search_peoplename" placeholder="请输入搜索的中文人名">
 			            					<span class="input-group-btn">
-                        						<input type="submit" id="search_submit" class="btn btn-primary" value="确认">
+                        						<input type="button" id="search_submit" class="btn btn-primary" value="确认" onclick="sbt_people()">
                     						</span>			     
 			            				</div>
 			            				<div class="col-sm-4"></div>
@@ -91,5 +91,11 @@
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/networks.js' %}" type="text/javascript"></script>
+
+		<script >
+	    	$(document).ready(function(){
+    			sbt_people();
+			});
+	    </script>
 	</body>
 </html>
