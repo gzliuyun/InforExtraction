@@ -63,7 +63,6 @@ def ner(words,tags):
 	response = urllib2.urlopen('http://192.168.1.6:10001/', message)
 	data = response.read()
     #data1 = data.decode("utf-8-sig").encode("utf-8")
-    print type(data)
 	jdata = json.loads(data, encoding="utf8")   #jdata即为获取的json数据
 	netags = jdata['netags']
 
