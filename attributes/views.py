@@ -112,6 +112,8 @@ def text_upload(request):
 def people_search(request):
     request.encoding = 'utf-8'
     name = request.GET.get('search_name', None).encode('utf8')
+    print name
+    print "--------"
     url = "https://zh.wikipedia.org/wiki/" + str(name)
     response = urllib2.urlopen(url)
     bs = BeautifulSoup(response.read(), "html.parser")
