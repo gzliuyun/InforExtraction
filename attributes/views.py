@@ -34,31 +34,31 @@ def text_upload(request):
     timeList = []
     # 词频统计
     wordsCount = {}
-    # for paragraph in txtList:
-    #     sents = SentenceSplitter.split(paragraph)
-    #     for s in sents:
-    #         words = segmentor(s)
-    #         # 词频统计部分
-    #         inRelWords = False
-    #         for word in words:
-    #             if isinstance(word, unicode):
-    #                 word = word.encode('utf-8')
-    #             if word in wordsCount.keys():
-    #                 wordsCount[word] += 1
-    #             else:
-    #                 wordsCount[word] = 1
-    #         tags = postagger(words)
-    #         netags = ner(words, tags)
-    #         names, places, orgs, times = extract_entity(words, tags, netags)
-    #         # 添加实体抽取部分传回的数据
-    #         placeList.extend([x for x in places if x not in placeList])
-    #         nameList.extend([x for x in names if x not in nameList])
-    #         orgList.extend([x for x in orgs if x not in orgList])
-    #         timeList.extend([x for x in times if x not in timeList])
-    #         # 添加词性标注部分传回的数据
-    #         wordsList.extend(words)
-    #         # 添加词性说明部分传回的数据
-    #         tagsList.extend(tags)
+    for paragraph in txtList:
+        sents = SentenceSplitter.split(paragraph)
+        for s in sents:
+            words = segmentor(s)
+            # 词频统计部分
+            inRelWords = False
+            for word in words:
+                if isinstance(word, unicode):
+                    word = word.encode('utf-8')
+                if word in wordsCount.keys():
+                    wordsCount[word] += 1
+                else:
+                    wordsCount[word] = 1
+            tags = postagger(words)
+            netags = ner(words, tags)
+            names, places, orgs, times = extract_entity(words, tags, netags)
+            # 添加实体抽取部分传回的数据
+            placeList.extend([x for x in places if x not in placeList])
+            nameList.extend([x for x in names if x not in nameList])
+            orgList.extend([x for x in orgs if x not in orgList])
+            timeList.extend([x for x in times if x not in timeList])
+            # 添加词性标注部分传回的数据
+            wordsList.extend(words)
+            # 添加词性说明部分传回的数据
+            tagsList.extend(tags)
     # 词频排序
     wordsCount = sorted(wordsCount.items(), key=lambda item: item[1], reverse=True)
     topWordsCount = []
