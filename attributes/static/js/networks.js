@@ -40,10 +40,10 @@ function sbt_people(){
                 'search_name': search_name
             },
             success:function(jsonData){ //提交成功的回调函数
-                var networkData = eval("("+jsonData+")");
+                var networkData = eval(jsonData);
                 //drawNetwork(networkData);
                 console.log(networkData);
-                document.append(networkData);
+                $('#attribute_info').append(networkData)
             }
         });
         return false; //不刷新页面
