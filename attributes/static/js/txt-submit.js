@@ -329,15 +329,6 @@ function sbt_txt(){
             drawPie(tagsNum);
             nowPunct = punct;
             modNumber(nowNum,punct);
-            {
-                // 词频统计部分展示
-                wordsCountShow(topWordsCountList);
-                var wordsCountForm = document.getElementById("wordsCount");
-                var wordsCountHeight = wordsCountForm.offsetHeight;
-                // document.getElementById("relSen_btBox").style.height = tableHeight + 'px';
-                var wordsCountBox = document.getElementById("wordsCountBox");
-                wordsCountBox.style.height =  wordsCountHeight + 15 + "px";
-            }
 
             {
                 // 实体抽取展示
@@ -349,6 +340,17 @@ function sbt_txt(){
                 var entityTabBox = document.getElementById("entityTable");
                 entityTabBox.style.height =  tableHeight + 90 + "px";
             }
+            {
+                // 词频统计部分展示
+                wordsCountShow(topWordsCountList);
+                var wordsCountForm = document.getElementById("wordsCount");
+                var wordsCountHeight = wordsCountForm.offsetHeight;
+                // document.getElementById("relSen_btBox").style.height = tableHeight + 'px';
+                var wordsCountBox = document.getElementById("wordsCountBox");
+                wordsCountBox.style.height =  wordsCountHeight + 15 + "px";
+            }
+
+
 
         }
     });
