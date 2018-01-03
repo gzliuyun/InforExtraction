@@ -1,15 +1,15 @@
 $(function() {
 
     // 加载进来时，先绘制json文件中的人物关系
-    d3.json("../../static/json/relation.json",function(error,root){
-        if( error ){
-            return console.log(error);
-        }
-        drawNetwork(root);
-    });
+//    d3.json("../../static/json/relation.json",function(error,root){
+//        if( error ){
+//            return console.log(error);
+//        }
+//        drawNetwork(root);
+//    });
     // search提交ajax
-    $("#search_form").submit(function(){
-        var search_name = $("#search_name").val();  
+    $("#search_people").submit(function(){
+        var search_name = $("#search_peoplename").val();
         $.ajax({
             type:"get",  //提交方式
             dataType:"text", //数据类型
