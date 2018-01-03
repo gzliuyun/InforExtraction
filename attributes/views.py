@@ -1,10 +1,11 @@
 # coding: utf-8
 import json
+import urllib2
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from django.http import JsonResponse
 from attribute_extr_client import extr_from_text,extr_from_url
-from web_rpc_server import text_to_story,ner,extract_entity,segmentor,postagger
+from web_rpc_server import text_to_story,ner,extract_entity,segmentor
 from pyltp import SentenceSplitter
 from jieba import analyse
 # Create your views here.
@@ -14,6 +15,20 @@ def attributes_home(request):
 
 def attributes_network(request):
 	return render_to_response("attributes_network.html")
+
+
+def postTagger(words):
+    sendData = {}
+    sendData['method'] = "postTag"
+    sendData['wordsList'] = words
+
+    message = json.dumps(sendData).decode().encode('utf8')
+    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    data = response.read()
+    jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
+    tags = jdata['postags']
+
+    return tags
 def text_upload(request):
     request.encoding = 'utf-8'
     text = request.GET.get('input_textarea', None).encode('utf8')
@@ -47,7 +62,7 @@ def text_upload(request):
                     wordsCount[word] += 1
                 else:
                     wordsCount[word] = 1
-            tags = postagger(words)
+            tags = postTagger(words)
             netags = ner(words, tags)
             names, places, orgs, times = extract_entity(words, tags, netags)
             # 添加实体抽取部分传回的数据
