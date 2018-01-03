@@ -20,6 +20,7 @@ $(function() {
             success:function(jsonData){ //提交成功的回调函数
                 var networkData = eval("("+jsonData+")");
                 //drawNetwork(networkData);
+                console.log(networkData)
                 document.append(networkData)
             }
         });

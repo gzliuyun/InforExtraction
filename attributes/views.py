@@ -116,5 +116,5 @@ def people_search(request):
     response = urllib2.urlopen(url)
     bs = BeautifulSoup(response.read(), "html.parser")
     table = bs.find('table', attrs={'class': 'infobox'})
-
+    print table
     return HttpResponse(json.dumps(table), content_type='application/json')
