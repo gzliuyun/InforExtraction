@@ -13,13 +13,14 @@ $(function() {
         $.ajax({
             type:"get",  //提交方式
             dataType:"text", //数据类型
-            url:"/relations/search/", //请求url
+            url:"/attributes/search/", //请求url
             data: {
                 'search_name': search_name
             },
             success:function(jsonData){ //提交成功的回调函数
                 var networkData = eval("("+jsonData+")");
-                drawNetwork(networkData);
+                //drawNetwork(networkData);
+                document.append(networkData)
             }
         });
         return false; //不刷新页面
