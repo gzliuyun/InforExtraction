@@ -23,7 +23,7 @@ def postTagger(words):
     sendData['wordsList'] = words
 
     message = json.dumps(sendData).decode().encode('utf8')
-    response = urllib2.urlopen('http://192.168.1.11:10001/', message)
+    response = urllib2.urlopen('http://192.168.1.6:10001/', message)
     data = response.read()
     jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
     tags = jdata['postags']
