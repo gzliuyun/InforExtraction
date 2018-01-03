@@ -122,4 +122,5 @@ def people_search(request):
     table_wiki = bs.find('table', attrs={'class': 'infobox'})
     table_baidu = bs.find('div', attrs={'class': 'basic-info'})
     print table_baidu
-    return HttpResponse(json.dumps(table_baidu), content_type='application/json')
+    #return HttpResponse(json.dumps(table_wiki), content_type='application/json')
+    return HttpResponse(table_baidu, content_type='text/html')
