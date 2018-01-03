@@ -127,7 +127,7 @@ def extract_entity(words,tags,netags):
 		index += 1
 	return names, places, orgs, times
 def text_to_story(text):
-    print "#######" + text.encode('utf-8').decode('utf-8')
+    #print "#######" + text.encode('utf-8').decode('utf-8')
     postagger(segmentor(text))
     ##执行shell命令，开始跑模型，
     commands.getstatusoutput('cd /home/pengbin/attribute_extraction/bishe/ && ./crf_test -m 6.model test.data > test.rst ')
