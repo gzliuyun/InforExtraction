@@ -139,6 +139,46 @@ function show_word_tag(wordsList,tagsList){
     }
 }
 
+function wordsCountShow(topWordsCountList){
+    var chart = echarts.init(document.getElementById("wordsCount"));
+    var words = [];
+    var counts = [];
+    for (var idx = 0; idx < topWordsCountList.length; idx++){
+        var wc = topWordsCountList[idx];
+        words.push(wc[0]);
+        counts.push(wc[1]);
+    }
+    var option = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : {
+                data :words
+        },
+        yAxis : {},
+        series : [
+            {
+                name:'词频',
+                type:'bar',
+                data:counts,
+            }
+        ]
+    };
+    chart.setOption(option);
+
+}
+
 function show_entity_extract(entityDict){
     // 实体抽取--人名抽取 展示
     namesList = entityDict.names;
