@@ -111,7 +111,7 @@ def text_upload(request):
 
 def people_search(request):
     request.encoding = 'utf-8'
-    name = request.GET.get('search_name', None)
+    name = request.GET.get('search_name', None).encode('utf8')
     print name
     print "--------"
     url_wiki = "https://zh.wikipedia.org/wiki/" + str(name)
