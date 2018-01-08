@@ -120,7 +120,7 @@ def people_search(request):
         host = '111.205.121.93',
         port = 9002,
         user = 'root',
-        password = '123456',
+        passwd = '123456',
         db = 'RelationExtraction',
         charset = 'utf8'
     )
