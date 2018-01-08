@@ -49,10 +49,17 @@ function sbt_people(){
                 console.log(attributes);
                 console.log(typeof attributes);
                 //console.log(information);
+                console.log(information["intro"]);
                 console.log(typeof information);
                 //alert(jsonData);
                 //console.log(jsonData);
-                $('#attribute_info').html(jsonData);
+                //$('#attribute_info').html(jsonData);
+                var element_div = document.getElementById("attribute_info");
+                var intro_p = document.createElement("p");
+                var text = document.createTextNode(information['intro']);
+                intro_p.appendChild(text);
+
+                element_div.appendChild(intro_p);
             }
         });
         return false; //不刷新页面
