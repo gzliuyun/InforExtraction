@@ -112,7 +112,8 @@ def text_upload(request):
 
 def people_search(request):
     request.encoding = 'utf-8'
-    name = request.GET.get('search_name', None).encode('utf8')
+    #name = request.GET.get('search_name', None).encode('utf8')
+    name = request.GET.get('search_name', None)
     print name
     print "--------"
     print type(name)
