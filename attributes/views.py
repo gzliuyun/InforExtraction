@@ -113,13 +113,15 @@ def text_upload(request):
 def people_search(request):
     request.encoding = 'utf-8'
     #name = request.GET.get('search_name', None).encode('utf8')
-    name = request.GET.get('search_name', None)
+    name = request.GET.get('search_name', None).encode('utf8')
     print name
     print "--------"
 
     conn = MySQLdb.connect(
-        host = '111.205.121.93',
-        port = 9002,
+        #host = '111.205.121.93',
+        host = 'localhost',
+        #port = 9002,
+        port = 3306,
         user = 'root',
         passwd = '123456',
         db = 'RelationExtraction',
@@ -128,7 +130,7 @@ def people_search(request):
     print type(name)
     cur = conn.cursor()
 
-    cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name.encode('utf8'))
+    cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     results = cur.fetchall()
     conn.close()
     print results
