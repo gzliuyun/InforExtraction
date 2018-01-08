@@ -132,10 +132,13 @@ def people_search(request):
 
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     ###results是一个元祖tuple，每一个代表一行记录
-    results_attributes = cur.fetchall()
-
+    results_attributes = cur.fetchone()
+    print type(results_attributes)
+    print results_attributes
     cur.execute('select * from Peoplelist where name = "%s"' %name)
-    results_info = cur.fetchall()
+    results_info = cur.fetchone()
+    print type(results_info)
+    print results_info
     conn.close()
     results_json = {
         'attributes':results_attributes,

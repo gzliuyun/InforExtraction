@@ -50,8 +50,8 @@ function sbt_people(){
                 console.log(typeof attributes);
                 console.log(information);
                 console.log(typeof information)
-                alert(jsonData);
-                console.log(jsonData);
+                //alert(jsonData);
+                //console.log(jsonData);
                 $('#attribute_info').html(jsonData);
             }
         });
