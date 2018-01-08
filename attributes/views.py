@@ -118,7 +118,7 @@ def people_search(request):
 
     conn = MySQLdb.connect(
         host = '111.205.121.93',
-        port = '9002',
+        port = 9002,
         user = 'root',
         password = '123456',
         db = 'RelationExtraction',
