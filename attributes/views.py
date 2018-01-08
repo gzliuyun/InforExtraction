@@ -132,13 +132,59 @@ def people_search(request):
 
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     ###results是一个元祖tuple，每一个代表一行记录
-    results_attributes = cur.fetchone()
-    print type(results_attributes)
-    print results_attributes
+    results1 = cur.fetchone()
+    print type(results1)
+    print results1
+    results_attributes = {
+
+    }
+    if results1[1] is not None:
+        results_attributes['name'] = results1[1].encode('utf8')
+    if results1[2] is not None:
+        results_attributes['university'] = results1[2].encode('utf8')
+    if results1[3] is not None:
+        results_attributes['major'] = results1[3].encode('utf8')
+    if results1[4] is not None:
+        results_attributes['education'] = results1[4].encode('utf8')
+    if results1[5] is not None:
+        results_attributes['school'] = results1[5].encode('utf8')
+    if results1[6] is not None:
+        results_attributes['party'] = results1[6].encode('utf8')
+    if results1[7] is not None:
+        results_attributes['birthday'] = results1[7].encode('utf8')
+    if results1[8] is not None:
+        results_attributes['jointime'] = results1[8].encode('utf8')
+    if results1[9] is not None:
+        results_attributes['job'] = results1[9].encode('utf8')
+    if results1[10] is not None:
+        results_attributes['birthplace'] = results1[10].encode('utf8')
+    if results1[11] is not None:
+        results_attributes['workplace'] = results1[11].encode('utf8')
+    if results1[12] is not None:
+        results_attributes['nation'] = results1[12].encode('utf8')
+    if results1[13] is not None:
+        results_attributes['gender'] = results1[13].encode('utf8')
+    if results1[14] is not None:
+        results_attributes['spouse'] = results1[14].encode('utf8')
+    if results1[15] is not None:
+        results_attributes['children'] = results1[15].encode('utf8')
+    if results1[16] is not None:
+        results_attributes['parents'] = results1[16].encode('utf8')
     cur.execute('select * from Peoplelist where name = "%s"' %name)
-    results_info = cur.fetchone()
-    print type(results_info)
-    print results_info
+    results2 = cur.fetchone()
+    print type(results2)
+    results_info = {
+
+    }
+    if results2[1] is not None:
+        results_info['name'] = results2[1].encode('utf8')
+    if results2[2] is not None:
+        results_info['intro'] = results2[2].encode('utf8')
+    if results2[3] is not None:
+        results_info['url'] = results2[3].encode('utf8')
+    if results2[4] is not None:
+        results_info['photo_url'] = results2[4].encode('utf8')
+
     conn.close()
     results_json = {
         'attributes':results_attributes,

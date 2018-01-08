@@ -48,7 +48,7 @@ function sbt_people(){
                 var information = ret.information;
                 console.log(attributes);
                 console.log(typeof attributes);
-                console.log(information);
+                //console.log(information);
                 console.log(typeof information)
                 //alert(jsonData);
                 //console.log(jsonData);
