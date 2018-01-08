@@ -115,7 +115,7 @@ def people_search(request):
     name = request.GET.get('search_name', None).encode('utf8')
     print name
     print "--------"
-
+    print type(name)
     conn = MySQLdb.connect(
         host = '111.205.121.93',
         port = 9002,
@@ -128,6 +128,7 @@ def people_search(request):
 
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     results = cur.fetchall()
+    conn.close()
     print results
     print type(results)
     return HttpResponse(json.dumps(results), content_type='application/json')
