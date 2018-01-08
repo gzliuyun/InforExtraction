@@ -42,6 +42,14 @@ function sbt_people(){
             success:function(jsonData){ //提交成功的回调函数
                 //var networkData = eval(" " + jsonData);
                 //drawNetwork(networkData);
+                var ret = eval("("+jsonData+")");
+
+                var attributes = ret.attributes;
+                var information = ret.information;
+                console.log(attributes);
+                console.log(typeof attributes);
+                console.log(information);
+                console.log(typeof information)
                 alert(jsonData);
                 console.log(jsonData);
                 $('#attribute_info').html(jsonData);

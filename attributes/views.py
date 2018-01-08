@@ -131,11 +131,17 @@ def people_search(request):
     cur = conn.cursor()
 
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
-    results = cur.fetchall()
+    ###results是一个元祖tuple，每一个代表一行记录
+    results_attributes = cur.fetchall()
+
+    cur.execute('select * from Peoplelist where name = "%s"' %name)
+    results_info = cur.fetchall()
     conn.close()
-    print results
-    print type(results)
-    return HttpResponse(json.dumps(results), content_type='application/json')
+    results_json = {
+        'attributes':results_attributes,
+        'information':results_info
+    }
+    return HttpResponse(json.dumps(results_json), content_type='application/json')
     ####直接获取百度或者维基百科页面信息
     # url_wiki = "https://zh.wikipedia.org/wiki/" + str(name)
     # url_baidu = "https://baike.baidu.com/item/" + str(name)
