@@ -126,7 +126,7 @@ def people_search(request):
     )
     cur = conn.cursor()
 
-    cur.execute('select * from person_attributOfWilki where person_name = %s' %name)
+    cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     results = cur.fetchall()
     print results
     print type(results)
