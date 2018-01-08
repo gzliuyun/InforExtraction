@@ -116,7 +116,7 @@ def people_search(request):
     name = request.GET.get('search_name', None)
     print name
     print "--------"
-    print type(name)
+
     conn = MySQLdb.connect(
         host = '111.205.121.93',
         port = 9002,
@@ -125,9 +125,10 @@ def people_search(request):
         db = 'RelationExtraction',
         charset = 'utf8'
     )
+    print type(name)
     cur = conn.cursor()
 
-    cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
+    cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name.encode('utf8'))
     results = cur.fetchall()
     conn.close()
     print results
