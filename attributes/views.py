@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import MySQLdb
 import urllib2
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
@@ -114,13 +115,30 @@ def people_search(request):
     name = request.GET.get('search_name', None).encode('utf8')
     print name
     print "--------"
-    url_wiki = "https://zh.wikipedia.org/wiki/" + str(name)
-    url_baidu = "https://baike.baidu.com/item/" + str(name)
-    print url_baidu
-    response = urllib2.urlopen(url_baidu)
-    bs = BeautifulSoup(response.read(), "html.parser")
-    table_wiki = bs.find('table', attrs={'class': 'infobox'})
-    table_baidu = bs.find('div', attrs={'class': 'basic-info'})
-    print table_baidu
-    #return HttpResponse(json.dumps(table_wiki), content_type='application/json')
-    return HttpResponse(table_baidu, content_type='text/html')
+
+    conn = MySQLdb.connect(
+        host = '111.205.121.93',
+        port = '9002',
+        user = 'root',
+        password = '123456',
+        db = 'RelationExtraction',
+        charset = 'utf8'
+    )
+    cur = conn.cursor()
+
+    cur.execute('select * from person_attributOfWilki where person_name = %s' %name)
+    results = cur.fetchall()
+    print results
+    print type(results)
+    return HttpResponse(json.dumps(results), content_type='application/json')
+    ####直接获取百度或者维基百科页面信息
+    # url_wiki = "https://zh.wikipedia.org/wiki/" + str(name)
+    # url_baidu = "https://baike.baidu.com/item/" + str(name)
+    # print url_baidu
+    # response = urllib2.urlopen(url_baidu)
+    # bs = BeautifulSoup(response.read(), "html.parser")
+    # table_wiki = bs.find('table', attrs={'class': 'infobox'})
+    # table_baidu = bs.find('div', attrs={'class': 'basic-info'})
+    # print table_baidu
+    # #return HttpResponse(json.dumps(table_wiki), content_type='application/json')
+    # return HttpResponse(table_baidu, content_type='text/html')

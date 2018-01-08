@@ -44,7 +44,7 @@ function sbt_people(){
                 //drawNetwork(networkData);
                 alert(jsonData);
                 console.log(jsonData);
-                $('#attribute_info').append(jsonData);
+                $('#attribute_info').html(jsonData);
             }
         });
         return false; //不刷新页面
