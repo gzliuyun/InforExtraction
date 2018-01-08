@@ -44,12 +44,12 @@ function sbt_people(){
                 //drawNetwork(networkData);
                 var ret = eval("("+jsonData+")");
 
-                var attributes = ret.attributes;
-                var information = ret.information;
+                var attributes = ret.attributes.attributes;
+                var information = ret.information.information;
                 console.log(attributes);
                 console.log(typeof attributes);
                 //console.log(information);
-                console.log(typeof information)
+                console.log(typeof information);
                 //alert(jsonData);
                 //console.log(jsonData);
                 $('#attribute_info').html(jsonData);

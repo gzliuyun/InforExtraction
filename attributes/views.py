@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from attribute_extr_client import extr_from_text,extr_from_url
 from web_rpc_server import text_to_story,ner,extract_entity,segmentor
 from pyltp import SentenceSplitter
+from collections import OrderedDict
 from bs4 import BeautifulSoup
 from jieba import analyse
 # Create your views here.
@@ -135,9 +136,8 @@ def people_search(request):
     results1 = cur.fetchone()
     print type(results1)
     print results1
-    results_attributes = {
-
-    }
+    ###有序字典
+    results_attributes = OrderedDict()
     if results1[1] is not None:
         results_attributes['name'] = results1[1].encode('utf8')
     if results1[2] is not None:
@@ -173,9 +173,8 @@ def people_search(request):
     cur.execute('select * from Peoplelist where name = "%s"' %name)
     results2 = cur.fetchone()
     print type(results2)
-    results_info = {
-
-    }
+    ####有序字典
+    results_info = OrderedDict()
     if results2[1] is not None:
         results_info['name'] = results2[1].encode('utf8')
     if results2[2] is not None:
