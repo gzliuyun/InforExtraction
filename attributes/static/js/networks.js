@@ -59,7 +59,7 @@ function sbt_people(){
                 //设置textarea的相应属性值
                 intro_textarea.value = information['简介'];
                 intro_textarea.rows = "30";
-                intro_textarea.cols = "90";
+                intro_textarea.cols = "110";
                 intro_div.appendChild(intro_textarea);
                 //展示人物属性信息
 
