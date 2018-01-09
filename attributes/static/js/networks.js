@@ -30,7 +30,6 @@
 //});
 
 function sbt_people(){
-    document.getElementById("network").innerHTML="";
     var search_name = $("#search_peoplename").val();
         console.log(search_name);
         $.ajax({
@@ -42,6 +41,9 @@ function sbt_people(){
             },
             success:function(jsonData){ //提交成功的回调函数
                 var ret = eval("("+jsonData+")");
+
+                document.getElementById("person_intro").innerHTML="";
+                document.getElementById("person_attributes").innerHTML="";
 
                 var attributes = ret.attributes;
                 var information = ret.information;
