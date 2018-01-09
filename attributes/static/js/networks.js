@@ -46,7 +46,6 @@ function sbt_people(){
                 var information = ret.information;
                 console.log(attributes);
                 console.log(typeof attributes);
-                console.log(information["简介"]);
                 console.log(typeof information);
                 //展示人物简介部分
                 var intro_div = document.getElementById("person_intro");
@@ -57,9 +56,11 @@ function sbt_people(){
                 intro_div.appendChild(intro_p);
                 //展示人物属性信息
 
-                var attributes_div = document.getElementById("person_attribute");
+                var attributes_div = document.getElementById("person_attributes");
                 for(var attr in attributes){
-                    alert(attr + ":" + attributes[attr]);
+                    var attr_li = document.createElement("li");
+                    attr_li.innerHTML = attr + " : " + attributes[attr];
+                    attributes_div.appendChild(attr_li);
                 }
             }
         });

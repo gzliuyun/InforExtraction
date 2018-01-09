@@ -188,7 +188,6 @@ def people_search(request):
     conn.close()
     print results_attributes
     print type(results_info)
-    print results_info['简介']
     results_json = {
         'attributes':results_attributes,
         'information':results_info
