@@ -134,6 +134,9 @@ def people_search(request):
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     ###results1是一个元祖tuple
     results1 = cur.fetchone()
+    print results1[1]
+    print "#########"
+    print type(results1[1])
     ###有序字典
     results_attributes = OrderedDict()
     if results1[1] is not None:
