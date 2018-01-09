@@ -136,7 +136,7 @@ def people_search(request):
     results1 = cur.fetchone()
     print results1[1]
     print "#########"
-    print type(results1[1])
+    print type(results1[1])  ###unicode字符
     ###有序字典
     results_attributes = OrderedDict()
     if results1[1] is not None:

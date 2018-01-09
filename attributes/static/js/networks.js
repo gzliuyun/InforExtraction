@@ -48,12 +48,19 @@ function sbt_people(){
                 console.log(typeof attributes);
                 console.log(information["简介"]);
                 console.log(typeof information);
-                var element_div = document.getElementById("attribute_info");
+                //展示人物简介部分
+                var intro_div = document.getElementById("person_intro");
                 var intro_p = document.createElement("p");
                 var text = document.createTextNode(information['简介']);
                 intro_p.appendChild(text);
 
-                element_div.appendChild(intro_p);
+                intro_div.appendChild(intro_p);
+                //展示人物属性信息
+
+                var attributes_div = document.getElementById("person_attribute");
+                for(var attr in attributes){
+                    alert(attr + ":" + attributes[attr]);
+                }
             }
         });
         return false; //不刷新页面
