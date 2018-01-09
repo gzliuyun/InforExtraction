@@ -30,6 +30,7 @@
 //});
 
 function sbt_people(){
+    document.getElementById("network").innerHTML="";
     var search_name = $("#search_peoplename").val();
         console.log(search_name);
         $.ajax({
@@ -40,7 +41,6 @@ function sbt_people(){
                 'search_name': search_name
             },
             success:function(jsonData){ //提交成功的回调函数
-                $("#network").html("");
                 var ret = eval("("+jsonData+")");
 
                 var attributes = ret.attributes;
