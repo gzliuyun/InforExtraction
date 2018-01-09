@@ -40,12 +40,10 @@ function sbt_people(){
                 'search_name': search_name
             },
             success:function(jsonData){ //提交成功的回调函数
-                //var networkData = eval(" " + jsonData);
-                //drawNetwork(networkData);
                 var ret = eval("("+jsonData+")");
 
-                var attributes = ret.attributes.attributes;
-                var information = ret.information.information;
+                var attributes = ret.attributes;
+                var information = ret.information;
                 console.log(attributes);
                 console.log(typeof attributes);
                 console.log(information["简介"]);

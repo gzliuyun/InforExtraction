@@ -132,10 +132,8 @@ def people_search(request):
     cur = conn.cursor()
 
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
-    ###results是一个元祖tuple，每一个代表一行记录
+    ###results1是一个元祖tuple
     results1 = cur.fetchone()
-    print type(results1)
-    print results1
     ###有序字典
     results_attributes = OrderedDict()
     if results1[1] is not None:
@@ -172,7 +170,7 @@ def people_search(request):
         results_attributes['父母'] = results1[16].encode('utf8')
     cur.execute('select * from Peoplelist where name = "%s"' %name)
     results2 = cur.fetchone()
-    print type(results2)
+
     ####有序字典
     results_info = OrderedDict()
     if results2[1] is not None:
@@ -185,6 +183,9 @@ def people_search(request):
         results_info['photo_url'] = results2[4].encode('utf8')
 
     conn.close()
+    print results_attributes
+    print type(results_info)
+    print results_info['简介']
     results_json = {
         'attributes':results_attributes,
         'information':results_info
