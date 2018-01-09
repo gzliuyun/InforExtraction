@@ -52,10 +52,11 @@ function sbt_people(){
                 console.log(typeof information);
                 //展示人物简介部分
                 var intro_div = document.getElementById("person_intro");
-                var intro_p = document.createElement("p");
-                var text = document.createTextNode(information['简介']);
-                intro_p.appendChild(text);
-                intro_div.appendChild(intro_p);
+                var intro_textarea = document.createElement("textarea");
+//                var text = document.createTextNode(information['简介']);
+//                intro_p.appendChild(text);
+                intro_textarea.value = information['简介'];
+                intro_div.appendChild(intro_textarea);
                 //展示人物属性信息
 
                 var attributes_div = document.getElementById("person_attributes");
