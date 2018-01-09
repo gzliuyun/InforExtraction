@@ -139,46 +139,46 @@ def people_search(request):
     ###有序字典
     results_attributes = OrderedDict()
     if results1[1] is not None:
-        results_attributes['name'] = results1[1].encode('utf8')
+        results_attributes['姓名'] = results1[1].encode('utf8')
     if results1[2] is not None:
-        results_attributes['university'] = results1[2].encode('utf8')
+        results_attributes['大学学校'] = results1[2].encode('utf8')
     if results1[3] is not None:
-        results_attributes['major'] = results1[3].encode('utf8')
+        results_attributes['专业'] = results1[3].encode('utf8')
     if results1[4] is not None:
-        results_attributes['education'] = results1[4].encode('utf8')
+        results_attributes['学历'] = results1[4].encode('utf8')
     if results1[5] is not None:
-        results_attributes['school'] = results1[5].encode('utf8')
+        results_attributes['中学学校'] = results1[5].encode('utf8')
     if results1[6] is not None:
-        results_attributes['party'] = results1[6].encode('utf8')
+        results_attributes['政党'] = results1[6].encode('utf8')
     if results1[7] is not None:
-        results_attributes['birthday'] = results1[7].encode('utf8')
+        results_attributes['出生年月'] = results1[7].encode('utf8')
     if results1[8] is not None:
-        results_attributes['jointime'] = results1[8].encode('utf8')
+        results_attributes['入党时间'] = results1[8].encode('utf8')
     if results1[9] is not None:
-        results_attributes['job'] = results1[9].encode('utf8')
+        results_attributes['职业'] = results1[9].encode('utf8')
     if results1[10] is not None:
-        results_attributes['birthplace'] = results1[10].encode('utf8')
+        results_attributes['出生地'] = results1[10].encode('utf8')
     if results1[11] is not None:
-        results_attributes['workplace'] = results1[11].encode('utf8')
+        results_attributes['工作地点'] = results1[11].encode('utf8')
     if results1[12] is not None:
-        results_attributes['nation'] = results1[12].encode('utf8')
+        results_attributes['民族'] = results1[12].encode('utf8')
     if results1[13] is not None:
-        results_attributes['gender'] = results1[13].encode('utf8')
+        results_attributes['性别'] = results1[13].encode('utf8')
     if results1[14] is not None:
-        results_attributes['spouse'] = results1[14].encode('utf8')
+        results_attributes['配偶'] = results1[14].encode('utf8')
     if results1[15] is not None:
-        results_attributes['children'] = results1[15].encode('utf8')
+        results_attributes['儿女'] = results1[15].encode('utf8')
     if results1[16] is not None:
-        results_attributes['parents'] = results1[16].encode('utf8')
+        results_attributes['父母'] = results1[16].encode('utf8')
     cur.execute('select * from Peoplelist where name = "%s"' %name)
     results2 = cur.fetchone()
     print type(results2)
     ####有序字典
     results_info = OrderedDict()
     if results2[1] is not None:
-        results_info['name'] = results2[1].encode('utf8')
+        results_info['姓名'] = results2[1].encode('utf8')
     if results2[2] is not None:
-        results_info['intro'] = results2[2].encode('utf8')
+        results_info['简介'] = results2[2].encode('utf8')
     if results2[3] is not None:
         results_info['url'] = results2[3].encode('utf8')
     if results2[4] is not None:

@@ -48,15 +48,11 @@ function sbt_people(){
                 var information = ret.information.information;
                 console.log(attributes);
                 console.log(typeof attributes);
-                //console.log(information);
-                console.log(information["intro"]);
+                console.log(information["简介"]);
                 console.log(typeof information);
-                //alert(jsonData);
-                //console.log(jsonData);
-                //$('#attribute_info').html(jsonData);
                 var element_div = document.getElementById("attribute_info");
                 var intro_p = document.createElement("p");
-                var text = document.createTextNode(information['intro']);
+                var text = document.createTextNode(information['简介']);
                 intro_p.appendChild(text);
 
                 element_div.appendChild(intro_p);
