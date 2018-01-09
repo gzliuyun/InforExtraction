@@ -52,8 +52,9 @@ function sbt_people(){
                 var intro_p = document.createElement("p");
                 var text = document.createTextNode(information['简介']);
                 intro_p.appendChild(text);
-
+                text = null;
                 intro_div.appendChild(intro_p);
+                intro_p = null;
                 //展示人物属性信息
 
                 var attributes_div = document.getElementById("person_attributes");
@@ -61,6 +62,7 @@ function sbt_people(){
                     var attr_li = document.createElement("li");
                     attr_li.innerHTML = attr + " : " + attributes[attr];
                     attributes_div.appendChild(attr_li);
+                    attr_li = null;
                 }
             }
         });
