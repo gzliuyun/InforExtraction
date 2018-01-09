@@ -51,10 +51,16 @@ function sbt_people(){
                 console.log(typeof attributes);
                 console.log(typeof information);
                 //展示人物简介部分
-                var intro_textarea = document.getElementById("person_introduction");
+                var intro_div = document.getElementById("person_intro");
 //                var text = document.createTextNode(information['简介']);
 //                intro_p.appendChild(text);
+
+                var intro_textarea = document.createElement("textarea");
+                //设置textarea的相应属性值
                 intro_textarea.value = information['简介'];
+                intro_textarea.rows = "30";
+                intro_textarea.cols = "90";
+                intro_div.appendChild(intro_textarea);
                 //展示人物属性信息
 
                 var attributes_div = document.getElementById("person_attributes");
