@@ -66,8 +66,10 @@ function sbt_people(){
                 var attributes_div = document.getElementById("person_attributes");
                 for(var attr in attributes){
                     var attr_li = document.createElement("li");
-                    attr_li.innerHTML = attr + " : " + attributes[attr];
                     attr_li.setAttribute("id","attribute_info");
+                    
+                    attr_li.innerHTML = attr + " : " + attributes[attr];
+
                     document.getElementById("attribute_info").style.fontWeight = "bold";
                     attributes_div.appendChild(attr_li);
                 }
