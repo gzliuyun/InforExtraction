@@ -67,6 +67,7 @@ function sbt_people(){
                 for(var attr in attributes){
                     var attr_li = document.createElement("li");
                     attr_li.innerHTML = attr + " : " + attributes[attr];
+                    attr_li.style.font-size = "24px";
                     attributes_div.appendChild(attr_li);
                 }
             }
