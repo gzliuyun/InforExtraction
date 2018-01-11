@@ -70,7 +70,7 @@ function sbt_people(){
 
                     attr_li.innerHTML = attr + " : " + attributes[attr];
 
-                    attr_li.style.fontWeight = "bold";
+                    //attr_li.style.fontWeight = "bold";
                     attributes_div.appendChild(attr_li);
                 }
             }
