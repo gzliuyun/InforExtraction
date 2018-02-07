@@ -55,12 +55,15 @@ function sbt_people(){
 //                var text = document.createTextNode(information['简介']);
 //                intro_p.appendChild(text);
 
-                var intro_textarea = document.createElement("textarea");
+                //var intro_textarea = document.createElement("textarea");
+                var intro_p = document.createElement("p");
+                var text = document.createTextNode(information['简介']);
+                intro_p.appendChild(text);
                 //设置textarea的相应属性值
-                intro_textarea.value = information['简介'];
-                intro_textarea.rows = "30";
-                intro_textarea.cols = "110";
-                intro_div.appendChild(intro_textarea);
+                //intro_textarea.value = information['简介'];
+                //intro_textarea.rows = "30";
+                //intro_textarea.cols = "110";
+                intro_div.appendChild(intro_p);
                 //展示人物属性信息
 
                 var attributes_div = document.getElementById("person_attributes");
