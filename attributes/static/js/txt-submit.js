@@ -273,6 +273,90 @@ function show_attribute_extract(attributeDict){
         node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
         row_education.appendChild(node);
     }
+
+    //属性抽取--职务抽取 展示
+    jobList = attributeDict.job;
+    var row_job = document.getElementById("row_job");
+    row_job.innerHTML = "";
+    for(var index = 0; index < jobList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = jobList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_job.appendChild(node);
+    }
+
+    //属性抽取--出生地抽取 展示
+    birthplaceList = attributeDict.birthplace;
+    var row_birthplace = document.getElementById("row_birthplace");
+    row_birthplace.innerHTML = "";
+    for(var index = 0; index < birthplaceList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = birthplaceList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_birthplace.appendChild(node);
+    }
+
+    //属性抽取--民族抽取 展示
+    nationList = attributeDict.nation;
+    var row_nation = document.getElementById("row_nation");
+    row_nation.innerHTML = "";
+    for(var index = 0; index < nationList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = nationList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_nation.appendChild(node);
+    }
+
+    //属性抽取--性别抽取 展示
+    genderList = attributeDict.gender;
+    var row_gender = document.getElementById("row_gender");
+    row_gender.innerHTML = "";
+    for(var index = 0; index < genderList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = genderList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_gender.appendChild(node);
+    }
+
+    //属性抽取--工作地点抽取 展示
+    workplaceList = attributeDict.workplace;
+    var row_workplace = document.getElementById("row_workplace");
+    row_workplace.innerHTML = "";
+    for(var index = 0; index < workplaceList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = workplaceList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_workplace.appendChild(node);
+    }
+
+    //属性抽取--政党抽取 展示
+    partyList = attributeDict.party;
+    var row_party = document.getElementById("row_party");
+    row_party.innerHTML = "";
+    for(var index = 0; index < partyList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = partyList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_party.appendChild(node);
+    }
+
+    //属性抽取--入党时间抽取 展示
+    jointimeList = attributeDict.jointime;
+    var row_jointime = document.getElementById("row_jointime");
+    row_jointime.innerHTML = "";
+    for(var index = 0; index < jointimeList.length; index ++){
+        var node = document.createElement("a");
+        node.innerHTML = jointimeList[index];
+        node.setAttribute("class","btn btn-xs btn-default");
+        node.setAttribute("style","margin: 2px; background-color: rgb(136, 136, 136); border-color: rgb(136, 136, 136);");
+        row_jointime.appendChild(node);
+    }
 }
 
 function sbt_txt(){
