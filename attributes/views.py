@@ -81,7 +81,7 @@ def text_upload(request):
     topWordsCount = []
     ct = 1
     for item in wordsCount:
-        if ct <= 10 and len(item[0]) >= 2:
+        if ct <= 10 and len(item[0]) > 1:
             wc = [item[0], item[1]]
             topWordsCount.append(wc)
             ct += 1
