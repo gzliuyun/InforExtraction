@@ -13,26 +13,26 @@ from time import strftime, gmtime
 # Create your views here.
 relWords = [
 	# man_and_wife
-	"妻子","结婚","婚礼","丈夫","夫人","婚姻","夫妻","相识","老公","举行","夫妇","认识",
-	"爱情","工作","感情","相恋","生活","太太","女儿","老婆","太太妻","夫",
+	"妻子","结婚","婚礼","丈夫","夫人","婚姻","夫妻","相识","老公","夫妇",
+	"爱情","感情","相恋","生活","太太","女儿","老婆","太太妻","夫",
 	# parent_children
 	"父亲","儿子","母亲","女儿","长子","出生","家庭","次子","子女","长女","祖父","世家","次女","三子","原配","去世","生于",
 	"父母","夫人","妈妈","爸爸","母子","父女","子","三儿子","四子父","爸","爹","母","妈","娘","儿","女",
 	# teacher_and_pupil
-	"弟子","先生","师从","老师","学习","艺术","学生","教授","名家","传人","大师","演出","考入","相声","京剧","徒弟","得到",
-	"拜师","指导","表演艺术家","师父","师傅","恩师","导师","师","徒",
+	"弟子","先生","师从","老师","学习","艺术","学生","教授","名家","传人","大师","演出","考入","徒弟",
+	"拜师","指导","师父","师傅","恩师","导师","师","徒",
 	# cooperate
-	"冠军","演出","世界","合作","组合","决赛","主演","获得","搭档","编剧","沙滩","公开赛","排球","小品","队友","黄希庭",
+	"冠军","演出","世界","合作","组合","决赛","主演","获得","搭档","编剧","沙滩","公开赛","排球","小品","队友",
 	"比赛","羽毛球","导演","同事","同僚","女双搭档","小品搭档","男双搭档","沙排搭档","羽毛球混双搭档","羽毛球女双搭档",
 	"队友及搭档","双人滑搭档",
 	# friends
-	"热力","筱桂花","环球","好友","兄弟","静农","电影","影音","加盟","鼓票界","八角","邀请","农君","导演","灌篮","友谊",
+	"热力","环球","好友","兄弟","静农","电影","影音","加盟","鼓票界","八角","邀请","农君","导演","灌篮","友谊",
 	"出版","创作","主演","发表","朋友","挚友","友人","密友友",
 	# brother
-	"弟弟","哥哥","兄长","兄弟","胞弟","亲兄弟","手足","老二","带入","母弟","关羽","中立","堂兄弟","结盟","同盟会","袁术",
+	"弟弟","哥哥","兄长","兄弟","胞弟","亲兄弟","手足","老二","带入","母弟","关羽","中立","堂兄弟","结盟","同盟会",
 	"电影圈","大哥","兄","长兄","三哥","三弟","二哥哥","弟",
 	# sweetheart
-	"分手","恋情","女友","男友","媒体","绯闻","传出","感情","恋爱","照片","交往","相恋","报道","承认","曝光","朋友","超云",
+	"分手","恋情","女友","男友","媒体","绯闻","传出","感情","恋爱","照片","交往","相恋","报道","承认","曝光","朋友",
 	"关系","传闻","女星","前女友","前男友","绯闻男友","恋人","男朋友","初恋男友","初恋"
 ]
 def relations_txt(request):
@@ -50,7 +50,7 @@ def cutWords(sentence):
 	sendData['sentence'] = sentence
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.6:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	words = jdata['wordsList']
@@ -63,7 +63,7 @@ def postTagger(words):
 	sendData['wordsList'] = words
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.6:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	tags = jdata['postags']
@@ -77,7 +77,7 @@ def ner(words,tags):
 	sendData['postags'] = tags
 
 	message = json.dumps(sendData).decode().encode('utf8')
-	response = urllib2.urlopen('http://192.168.1.11:10001/',message)
+	response = urllib2.urlopen('http://192.168.1.6:10001/',message)
 	data = response.read()
 	jdata = json.loads(data,encoding="utf8")   #jdata即为获取的json数据
 	netags = jdata['netags']
@@ -91,7 +91,7 @@ def extract_relation(wordsList, name1, name2):
 	send["name1"] = name1
 	send["name2"] = name2
 	message =  json.dumps(send).decode().encode('utf8')
-	response = urllib2.urlopen('http://192.168.1.11:10002',message)
+	response = urllib2.urlopen('http://192.168.1.6:10002',message)
 	data = response.read()
 	jdata =  json.loads(data,encoding="utf8") #jdata即为返回的json数据
 	relation = jdata["relation"]
@@ -200,7 +200,9 @@ def relations_sentence(relSentenceList):
 
 def relations_txt_submit(request):
 	request.encoding='utf-8'
-	txtInfo = request.GET.get('input_textarea', None).encode('utf8')
+	txtInfo = None
+	if request.POST:
+		txtInfo = request.POST['input_textarea'].encode('utf8')
 	if len(txtInfo.strip()) == 0:
 		return 
 	txtList = txtInfo.split('\n')
@@ -232,6 +234,7 @@ def relations_txt_submit(request):
 				# 判断句子中是否存在关系关键词
 				if inRelWords == False:
 					if word in relWords:
+						print word
 						inRelWords = True
 
 			tags = postTagger(words)
@@ -259,7 +262,7 @@ def relations_txt_submit(request):
 	topWordsCount = []
 	ct  =  1
 	for item in wordsCount:
-		if ct <=10 and len(item[0]) > 1:
+		if ct <=10 and len(item[0].decode("utf8")) >= 2:
 			wc = [item[0],item[1]]
 			topWordsCount.append(wc)
 			ct += 1
@@ -292,7 +295,7 @@ def relations_txt_submit(request):
 
 def relations_search(request):
 	request.encoding='utf-8'
-	name = request.GET.get('search_name', None).encode('utf8')
+	name = request.GET.get('search_name',None).encode('utf8')
 	pid2name = {}
 	pid2url = {}
 	rid2name = {} 

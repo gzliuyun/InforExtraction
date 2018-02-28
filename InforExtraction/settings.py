@@ -27,7 +27,7 @@ SECRET_KEY = 'bj&%bwibwq_)mc_brr%6!l0fd2g+=cfu(@6gi2sm0+&-gzk-zd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','*']
 
 
 # Application definition
@@ -46,7 +46,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -88,9 +88,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'RelationExtraction',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '219.224.169.20',
-        'PORT': '3300',
+        'PASSWORD': '123456',
+        'HOST': '192.168.1.6',
+        'PORT': '3306',
     }
 }
 
