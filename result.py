@@ -220,4 +220,8 @@ def text_to_story():
     print result
     return result
 
-text_to_story()
+s = "《》"
+print type(s)
+print type(s.decode('utf-8'))
+print len(s)
+print len(s.decode('utf-8'))
