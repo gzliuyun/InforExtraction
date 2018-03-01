@@ -78,6 +78,8 @@ def text_upload(request):
             tagsList.extend(tags)
     # 词频排序
     wordsCount = sorted(wordsCount.items(), key=lambda item: item[1], reverse=True)
+    print "test wordsCount"
+    print wordsCount
     topWordsCount = []
     ct = 1
     for item in wordsCount:
@@ -92,7 +94,8 @@ def text_upload(request):
     # for idx in range(len(keyWords)):
     #     if isinstance(keyWords[idx], unicode):
     #         keyWords[idx] = keyWords[idx].encode('utf-8')
-
+    print "after filter"
+    print topWordsCount
     entityDict = {
         'places': placeList,
         'names': nameList,

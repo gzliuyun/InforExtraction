@@ -139,6 +139,7 @@ function show_word_tag(wordsList,tagsList){
     }
 }
 
+//词频展示
 function wordsCountShow(topWordsCountList){
     var chart = echarts.init(document.getElementById("wordsCount"));
     var words = [];
