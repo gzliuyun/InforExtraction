@@ -66,15 +66,15 @@ function sbt_people(){
                 intro_div.appendChild(intro_p);
                 //展示人物属性信息
 
-                var attributes_div = document.getElementById("person_attributes");
+                var attributes_ul = document.getElementById("person_attributes");
                 for(var attr in attributes){
                     var attr_li = document.createElement("li");
                     attr_li.setAttribute("id","attribute_info");
-
+                    attr_li.style.listStyle = "none";
                     attr_li.innerHTML = attr + " : " + attributes[attr];
 
                     //attr_li.style.fontWeight = "bold";
-                    attributes_div.appendChild(attr_li);
+                    attributes_ul.appendChild(attr_li);
                 }
             }
         });
