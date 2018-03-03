@@ -82,6 +82,8 @@ function sbt_people(){
                 //展示图片
                 var photo = document.getElementById("photo_url");
                 photo.src = information['photo_url'];
+                photo.style.width = "50";
+                photo.style.height = "100";
             }
         });
         return false; //不刷新页面
