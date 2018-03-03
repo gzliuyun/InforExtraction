@@ -50,9 +50,7 @@ function sbt_people(){
                 console.log(attributes);
                 console.log(typeof attributes);
                 console.log(typeof information);
-                //展示图片
-                var photo = document.getElementById("photo_url");
-                photo.src = information['photo_url'];
+
                 //展示人物简介部分
                 var intro_div = document.getElementById("person_intro");
 //                var text = document.createTextNode(information['简介']);
@@ -67,7 +65,7 @@ function sbt_people(){
                 intro_textarea.value = information['简介'];
                 intro_textarea.rows = "30";
                 intro_textarea.cols = "110";
-                intro_div.appendChild(intro_p);
+                intro_div.appendChild(intro_textarea);
                 //展示人物属性信息
 
                 var attributes_ul = document.getElementById("person_attributes");
@@ -80,6 +78,10 @@ function sbt_people(){
                     //attr_li.style.fontWeight = "bold";
                     attributes_ul.appendChild(attr_li);
                 }
+
+                //展示图片
+                var photo = document.getElementById("photo_url");
+                photo.src = information['photo_url'];
             }
         });
         return false; //不刷新页面
