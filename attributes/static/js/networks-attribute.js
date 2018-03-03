@@ -63,7 +63,7 @@ function sbt_people(){
                 //设置textarea的相应属性值
                 var intro_textarea = document.createElement("textarea");
                 intro_textarea.value = information['简介'];
-                intro_textarea.rows = "50";
+                intro_textarea.rows = "40";
                 intro_textarea.cols = "110";
                 intro_div.appendChild(intro_textarea);
                 //展示人物属性信息
@@ -72,7 +72,7 @@ function sbt_people(){
                 for(var attr in attributes){
                     var attr_li = document.createElement("li");
                     attr_li.setAttribute("id","attribute_info");
-                    attr_li.style.fontSize = 12 + 'pt';
+                    attr_li.style.fontSize = 13.5 + 'pt';
                     attr_li.style.listStyle = "none";
                     attr_li.innerHTML = attr + " : " + attributes[attr];
 
