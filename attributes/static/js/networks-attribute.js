@@ -56,9 +56,7 @@ function sbt_people(){
                     console.log(attributes);
                     console.log(typeof attributes);
                     console.log(typeof information);
-                    document.getElementById("person_intro").innerHTML="";
-                    document.getElementById("person_attributes").innerHTML="";
-                    document.getElementById("person_photo").innerHTML="";
+
 
                     //展示人物简介部分
                     var intro_div = document.getElementById("person_intro");
