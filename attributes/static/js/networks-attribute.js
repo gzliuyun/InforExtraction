@@ -49,6 +49,7 @@ function sbt_people(){
                 var information = ret.information;
                 if(Object.getOwnPropertyNames(attributes).length == 0 && Object.getOwnPropertyNames(information).length == 0){
                     alert("该人物没有信息，请重新输入");
+                    document.getElementById("network-attr").innerHTML = "";
                 }
                 else{
                     console.log(attributes);
