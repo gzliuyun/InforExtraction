@@ -136,7 +136,6 @@ def people_search(request):
     cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
     ###results1是一个元祖tuple
     results1 = cur.fetchone()
-    print results1[1]
     print "#########"
     print type(results1[1])  ###unicode字符
     ###有序字典
@@ -188,7 +187,6 @@ def people_search(request):
         results_info['photo_url'] = results2[4].encode('utf8')
 
     conn.close()
-    print results_attributes
     print type(results_info)
     results_json = {
         'attributes':results_attributes,

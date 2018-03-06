@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import codecs
+import MySQLdb
 import commands
 from pyltp import Segmentor
 import json
@@ -220,8 +221,19 @@ def text_to_story():
     print result
     return result
 
-s = "《》"
-print type(s)
-print type(s.decode('utf-8'))
-print len(s)
-print len(s.decode('utf-8'))
+conn = MySQLdb.connect(
+        host = '111.205.121.93',
+        #host = 'localhost',
+        port = 9002,
+        #port = 3306,
+        user = 'root',
+        passwd = '123456',
+        db = 'RelationExtraction',
+        charset = 'utf8'
+    )
+name = "林丹"
+cur = conn.cursor()
+cur.execute('select * from person_attributOfWilki where person_name = "%s"' %name)
+results1 = cur.fetchone()
+if results1 is  None:
+    print "none"
