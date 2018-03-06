@@ -50,44 +50,46 @@ function sbt_people(){
                 if(Object.getOwnPropertyNames(attributes).length == 0 && Object.getOwnPropertyNames(information).length == 0){
                     alert("该人物没有信息，请重新输入");
                 }
-                console.log(attributes);
-                console.log(typeof attributes);
-                console.log(typeof information);
+                else{
+                    console.log(attributes);
+                    console.log(typeof attributes);
+                    console.log(typeof information);
 
-                //展示人物简介部分
-                var intro_div = document.getElementById("person_intro");
-//                var text = document.createTextNode(information['简介']);
-//                intro_p.appendChild(text);
+                    //展示人物简介部分
+                    var intro_div = document.getElementById("person_intro");
+//                  var text = document.createTextNode(information['简介']);
+//                  intro_p.appendChild(text);
 
 
-//                var intro_p = document.createElement("p");
-//                var text = document.createTextNode(information['简介']);
-//                intro_p.appendChild(text);
-                //设置textarea的相应属性值
-                var intro_textarea = document.createElement("textarea");
-                intro_textarea.value = information['简介'];
-                intro_textarea.rows = "38";
-                intro_textarea.cols = "120";
-                intro_div.appendChild(intro_textarea);
-                //展示人物属性信息
+//                  var intro_p = document.createElement("p");
+//                  var text = document.createTextNode(information['简介']);
+//                  intro_p.appendChild(text);
+                //  设置textarea的相应属性值
+                    var intro_textarea = document.createElement("textarea");
+                    intro_textarea.value = information['简介'];
+                    intro_textarea.rows = "38";
+                    intro_textarea.cols = "120";
+                    intro_div.appendChild(intro_textarea);
+                    //展示人物属性信息
 
-                var attributes_ul = document.getElementById("person_attributes");
-                for(var attr in attributes){
-                    var attr_li = document.createElement("li");
-                    attr_li.setAttribute("id","attribute_info");
-                    attr_li.style.fontSize = 13.5 + 'pt';
-                    attr_li.style.listStyle = "none";
-                    attr_li.innerHTML = attr + " : " + attributes[attr];
+                    var attributes_ul = document.getElementById("person_attributes");
+                    for(var attr in attributes){
+                        var attr_li = document.createElement("li");
+                        attr_li.setAttribute("id","attribute_info");
+                        attr_li.style.fontSize = 13.5 + 'pt';
+                        attr_li.style.listStyle = "none";
+                        attr_li.innerHTML = attr + " : " + attributes[attr];
 
-                    //attr_li.style.fontWeight = "bold";
-                    attributes_ul.appendChild(attr_li);
+                        //attr_li.style.fontWeight = "bold";
+                        attributes_ul.appendChild(attr_li);
+                    }
+
+                    //展示图片
+                    var photo = document.getElementById("photo_url");
+                    photo.src = information['photo_url'];
+                    photo.style.width = "25";
+                    photo.style.height = "50";
                 }
-
-                //展示图片
-                var photo = document.getElementById("photo_url");
-                photo.src = information['photo_url'];
-                photo.style.width = "25";
-                photo.style.height = "50";
             }
         });
         return false; //不刷新页面
