@@ -42,19 +42,23 @@ function sbt_people(){
             success:function(jsonData){ //提交成功的回调函数
                 var ret = eval("("+jsonData+")");
 
-                document.getElementById("person_intro").innerHTML="";
-                document.getElementById("person_attributes").innerHTML="";
+
 
                 var attributes = ret.attributes;
                 var information = ret.information;
                 if(Object.getOwnPropertyNames(attributes).length == 0 && Object.getOwnPropertyNames(information).length == 0){
                     alert("该人物没有信息，请重新输入");
-                    document.getElementById("network-attr").innerHTML = "";
+                    document.getElementById("person_intro").innerHTML="";
+                    document.getElementById("person_attributes").innerHTML="";
+                    document.getElementById("person_photo").innerHTML="";
                 }
                 else{
                     console.log(attributes);
                     console.log(typeof attributes);
                     console.log(typeof information);
+                    document.getElementById("person_intro").innerHTML="";
+                    document.getElementById("person_attributes").innerHTML="";
+                    document.getElementById("person_photo").innerHTML="";
 
                     //展示人物简介部分
                     var intro_div = document.getElementById("person_intro");
