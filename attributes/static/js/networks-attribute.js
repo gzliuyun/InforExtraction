@@ -47,6 +47,9 @@ function sbt_people(){
 
                 var attributes = ret.attributes;
                 var information = ret.information;
+                if(Object.keys(attributes).length == 0 && Object.key(information).length == 0){
+                    alert("该人物没有信息，请重新输入");
+                }
                 console.log(attributes);
                 console.log(typeof attributes);
                 console.log(typeof information);
