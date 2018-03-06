@@ -88,10 +88,12 @@ function sbt_people(){
                     }
 
                     //展示图片
-                    var photo = document.getElementById("photo_url");
+                    var photo = document.createElement("img");
+                    var photo_div = document.getElementById("person_photo");
                     photo.src = information['photo_url'];
                     photo.style.width = "25";
                     photo.style.height = "50";
+                    photo_div.appendChild(photo);
                 }
             }
         });
