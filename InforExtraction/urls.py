@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^home/$', views.home),
     url(r'^login/$', views.login),
     url(r'^relations/', include('relations.urls')),
+    url(r'^opinions/', include('opinions.urls')),
 ]
