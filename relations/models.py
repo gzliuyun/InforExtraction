@@ -78,4 +78,3 @@ class Relinsentence(models.Model):
         managed = True
         db_table = 'Relinsentence'
 
-
