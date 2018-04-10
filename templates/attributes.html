@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	    <title>人物属性抽取</title>
+
+		{% load staticfiles %}
+	    <link rel="shortcut icon" href="{%static 'favicon.ico' %}"> 
+	    <!-- <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet"> -->
+	    <!-- <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+	    <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/font-awesome.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/animate.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/relations.css' %}" rel="stylesheet">
+	    <!-- 添加css插件-->
+	    
+	    <link href="{%static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/plugins/bootstrap-table/bootstrap-table.min.css' %}" rel="stylesheet">
+	</head>
+	<body class="gray-bg top-navigation">
+		<div class="wrapper">
+			<div id="page-wrapper" class="gray-bg">
+				<div class="contain-content">
+					<div class="row block-row">
+			            <div class="col-sm-12">
+			                <div class="tabs-container block-container">
+			                    <ul class="nav nav-tabs">
+			                        <li class="active">
+			                        	<a data-toggle="tab" href="#tab-1" aria-expanded="true">
+			                        		<i class="fa fa-edit">
+			                        			<strong>属性文本输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                        <li class="">
+			                        	<a data-toggle="tab" href="#tab-2" aria-expanded="false">
+			                        		<i class="fa fa-link">
+			                        			<strong>属性网页URL输入</strong>
+			                        		</i>
+			                        	</a>
+			                        </li>
+			                    </ul>
+			                    <div class="tab-content">
+			                        <div id="tab-1" class="tab-pane active">
+			                            <div class="panel-body">
+			                            	<form class="form-horizontal m-lg" id="textFrom" novalidate="novalidate" method="get">
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<textarea id="input_textarea" style="height: 200px" name="text"  placeholder="请输入需要分析的中文人物文本" class="form-control"></textarea>
+			                            			</div>
+			                            		</div>
+			                            		<div class="form-group">
+			                            			<div class="col-sm-12">
+			                            				<button class="btn btn-primary pull-right" type="button" id="txtSubmit" onclick ="sbt_txt();">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                            			</div>
+			                            		</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                        <div id="tab-2" class="tab-pane">
+			                            <div class="panel-body">
+			                                <form class="form-horizontal m-lg" id="urlFrom" novalidate="novalidate">
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<input type="url" id="input_url" name="input_url" class="form-control" placeholder="请输入需要分析的文本URL">
+			                                		</div>
+			                                	</div>
+			                                	<div class="form-group">
+			                                		<div class="col-sm-12">
+			                                			<button class="btn btn-primary pull-right" type="submit">
+			                            					<i class="fa fa-check"></i>提交
+			                            				</button>
+			                            				<button class="btn btn-primary pull-right" style="margin-right: 20px" type="reset">
+			                            					重置
+			                            				</button>
+			                                		</div>
+			                                	</div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="row block-row">
+			        	<div class="col-sm-12">
+			        		<div class="ibox box-contain">
+			        			<div class="ibox-title">
+			        				<h5>文本信息</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content">
+			        				<span id='passage_txt'></span>
+			        			</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="row block-row" >
+			        	<div class="col-lg-8 col-md-8">
+			        		<div class="ibox box-contain">
+			        			<div class="ibox-title">
+			        				<h5>词性标注</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+			        			</div>
+			        			<div class="ibox-content" style="height: 470px">
+			        				<div class="row" style="height: 410px;">
+				        				<div class="col-md-8">
+				        					<div class="tooltip-demo full-height-scroll" id="tag_result" style="width: auto;height:400px; overflow:auto">
+					        				</div>
+				        				</div>
+				        				<div class="col-md-4" >
+				        					<div class="row">
+				        						<div class="col-md-6 col-xs-6">
+				        							<div class="checkbox i-check">
+				        								<input id="noun" type="checkbox" checked="checked" >
+				        								<label for="noun" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-primary">名词</a>
+				        								</label> 
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="adjective" type="checkbox" checked="checked" >
+				        								<label for="adjective" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-danger">形容词</a>
+				        								</label> 
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="other" type="checkbox" checked="checked" >
+				        								<label for="other" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-warning">其他词</a>
+				        								</label> 
+				        							</div>
+				        						</div>
+				        						<div class="col-md-6 col-xs-6">
+				        							<div class="checkbox i-check">
+				        								<input id="verb" type="checkbox" checked="checked" >
+				        								<label for="verb" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-success">动词</a>
+				        								</label> 
+				        							</div>
+				        							<div class="checkbox i-check">
+				        								<input id="adverb" type="checkbox" checked="checked" >
+				        								<label for="adverb" style="padding-left: 10px;">
+				        									<a class="btn btn-xs btn-rounded btn-info">副词</a>
+				        								</label> 
+				        							</div>
+				        						</div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="hr-line-dashed m-xs"></div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="text-center">
+				        							<h4>词性分布比例</h4>
+	                        						<div id="flot-pie-chart" style="height: 200px; width: 200px; margin: 0 auto;">
+	                        						</div>
+	                        						
+				        						</div>
+				        						<div class="text-right" style="margin-right: 10px">
+			        								<small>词总数：</small>
+			        								<span id="tag_words_count">521</span>
+			        							</div>
+				        					</div>
+				        					<div class="row">
+				        						<div class="hr-line-dashed m-xs"></div>
+				        					</div>
+				        					<div class="row">
+				        						<ul class="stat-list m-t-sm">
+				        							<li>
+				        								<p class="no-margins">
+				        									实体词数目:
+				        									<span id="tag_entity_count">42</span>
+				        								</p>
+				        								<div class="progress progress-mini">
+				        									<div id="tag_entity_rate" class="progress-bar progress-bar-entity" style="width: 15%">
+				        									</div>
+				        								</div>
+				        							</li>
+				        						</ul>
+				        					</div>
+				        				</div>
+				        			</div>
+			        				<div class="row">
+			        					<small style="margin: 0 20px;">
+			        						<strong>说明：可查看单词原型、实体类型及词性缩写</strong>
+			        					</small>
+			        				</div>
+			        			</div>
+							</div>	        		
+			        	</div>
+			        	<div class="col-md-4 col-lg-4">
+			        		<div class="ibox box-contain">
+				        		<div class="ibox-title">
+			        				<h5>词性标注说明</h5>
+			        				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				        		</div>
+				        		<div class="ibox-content" style="height: 470px">
+				        			<div class="col-sm-12">
+				        				<input type="text" class="form-control input-sm m-b-xs" id="tag_filter" placeholder="表格搜索...">
+                                        <table id="tag_discription_table"  class="footable table table-hover" data-page-size="9" data-filter="#tag_filter">
+                                            <thead>
+                                            <tr>
+                                                <th data-type="numeric">序号</th>
+                                                <th>词性标注</th>
+                                                <th>词性描述</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+				        			</div>
+				        		</div>
+				        	</div>
+			        	</div>
+				    </div>
+				    <div class="row block-row">
+				    	<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>词频统计</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+				    			<div class="ibox-content" id="wordsCountBox">
+				    				<div id="wordsCount" style="height:400px;"></div>
+				    			</div> 
+				    		</div>
+				    	</div>
+						<div class="col-md-6 col-lg-6">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>实体抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" id="entityTable" style="height: 400px;">
+					    			<div class="col-sm-12">
+					    				<input type="text" id="entity_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
+					    				<table id="entity_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
+					    					<thead >
+					    						<tr>
+					    							<th>实体类型</th>
+					    							<th>实体列表</th>
+					    						</tr>
+					    					</thead>
+					    					<tbody>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td class="col-md-3">
+					    								<span >人名</span>
+					    							</td>
+					    							<td id = "row_names">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >地名</span>
+					    							</td>
+					    							<td id = "row_places">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >机构名</span>
+					    							</td>
+					    							<td id="row_orgs">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >时间</span>
+					    							</td>
+					    							<td id="row_times">
+					    							</td>
+					    						</tr>
+					    					</tbody>
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+				   	</div>
+					<div class="row block-row">
+						<div class="col-md-12 col-lg-12">
+				    		<div class="ibox ibox-contain">
+				    			<div class="ibox-title">
+				    				<h5>属性抽取</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" id="attributeTable" style="height: 400px;">
+					    			<div class="col-sm-12">
+					    				<input type="text" id="attribute_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索...">
+					    				<table id="attribute_extract_table" class="footable table table-bordered table-hover" data-filter="#entity_filter" >
+					    					<thead >
+					    						<tr>
+					    							<th>属性类型</th>
+					    							<th>属性列表</th>
+					    						</tr>
+					    					</thead>
+					    					<tbody>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td class="col-md-3">
+					    								<span >人名</span>
+					    							</td>
+					    							<td id = "row_name">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >毕业院校</span>
+					    							</td>
+					    							<td id = "row_university">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >专业</span>
+					    							</td>
+					    							<td id="row_major">
+					    							</td>
+					    						</tr>
+					    						<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >学历</span>
+					    							</td>
+					    							<td id="row_education">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >职务</span>
+					    							</td>
+					    							<td id="row_job">
+					    							</td>
+					    						</tr>
+												<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >出生地</span>
+					    							</td>
+					    							<td id="row_birthplace">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >民族</span>
+					    							</td>
+					    							<td id="row_nation">
+					    							</td>
+					    						</tr>
+												<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >性别</span>
+					    							</td>
+					    							<td id="row_gender">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >工作地点</span>
+					    							</td>
+					    							<td id="row_workplace">
+					    							</td>
+					    						</tr>
+												<tr class="footable-old" style="display: table-row;">
+					    							<td>
+					    								<span >政党</span>
+					    							</td>
+					    							<td id="row_party">
+					    							</td>
+					    						</tr>
+												<tr class="footable-event" style="display: table-row;">
+					    							<td>
+					    								<span >入党时间</span>
+					    							</td>
+					    							<td id="row_jointime">
+					    							</td>
+					    						</tr>
+					    						</tbody>
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+					</div>
+		        </div>
+	        </div>
+	    </div>
+	    <!-- 全局js -->
+	    <script src="{%static 'js/jquery.min.js' %}"></script>
+	    <script src="{%static 'js/jquery-migrate-1.2.1.js' %}"></script>
+	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	    <!-- iCheck -->
+	    <script src="{%static 'js/plugins/iCheck/icheck.min.js' %}"></script>
+	    <!-- sparkline -->
+	    <script src="{%static 'js/plugins/sparkline/jquery.sparkline.min.js' %}"></script>
+
+	    <!-- Flot -->
+	    <script src="{%static 'js/plugins/flot/jquery.flot.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.tooltip.min.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.resize.js' %}"></script>
+	    <script src="{%static 'js/plugins/flot/jquery.flot.pie.js' %}"></script>
+	    <!-- echarts -->
+	    <script src="{%static 'js/plugins/echarts/echarts-all.js' %}"></script>
+	    <!-- footable -->
+	    <script src="{%static 'js/plugins/footable/footable.all.min.js' %}" type="text/javascript"></script>
+	    <!-- bootstap-table -->
+	    <script src="{%static 'js/plugins/bootstrap-table/bootstrap-table.min.js' %}"></script>
+		<script src="{%static 'js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js' %}"></script>
+		<!-- 词云插件 -->
+	    <script src="{%static 'js/plugins/wordcloud/jquery.mousewheel.min.js' %}" type="text/javascript"></script>
+	    <script src="{%static 'js/plugins/wordcloud/jquery.tagsphere.min.js' %}" type="text/javascript"></script>
+   	 	<!-- 解决ajax提交post请求的csrf.js -->
+   	 	<!-- <script src="{%static 'js/csrf.js' %}"></script> -->
+	    <!-- 自定义js -->
+		<script src="{%static 'js/content-attribute.js' %}" type="text/javascript"></script>
+		<script src="{%static 'js/load-data-attribute.js' %}" type="text/javascript"></script>
+		<script src="{%static 'js/txt-submit-attribute.js' %}" type="text/javascript"></script>
+	    
+	    <!-- icheck加载初始化 -->
+	    <script >
+	    	$(document).ready(function(){
+    			document.getElementById('input_textarea').innerHTML = "1996年，主演孙文学执导的剧情电影《星星点灯》，在片中饰演因患上骨癌而截肢的女主角陈薇，这是她的首部电影作品，从而正式进入演艺圈；同年，考入了中央戏剧学院表演系。1998年，被张艺谋选中，在根据鲍十小说《纪念》改编的剧情电影《我的父亲母亲》中饰演清纯可人、心灵手巧的女主角招娣，并凭借该片获得第23届大众电影百花奖最佳女主角奖。1999年，与周润发、杨紫琼联袂主演由李安执导的武侠动作电影《卧虎藏龙》，在片中饰演长相秀美、武术高强的九门提督之女玉娇龙，该片全球票房最终达到了2.15亿美元，而她则凭借该片获得了美国独立精神奖最佳女配角奖、第13届芝加哥影评人协会奖佳新人奖、第4届多伦多影评人协会奖最佳女配角奖等多个奖项。2000年2月，参加中央电视台春节联欢晚会，并表演开场歌舞《把春天迎进来》；同年，与成龙、克里斯·塔克联袂主演动作电影《尖峰时刻Ⅱ》，在片中饰演美丽又凶残的女打手胡莉，从而正式进军好莱坞；此外，她还凭借电影《卧虎藏龙》入围了第27届美国电影电视土星奖最佳女配角奖。";
+    			sbt_txt();
+    			document.getElementById('input_textarea').innerHTML = "";  
+			});
+	    </script>
+	</body>
+</html>

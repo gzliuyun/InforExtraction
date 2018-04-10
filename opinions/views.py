@@ -9,13 +9,16 @@ from pyltp import SentenceSplitter
 
 # Create your views here.
 def opinions_txt(request):
-        return render_to_response("opinions_txt.html")
+	return render_to_response("opinions_txt.html")
 
 def opinions_library(request):
-        return render_to_response("opinions_library.html")
+	return render_to_response("opinions_library.html")
 
 def bt_table(request):
-        return render_to_response("bt-table.html")
+	return render_to_response("bt-table.html")
+
+def news(request):
+	return render_to_response("news.html")
 
 def h_word_count(words):
 	wordsCount = {}
@@ -134,7 +137,15 @@ def opinions_txt_submit(request):
 	return HttpResponse(json.dumps(ret),content_type='application/json')
 
 def opinions_search(request):
-        request.encoding='utf-8'
-        name = request.GET.get('search_name',None).encode('utf8')
+	request.encoding='utf-8'
+	name, keyword = None, None
+		
+	if request.POST:
+		name = request.POST['name'].encode('utf8')
+		keyword = request.POST['keyword'].encode('utf8')
+		page = request.POST['page']
+	if len(name.strip()) == 0  and  len(keyword.strip()) == 0:
+		return
 	
+	ret = h_url_get( 'opinion_search', {'name': name, 'keyword': keyword, 'page': page}, ['opinions'] )
 	return HttpResponse(json.dumps(ret),content_type='application/json')
