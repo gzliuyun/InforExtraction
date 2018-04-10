@@ -38,7 +38,7 @@ def postagger(words):
     ######### for test
     #postags = ['nh']
     print postags
-    file = codecs.open('/home/pengbin/attribute_extraction/bishe/test.data','w','utf-8')
+    file = codecs.open('/var/www/html/InforExtraction/attributes/bishe/test.data','w','utf-8')
     result = []
     for word,tag in zip(words,postags):
         pair = []
@@ -131,9 +131,9 @@ def text_to_story(text):
     #print "#######" + text.encode('utf-8').decode('utf-8')
     postagger(segmentor(text))
     ##执行shell命令，开始跑模型，
-    commands.getstatusoutput('cd /home/pengbin/attribute_extraction/bishe/ && ./crf_test -m 6.model test.data > test.rst ')
+    commands.getstatusoutput('cd /var/www/html/InforExtraction/attributes/bishe/ && ./crf_test -m 6.model test.data > test.rst ')
     ##执行结束，结果存在了test.rst里面
-    file = open('/home/pengbin/attribute_extraction/bishe/test.rst','r')
+    file = open('/var/www/html/InforExtraction/attributes/bishe/test.rst','r')
     result = {
         'name':[],
         'university':[],
