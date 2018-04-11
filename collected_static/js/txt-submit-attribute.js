@@ -365,7 +365,7 @@ function sbt_txt(){
     //variable_init();
     var input_textarea = $("#input_textarea").val();  
     $.ajax({
-        type:"get",  //提交方式
+        type:"post",  //提交方式
         dataType:"text", //数据类型
         url:"/attributes/txt/submit/", //请求url
         data: {

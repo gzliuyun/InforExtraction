@@ -34,10 +34,9 @@ def postTagger(words):
     return tags
 def text_upload(request):
     request.encoding = 'utf-8'
-    text = request.GET.get('input_textarea', None).encode('utf8')
-    print "peng###############bin"
-    print text
-    print type(text)
+    text = None
+    if request.POST:
+        text = request.POST['input_textarea'].encode('utf8')
     if len(text.strip()) == 0:
         return
     txtList = text.split('\n')
