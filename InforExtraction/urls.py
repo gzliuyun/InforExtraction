@@ -18,8 +18,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from . import views,settings
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^home/$', views.home),
     url(r'^login/$', views.login),
+<<<<<<< HEAD
     url(r'^attributes/', include('attributes.urls'))
+=======
+    url(r'^relations/', include('relations.urls')),
+    url(r'^opinions/', include('opinions.urls')),
+>>>>>>> master
 ]

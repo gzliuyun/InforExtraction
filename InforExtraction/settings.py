@@ -27,7 +27,11 @@ SECRET_KEY = 'bj&%bwibwq_)mc_brr%6!l0fd2g+=cfu(@6gi2sm0+&-gzk-zd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
+=======
+ALLOWED_HOSTS = ['127.0.0.1','*']
+>>>>>>> master
 
 
 # Application definition
@@ -39,7 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'attributes'
+=======
+    'relations',
+    'opinions',
+>>>>>>> master
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -72,16 +81,25 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'InforExtraction.wsgi.application'
 
-
+CACHES = {
+     'default': {
+         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+     }
+}
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'RelationExtraction',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '192.168.1.6',
+        'PORT': '3306',
     }
 }
 
@@ -130,7 +148,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 # 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
 
 STATICFILES_DIR = (
+<<<<<<< HEAD
     os.path.join(BASE_DIR,"static"),
+=======
+    os.path.join(BASE_DIR, "common_static"),
+>>>>>>> master
 )
 
 # 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件
