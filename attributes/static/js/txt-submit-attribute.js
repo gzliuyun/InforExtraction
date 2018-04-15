@@ -361,16 +361,17 @@ function show_attribute_extract(attributeDict){
 }
 
 function sbt_txt(){
+    console.log("####################");
     //variable_init();
     var input_textarea = $("#input_textarea").val();  
     $.ajax({
         type:"post",  //提交方式
         dataType:"text", //数据类型
-		url:"/attributes/txt/submit/", //请求url
+        url:"/attributes/txt/submit/", //请求url
         data: {
             'input_textarea': input_textarea
         },
-        success:function(result){ //提交成功的回调函数,
+        success:function(result){ //提交成功的回调函数
             var ret = eval("("+result+")");
             var paragraphList = ret.text;
             var text = "";
@@ -401,6 +402,7 @@ function sbt_txt(){
             }
             // 词性标注展示
             show_word_tag(wordsList,tagsList);
+            console.log("if u see this, it means show_word_tag success!!!!")
             // 修改饼状图数据，调用load-data.js中的drawPie绘图函数。
             // 数组深度克隆，使用slice(0)函数，绘制饼状图，并修改实体词数量
             nowNum = tagsNum.slice(0);
@@ -433,4 +435,3 @@ function sbt_txt(){
         }
     });
 }
-

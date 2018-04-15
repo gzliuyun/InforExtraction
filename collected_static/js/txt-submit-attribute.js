@@ -367,7 +367,7 @@ function sbt_txt(){
     $.ajax({
         type:"post",  //提交方式
         dataType:"text", //数据类型
-		url:"/attributes/txt/submit/", //请求url
+        url:"/attributes/txt/submit/", //请求url
         data: {
             'input_textarea': input_textarea
         },
@@ -390,11 +390,6 @@ function sbt_txt(){
             // 获取关键词列表
             //var keyWords = ret.keyWords;
             var attributes = ret.attributeDict;//属性列表
-            console.log(attributes);
-            console.log(wordsList);
-            console.log(tagsList);
-            console.log(topWordsCountList);
-            console.log(entityDict);
             {
                 // 属性抽取展示
                 show_attribute_extract(attributes);
@@ -440,4 +435,3 @@ function sbt_txt(){
         }
     });
 }
-

@@ -30,8 +30,8 @@ def postTagger(words):
     data = response.read()
     jdata = json.loads(data, encoding="utf8")  # jdata即为获取的json数据
     tags = jdata['postags']
-
     return tags
+
 def text_upload(request):
     request.encoding = 'utf-8'
     text = None
@@ -77,12 +77,10 @@ def text_upload(request):
             tagsList.extend(tags)
     # 词频排序
     wordsCount = sorted(wordsCount.items(), key=lambda item: item[1], reverse=True)
-    print "test wordsCount"
-    print wordsCount
     topWordsCount = []
     ct = 1
     for item in wordsCount:
-        if ct <= 10 and len(item[0].decode('utf-8')) > 1:
+        if ct <= 10 and len(item[0]) > 1:
             wc = [item[0], item[1]]
             topWordsCount.append(wc)
             ct += 1
@@ -93,8 +91,7 @@ def text_upload(request):
     # for idx in range(len(keyWords)):
     #     if isinstance(keyWords[idx], unicode):
     #         keyWords[idx] = keyWords[idx].encode('utf-8')
-    print "after filter"
-    print topWordsCount
+
     entityDict = {
         'places': placeList,
         'names': nameList,

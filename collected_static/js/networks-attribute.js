@@ -53,10 +53,6 @@ function sbt_people(){
                     document.getElementById("person_photo").innerHTML="";
                 }
                 else{
-                    console.log(attributes);
-                    console.log(typeof attributes);
-                    console.log(typeof information);
-
                     document.getElementById("person_intro").innerHTML="";
                     document.getElementById("person_attributes").innerHTML="";
                     document.getElementById("person_photo").innerHTML="";
