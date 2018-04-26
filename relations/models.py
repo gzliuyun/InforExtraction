@@ -49,6 +49,20 @@ class Peoplerelation(models.Model):
         unique_together = (('p1_id', 'p2_id'),)
 
 
+class Extractedrelation(models.Model):
+    n_id = models.AutoField(primary_key=True)
+    p1_id = models.IntegerField()
+    p2_id = models.IntegerField()
+    r_id = models.IntegerField()
+
+    def __str__(self):
+        return self.n_id
+
+    class Meta:
+        managed = True
+        db_table = 'Extractedrelation'
+        unique_together = (('p1_id','p2_id','r_id'),)
+
 class Relationlist(models.Model):
     r_id = models.AutoField(primary_key=True)
     r_type = models.CharField(unique=True, max_length=255)

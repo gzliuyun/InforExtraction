@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
-from relations.models import Peoplelist,Peoplerelation,Relationlist
+from relations.models import Peoplelist,Peoplerelation,Relationlist,Extractedrelation
 from django.http import JsonResponse
 import urllib, urllib2
 import pynlpir
@@ -158,6 +158,32 @@ def extract_entity(words,tags,netags):
 		index += 1
 	return names, places, orgs, times
 
+def insert_peopleRelation(name1,name2,relation):
+	if isinstance(name1,unicode):
+		name1 = name1.encode('utf8')
+	if isinstance(name2,unicode):
+		name2 = name2.encode('utf8')
+	if isinstance(relation,unicode):
+		relation = relation.encode('utf8')
+
+	name1_id = Peoplelist.objects.filter(name = name1).values_list('p_id')
+	name2_id = Peoplelist.objects.filter(name = name2).values_list('p_id')
+	if len(name1_id) == 0:
+		Peoplelist.objects.create(name=name1)
+		name1_id = Peoplelist.objects.filter(name = name1).values_list('p_id')
+	if len(name2_id) == 0:
+		Peoplelist.objects.create(name=name2)
+		name2_id = Peoplelist.objects.filter(name = name2).values_list('p_id')
+	name1_id = name1_id[0][0]
+	name2_id = name2_id[0][0]
+	rid = Relationlist.objects.filter(r_type=relation).values_list('r_id')
+	rid = rid[0][0]
+	try:
+		Extractedrelation.objects.create(p1_id = name1_id, p2_id = name2_id, r_id = rid)
+	except:
+		return
+	
+
 # 关系语句抽取模块bootstrap-table展示部分json写入
 def relations_sentence(relSentenceList):
 	path = os.path.split(os.path.realpath(__file__))[0] + '/static/json/relSentence.json'
@@ -191,6 +217,7 @@ def relations_sentence(relSentenceList):
 				if isinstance(relation,unicode):
 					relation = relation.encode('utf8')
 				lineItem["relation"] = relation
+				insert_peopleRelation(name1,name2,relation)
 				relTableData.append(lineItem)
 				j += 1
 			i += 1
