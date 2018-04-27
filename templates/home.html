@@ -32,8 +32,8 @@
                         <a class="navbar-brand" href="#">知识抽取系统</a>
                     </div>
                     <div >
-                        <ul class="nav navbar-nav">
-							<li class="dropdown active">
+                        <ul class="nav navbar-nav", id="menu">
+							<li class="dropdown ">
 							    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物属性抽取 <span class="caret"></span></a>
 		                             <ul class="dropdown-menu">
 										 <li><a href="/attributes/txt/" target="iframe_a">属性文本语料抽取</a></li>
@@ -48,11 +48,12 @@
                                     <li><a href="/relations/network/" target="iframe_a">人物关系网</a></li>
                                 </ul>
                         	</li>
-                            <li class="dropdown active">
+                            <li class="dropdown ">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物观点抽取 <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/opinions/txt/" target="iframe_a">文本语料抽取</a></li>
-                                    <li><a href="/opinions/library/" target="_blank">人物观点库</a></li>
+                                    <!-- <li><a href="/opinions/library/" target="iframe_a">人物观点库</a></li>  -->
+									<li><a href="/opinions/library/" target="_blank">人物观点库</a></li>
                                 </ul>
                                 </li>
                         </ul>
@@ -76,6 +77,12 @@
 	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
 	    <script src="{%static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
 	    <script src="{%static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
-	    <script src="{%static 'js/plugins/layer/layer.min.js' %}"></script>
+	    <scripti src="{%static 'js/plugins/layer/layer.min.js' %}"></script>
+		<script>
+			$('#menu li').click(function () {
+                var f = this;
+                $('#menu li').each(function () {  this.className = this == f ? 'active' : ''   });
+            });	
+		</script>
 	</body>
 </html>
