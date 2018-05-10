@@ -46,7 +46,7 @@ class Peoplerelation(models.Model):
     class Meta:
         managed = True
         db_table = 'Peoplerelation'
-        unique_together = (('p1_id', 'p2_id'),)
+        unique_together = (('p1_id', 'p2_id','r_id'),)
 
 
 class Extractedrelation(models.Model):

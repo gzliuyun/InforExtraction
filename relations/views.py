@@ -179,7 +179,7 @@ def insert_peopleRelation(name1,name2,relation):
 	rid = Relationlist.objects.filter(r_type=relation).values_list('r_id')
 	rid = rid[0][0]
 	try:
-		Extractedrelation.objects.create(p1_id = name1_id, p2_id = name2_id, r_id = rid)
+		Peoplerelation.objects.create(p1_id = name1_id, p2_id = name2_id, r_id = rid)
 	except:
 		return
 	
@@ -385,11 +385,16 @@ def relations_search(request):
 
 			pid2orderid[pid] = index 
 			index += 1
-
+		setIdPair = set()
 		for items in relationInPeople:
 			dt = {}
 			p1_id = items[0]
 			p2_id = items[1]
+			idPair = "" + str(p1_id) + str(p2_id)
+			if idPair in setIdPair:
+				continue
+			else:
+				setIdPair.add(idPair)
 			relId = items[2]
 			rType = rid2name[relId]
 			dt["source"] = pid2orderid[p1_id]
