@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^relations/', include('relations.urls')),
     url(r'^opinions/', include('opinions.urls')),
 	url(r'^attributes/',include('attributes.urls')),
+	url(r'^home/',include('home.urls')),
 ]

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>知识抽取系统</title>
+
+		{% load staticfiles %}
+		<link rel="shortcut icon" href="{%static 'favicon.ico' %}"> 
+		<link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/font-awesome.min.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/animate.css' %}" rel="stylesheet">
+	    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+	    <style>
+			#top-div{
+				height: 50px;
+			}
+			/*让bootom占满剩下的屏幕高度*/
+			#bottom-div{ 
+				width: 100%;
+				position: absolute;
+				top: 50px;
+				bottom: 5px;
+			}
+		</style>
+	</head>
+	<body class="gray-bg top-navigation">
+	    <div  class="gray-bg" style="width: 100%; height:100%">
+            <div class="row white-bg" id="top-div">
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">知识抽取系统</a>
+                    </div>
+                    <div >
+                        <ul class="nav navbar-nav", id="menu">
+							<li class="dropdown ">
+							    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物属性抽取 <span class="caret"></span></a>
+		                             <ul class="dropdown-menu">
+										 <li><a href="/attributes/txt/" target="iframe_a">属性文本语料抽取</a></li>
+										 <li><a href="/attributes/network/" target="iframe_a">人物属性查询</a></li>
+									</ul>
+						    </li>
+
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物关系抽取 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/relations/txt/" target="iframe_a">文本语料抽取</a></li>
+                                    <li><a href="/relations/network/" target="iframe_a">人物关系网</a></li>
+                                </ul>
+                        	</li>
+                            <li class="dropdown ">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 人物观点抽取 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/opinions/txt/" target="iframe_a">文本语料抽取</a></li>
+                                    <!-- <li><a href="/opinions/library/" target="iframe_a">人物观点库</a></li>  -->
+									<li><a href="/opinions/library/" target="_blank">人物观点库</a></li>
+                                </ul>
+                                </li>
+                        </ul>
+                        <ul class="nav navbar-top-links navbar-right">
+                        	<li>
+                            	<a href="/login/">
+                                	<i class="fa fa-sign-out"></i> 退出
+                            	</a>
+                        	</li>
+                    	</ul>
+                    </div>
+                </nav>
+            </div>
+            <div id="bottom-div" style="">
+	    		<iframe name="iframe_a" class="J_iframe" src="/relations/txt/" width="100%" height="100%" frameborder="0">
+	    		</iframe>
+	    	</div> 
+	    </div>
+		<!-- 全局js -->
+		<script src="{%static 'js/jquery.min.js' %}"></script>
+	    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	    <script src="{%static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+	    <script src="{%static 'js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+	    <scripti src="{%static 'js/plugins/layer/layer.min.js' %}"></script>
+		<script>
+			$('#menu li').click(function () {
+                var f = this;
+                $('#menu li').each(function () {  this.className = this == f ? 'active' : ''   });
+            });	
+		</script>
+	</body>
+</html>

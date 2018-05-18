@@ -9,3 +9,6 @@ def home(request):
 def login(request):
 	# return HttpResponse("Hello,word. you're at the relation index.")
 	return render_to_response('login.html')
+
+
+
