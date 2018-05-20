@@ -1,0 +1,24 @@
+
+
+function home_txt() {
+    console.log("####################");
+//	$("#people-num").text(2018);
+    //var input_textarea = $("#input_textarea").val();  
+    $.ajax({
+        type:"post",  //提交方式
+        dataType:"text", //数据类型
+        url:"/home/txt/submit/", //请求url
+        data: {
+            //'people_num': input_textarea
+        },
+        success:function(result){ //提交成功的回调函数
+			console.log("hello")
+            var ret = eval("("+result+")");
+            var peopleNum = ret.people_num;
+			console.log(""+peopleNum);
+
+            $("#people-num").text( peopleNum);
+      }
+    });
+}
+

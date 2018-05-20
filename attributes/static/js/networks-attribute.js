@@ -70,6 +70,7 @@ function sbt_people(){
                     intro_textarea.value = information['简介'];
                     intro_textarea.rows = "38";
                     intro_textarea.cols = "120";
+					intro_textarea.style.marginTop = "30px";
                     intro_div.appendChild(intro_textarea);
                     //展示人物属性信息
 
