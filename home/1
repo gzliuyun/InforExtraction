@@ -39,13 +39,7 @@ def home_txt_submit(request):
 	global submittimestap, submitupdateSeconds, submitRetHistory
 	time = datetime.datetime.now()
 
-
-	refresh = (time - submittimestap).seconds >= submitupdateSeconds
-
-	if refresh:
-		submittimestap = time + datetime.timedelta(seconds=submitupdateSeconds) 
-
-	if not submitRetHistory or refresh:
+	if not submitRetHistory or (time - submittimestap).seconds >= submitupdateSeconds:
 		dbconn = get_db_connection('RelationExtraction')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
 		sql = 'SELECT count(1) as `num` from `Peoplelist`'
@@ -140,7 +134,9 @@ def home_txt_submit(request):
 			'relationListPer':relation_list_per,
 		}
 		submitRetHistory = ret
-			
+	
+		if ( time - submittimestap).seconds >= submitupdateSeconds:
+			submittimestap = time + datetime.timedelta(seconds=submitupdateSeconds) 
 
 	return HttpResponse(json.dumps(submitRetHistory), content_type='application/json')
 
@@ -152,14 +148,7 @@ sourceRetHistory = {}
 def home_txt_source(request):
 	global sourcetimestap, sourceupdateSeconds, sourceRetHistory
 	time = datetime.datetime.now()
-
-	refresh = ((time - sourcetimestap).seconds >= sourceupdateSeconds)
-
-	if refresh:
-		sourcetimestap = time + datetime.timedelta(seconds=sourceupdateSeconds) 
-
-	if not sourceRetHistory or refresh:
-
+	if not sourceRetHistory or (time - sourcetimestap).seconds >= sourceupdateSeconds:
 		dbconn = get_db_connection('opinion')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
 	
@@ -188,7 +177,9 @@ def home_txt_source(request):
 		ret = {'sourceList': source_list,
 				'sourceListTitle': source_list_title}
 		sourceRetHistory = ret
-			
+
+		if ( time - sourcetimestap).seconds >= sourceupdateSeconds:
+			sourcetimestap = time + datetime.timedelta(seconds=sourceupdateSeconds) 
 
 	return HttpResponse(json.dumps(sourceRetHistory), content_type='application/json')
 
@@ -199,13 +190,7 @@ classifyRetHistory = {}
 def home_txt_classify(request):
 	global classifytimestap, classifyupdateSeconds, classifyRetHistory
 	time = datetime.datetime.now()
-
-	refresh = ((time - classifytimestap).seconds >= classifyupdateSeconds)
-
-	if refresh:
-			classifytimestap = time + datetime.timedelta(seconds=classifyupdateSeconds) 
-
-	if not classifyRetHistory or refresh:
+	if not classifyRetHistory or (time - classifytimestap).seconds >= classifyupdateSeconds:
 		dbconn = get_db_connection('opinion')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
 
@@ -230,7 +215,8 @@ def home_txt_classify(request):
 				'classifyList': classify_list}
 		classifyRetHistory = ret
 
-		
+		if ( time - classifytimestap).seconds >= classifyupdateSeconds:
+			classifytimestap = time + datetime.timedelta(seconds=classifyupdateSeconds) 
 
 	return HttpResponse(json.dumps(classifyRetHistory), content_type='application/json')
 
@@ -241,13 +227,7 @@ opinionsRetHistory = {}
 def home_txt_opinions(request):
 	global opinionstimestap, opinionsupdateSeconds, opinionsRetHistory
 	time = datetime.datetime.now()
-
-	refresh = ((time - opinionstimestap).seconds >= opinionsupdateSeconds)
-
-	if refresh:
-		opinionstimestap = time + datetime.timedelta(seconds=opinionsupdateSeconds) 
-
-	if not opinionsRetHistory or refresh:
+	if not opinionsRetHistory or (time - opinionstimestap).seconds >= opinionsupdateSeconds:
 		dbconn = get_db_connection('opinion')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
 
@@ -305,7 +285,8 @@ def home_txt_opinions(request):
 				'opinionsTable': opinions_table}
 		opinionsRetHistory = ret
 
-			
+		if ( time - opinionstimestap).seconds >= opinionsupdateSeconds:
+			opinionstimestap = time + datetime.timedelta(seconds=opinionsupdateSeconds) 
 
 
 	return HttpResponse(json.dumps(opinionsRetHistory), content_type='application/json')
