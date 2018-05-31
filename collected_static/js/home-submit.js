@@ -166,7 +166,7 @@ function show_pie_list(title, view, data1, data2, per) {
 
 
 function home_txt() {
-    console.log("####################");
+    console.log("*####################*");
     //var input_textarea = $("#input_textarea").val();  
 	//var input_s = 2;
     $.ajax({
@@ -187,7 +187,7 @@ function home_txt() {
             var opinionsNum = ret.opinionsNum;
             $("#people-num").text(peopleNum);
 			$("#relation-num").text(relationNum);
-            $("#relation-type-num").text(relationTypeNum);
+            //$("#relation-type-num").text(relationTypeNum);
             $("#news-num").text(newsNum);
             $("#opinion-num").text(opinionsNum);
 
@@ -307,7 +307,7 @@ function home_opinions_txt() {
             var ret = eval("("+result+")");
             var opinionsListTitle = ret.opinionsListTitle;
             var opinionsList = ret.opinionsList;
-            show_pie_list('观点最多的6个人',"echarts-pie-opinions",opinionsListTitle,opinionsList, "0.23");
+            show_pie_list('观点最多的7个人',"echarts-pie-opinions",opinionsListTitle,opinionsList, "0.28");
       
             var relTableData = ret.opinionsTable;
 

@@ -6,6 +6,8 @@ import pymysql
 import  json
 import datetime
 import re
+import urllib2
+from bs4 import BeautifulSoup
 
 # Create your views here.
 def home_txt(request):
@@ -33,14 +35,15 @@ def group(n, sep = ','):
 submittimestap = datetime.datetime.now()
 submitupdateSeconds = 3600
 
-
+#获取统计数据
+#分成四个，主要是为了提高查询数据库的效率
 submitRetHistory = {}
 def home_txt_submit(request):
 	global submittimestap, submitupdateSeconds, submitRetHistory
 	time = datetime.datetime.now()
 
 
-	refresh = (time - submittimestap).seconds >= submitupdateSeconds
+	refresh = time > submittimestap and (time - submittimestap).seconds >= submitupdateSeconds
 
 	if refresh:
 		submittimestap = time + datetime.timedelta(seconds=submitupdateSeconds) 
@@ -62,12 +65,12 @@ def home_txt_submit(request):
 		if len(tmp)>= 1:
 			relation_num = tmp['num']
 
-		sql = 'SELECT count(1) as `num` from `Relationlist`'
-		cursor.execute(sql)
-		tmp = cursor.fetchone()
-		relation_type_num = 0
-		if len(tmp)>= 1:
-			relation_type_num = tmp['num']
+		#sql = 'SELECT count(1) as `num` from `Relationlist`'
+		#cursor.execute(sql)
+		#tmp = cursor.fetchone()
+		#relation_type_num = 0
+		#if len(tmp)>= 1:
+		#	relation_type_num = tmp['num']
 
 
 		sql = 'SELECT `age`, count(`age`) as `num` from ( \
@@ -130,7 +133,7 @@ def home_txt_submit(request):
 
 		ret = {'peopleNum':group(people_num), 
 			'relationNum':group(relation_num),
-			'relationTypeNum':group(relation_type_num),
+			#'relationTypeNum':group(relation_type_num),
 			'newsNum':group(news_num),
 			'opinionsNum':group(opinions_num),
 			'ages19List':ages_list[0:10],
@@ -153,7 +156,7 @@ def home_txt_source(request):
 	global sourcetimestap, sourceupdateSeconds, sourceRetHistory
 	time = datetime.datetime.now()
 
-	refresh = ((time - sourcetimestap).seconds >= sourceupdateSeconds)
+	refresh = time > sourcetimestap and (time - sourcetimestap).seconds >= sourceupdateSeconds
 
 	if refresh:
 		sourcetimestap = time + datetime.timedelta(seconds=sourceupdateSeconds) 
@@ -200,7 +203,7 @@ def home_txt_classify(request):
 	global classifytimestap, classifyupdateSeconds, classifyRetHistory
 	time = datetime.datetime.now()
 
-	refresh = ((time - classifytimestap).seconds >= classifyupdateSeconds)
+	refresh = time > classifytimestap and (time - classifytimestap).seconds >= classifyupdateSeconds
 
 	if refresh:
 			classifytimestap = time + datetime.timedelta(seconds=classifyupdateSeconds) 
@@ -242,7 +245,7 @@ def home_txt_opinions(request):
 	global opinionstimestap, opinionsupdateSeconds, opinionsRetHistory
 	time = datetime.datetime.now()
 
-	refresh = ((time - opinionstimestap).seconds >= opinionsupdateSeconds)
+	refresh = time > opinionstimestap and (time - opinionstimestap).seconds >= opinionsupdateSeconds
 
 	if refresh:
 		opinionstimestap = time + datetime.timedelta(seconds=opinionsupdateSeconds) 
@@ -309,6 +312,7 @@ def home_txt_opinions(request):
 
 
 	return HttpResponse(json.dumps(opinionsRetHistory), content_type='application/json')
+
 
 
 

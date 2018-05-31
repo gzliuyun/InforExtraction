@@ -156,6 +156,7 @@ function show_words_cloud(keyWords){
     });
 }
 
+
 function sbt_txt() {
     console.log("####################");
     variable_init();
@@ -238,8 +239,7 @@ function sbt_txt() {
             drawRelationCharts(relTableData);
 
             // 词云展示
-            show_words_cloud(keyWords);  
+            show_words_cloud(keyWords);      
         }
     });
 }
-
