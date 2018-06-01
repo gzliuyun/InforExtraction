@@ -1,14 +1,53 @@
-$(function() {
-
+//$(function() {
+//	document.getElementById('search_name').innerHTML = "章子怡";
+//	searchPeople();
     // 加载进来时，先绘制json文件中的人物关系
-    d3.json("../../static/json/relation.json",function(error,root){
-        if( error ){
-            return console.log(error);
-        }
-        drawNetwork(root);
-    });
+    //d3.json("../../static/json/relation.json",function(error,root){
+    //    if( error ){
+    //        return console.log(error);
+    //    }
+    //    drawNetwork(root);
+    //});
     // search提交ajax
-    $("#search_form").submit(function(){
+//});
+
+function showRelTable(relTableData){
+    // 在重新载入数据之前，需要先注销表
+    $("#relation_table").bootstrapTable('destroy');-
+    $('#relation_table').bootstrapTable({
+            data: relTableData,
+            queryParams:"queryParams",
+            striped: true,
+            sortable: true,
+            sortOrder: "asc",
+            pagination:"true",
+            search:"true",
+            showRefresh:"true",
+            showToggle:"true",
+            showColumns:"true",
+            pageList: [8],
+            pageSize:"8",
+            columns: [{
+                field: 'idx',
+                title: '序号'
+            }, {
+                field: 'name1',
+                title: '姓名1'
+            }, {
+                field: 'name2',
+                title: '姓名2'
+            },{
+                field: 'relation',
+                title: '关系'
+            }]
+    });
+    $('.bootstrap-table .fixed-table-toolbar').find("button").each(function () {
+        $(this).attr('class','btn btn-primary')
+    });
+}
+
+function searchPeople(){
+   // $("#search_form").submit(function(){
         var search_name = $("#search_name").val();  
         $.ajax({
             type:"get",  //提交方式
@@ -17,14 +56,23 @@ $(function() {
             data: {
                 'search_name': search_name
             },
-            success:function(jsonData){ //提交成功的回调函数
-                var networkData = eval("("+jsonData+")");
+            success:function(returnData){ //提交成功的回调函数
+                var ret = eval("("+returnData+")");
+				var networkData = ret.networkData;
                 drawNetwork(networkData);
+				var relTableData =  ret.relTableData;
+				//console.log(ret);
+				showRelTable(relTableData);
+				//设置高度
+				var btTable = document.getElementById("relation_table");
+                var tableHeight = btTable.offsetHeight;
+                var relTabBox = document.getElementById("relation_table_div");
+                relTabBox.style.height =  tableHeight + 150 + "px";
             }
         });
         return false; //不刷新页面
-    });
-});
+    //});
+}
 
 function drawNetwork(networkData){
     var width = 900;
@@ -45,7 +93,7 @@ function drawNetwork(networkData){
         // if( error ){
         //     return console.log(error);
         // }
-        console.log(root);
+        //console.log(root);
 
         //D3力导向布局
         var force = d3.layout.force()

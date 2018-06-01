@@ -18,14 +18,19 @@ def get_db_connection(name):
 	return pymysql.connect("localhost", "root", "123456", name, charset="utf8mb4" )
 
 
-def group(n, sep = ','):
+def group(n, sep = ',', acronym=False):
     s = str(abs(n))[::-1]
     groups = []
     i = 0
     while i < len(s):
         groups.append(s[i:i+3])
         i+=3
-    retval = sep.join(groups)[::-1]
+    
+    if acronym and len(groups)>=3:
+        retval = sep.join(groups[1::])[::-1]
+        retval += '  K'
+    else:
+        retval = sep.join(groups)[::-1]
     if n < 0:
         return '-%s' % retval
     else:
@@ -51,7 +56,7 @@ def home_txt_submit(request):
 	if not submitRetHistory or refresh:
 		dbconn = get_db_connection('RelationExtraction')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
-		sql = 'SELECT count(1) as `num` from `Peoplelist`'
+		sql = 'SELECT count(1) as `num` from `bill_people_ydj`'
 		cursor.execute( sql )
 		tmp = cursor.fetchone()
 		people_num = 0
@@ -87,8 +92,8 @@ def home_txt_submit(request):
   				ages_list[row['age']-181] = row['num']
 
 
-  		sql = 'select `p`.`r_id`, count(`p`.`r_id`) as `num` , `l`.`r_type` as `type` from `Peoplerelation` `p`, `Relationlist` `l` where `p`.`r_id` = `l`.`r_id` \
-				group by `p`.`r_id` order by `num` desc limit 0, 6'
+  		sql = 'select `p`.`r_id` as `rid`, count(`p`.`r_id`) as `num` , `l`.`r_type` as `type` from `Peoplerelation` `p`, `Relationlist` `l` where `p`.`r_id` = `l`.`r_id` \
+				group by `p`.`r_id` order by `num` desc limit 0, 7'
 		cursor.execute(sql)
 		tmp = cursor.fetchall()
 
@@ -96,6 +101,8 @@ def home_txt_submit(request):
 		relation_list_title = []
 		relationSum = 0
 		for row in tmp:
+			if row['rid'] == 155:
+				continue
 			relation_dict = {}
 			relation_dict["value"] = row['num']
 			relation_dict['name'] = row['type']
@@ -131,7 +138,7 @@ def home_txt_submit(request):
 		dbconn.close()
 
 
-		ret = {'peopleNum':group(people_num), 
+		ret = {'peopleNum':group(people_num, acronym=True), 
 			'relationNum':group(relation_num),
 			#'relationTypeNum':group(relation_type_num),
 			'newsNum':group(news_num),
@@ -258,7 +265,7 @@ def home_txt_opinions(request):
 			select `holder_id`, count(`holder_id`) as `num` from `opinions` \
 			GROUP BY `holder_id` \
 			order by `num` desc) `t`, `people` \
-			where  `people`.`id` = `t`.`holder_id` limit 1,7'
+			where  `people`.`id` = `t`.`holder_id` limit 1,6'
 		cursor.execute(sql)
 		tmp = cursor.fetchall()
 		opinions_list_title = []
@@ -268,7 +275,6 @@ def home_txt_opinions(request):
 		opinions_table = []
 		ids = 1
 		for row in tmp:
-		#classify_list_title.append(row['classify'])
 			opinions_dict = {}
 			opinions_dict["value"] = row['ght']
 			opinions_dict['name'] = row['type']

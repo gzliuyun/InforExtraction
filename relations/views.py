@@ -371,7 +371,7 @@ def relations_search(request):
 
 		path = os.path.split(os.path.realpath(__file__))[0] + '/static/json/relation.json'
 		pid2orderid = {}
-
+		relTableData = []
 		jsonData = {}
 		jsonData["nodes"] = []
 		jsonData["edges"] = []
@@ -386,10 +386,16 @@ def relations_search(request):
 			pid2orderid[pid] = index 
 			index += 1
 		setIdPair = set()
+		idx = 0
 		for items in relationInPeople:
 			dt = {}
 			p1_id = items[0]
 			p2_id = items[1]
+			relDict = {}
+			idx += 1
+			relDict["idx"] = idx
+			relDict["name1"] = pid2name[p1_id]
+			relDict["name2"] = pid2name[p2_id]
 			idPair = "" + str(p1_id) + str(p2_id)
 			if idPair in setIdPair:
 				continue
@@ -397,13 +403,19 @@ def relations_search(request):
 				setIdPair.add(idPair)
 			relId = items[2]
 			rType = rid2name[relId]
+			relDict["relation"] = rType
 			dt["source"] = pid2orderid[p1_id]
 			dt["target"] = pid2orderid[p2_id]
 			dt["relation"] = rType
 			jsonData["edges"].append(dt)
-
+			relTableData.append(relDict)
+		
+		returnData = {
+			"networkData": jsonData,
+			"relTableData": relTableData
+		}
 		# with codecs.open(path,'w','utf-8') as json_file:
 		# 	json_file.write(json.dumps(jsonData,ensure_ascii=False))
 
 	# return render_to_response("relations_network.html")
-	return HttpResponse(json.dumps(jsonData),content_type='application/json')
+	return HttpResponse(json.dumps(returnData),content_type='application/json')

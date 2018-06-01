@@ -307,7 +307,7 @@ function home_opinions_txt() {
             var ret = eval("("+result+")");
             var opinionsListTitle = ret.opinionsListTitle;
             var opinionsList = ret.opinionsList;
-            show_pie_list('观点最多的7个人',"echarts-pie-opinions",opinionsListTitle,opinionsList, "0.28");
+            show_pie_list('观点最多的6个人',"echarts-pie-opinions",opinionsListTitle,opinionsList, "0.28");
       
             var relTableData = ret.opinionsTable;
 

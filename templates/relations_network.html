@@ -57,7 +57,7 @@
 			            				<div class="input-group col-sm-4">
 			            					<input type="text" class="form-control inpust-sm" id = "search_name" name="search_name" placeholder="请输入搜索的中文人名">
 			            					<span class="input-group-btn">
-                        						<input type="submit" id="search_submit" class="btn btn-primary" value="确认">
+                        						<input type="button" id="search_submit" class="btn btn-primary" value="确认" onclick="searchPeople();">
                     						</span>			     
 			            				</div>
 			            				<div class="col-sm-4"></div>
@@ -68,6 +68,30 @@
 			            	</div>
 			            </div>
 			        </div>
+					<div class="row block-row" style="margin-top: 5px;">
+				    	<div class="col-lg-12 col-md-12">
+				    		<div class="ibox box-contain">
+				    			<div class="ibox-title">
+				    				<h5>关系表格展示</h5>
+				    				<div class="ibox-tools">
+			        					<a class="collapse-link">
+			        						<i class="fa fa-chevron-up"></i>
+			        					</a>
+			        					<a  class="close-link">
+			        						<i class="fa fa-times"></i>
+			        					</a>
+			        				</div>
+				    			</div>
+					    		<div class="ibox-content" id="relation_table_div">
+					    			<div class="col-sm-12" >
+					    				<!-- <input type="text" id="sentence_filter" class="form-control input-sm m-b-xs"  placeholder="表格搜索..."> -->
+					    				<table id="relation_table" data-page-size="5">
+					    				</table>
+					    			</div>
+					    		</div>
+					    	</div>
+				    	</div>
+				    </div>
 			    </div>
 			</div>
 		</div>
@@ -86,10 +110,20 @@
 	    <script src="{%static 'js/plugins/echarts/echarts-all.js' %}"></script>
 	    <!-- footable -->
 	    <script src="{%static 'js/plugins/footable/footable.all.min.js' %}"></script>
+		<!-- bootstap-table -->
+	    <script src="{%static 'js/plugins/bootstrap-table/bootstrap-table.min.js' %}"></script>
+		<script src="{%static 'js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js' %}"></script>
 	    <!-- 添加d3.js -->
 	    <script src="{%static 'js/plugins/d3/d3.v3.min.js' %}" charset="utf-8"></script>
 	    <!-- 自定义js -->
 	    <script src="{%static 'js/content.js' %}" type="text/javascript"></script>
 	    <script src="{%static 'js/networks.js' %}" type="text/javascript"></script>
+		<script>
+			$(document).ready(function(){
+				$('#search_name').val("周润发");
+				searchPeople();
+				$("#search_name").val("");
+			})
+		</script>
 	</body>
 </html>

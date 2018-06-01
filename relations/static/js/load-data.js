@@ -251,6 +251,7 @@ function relSenTable(relTableData){
         $(this).attr('class','btn btn-primary')
     });
 }
+
 // 词频统计展示
 function wordsCountShow(topWordsCountList){
     var chart = echarts.init(document.getElementById("wordsCount"));
