@@ -56,7 +56,7 @@ def home_txt_submit(request):
 	if not submitRetHistory or refresh:
 		dbconn = get_db_connection('RelationExtraction')
 		cursor = dbconn.cursor(cursor=pymysql.cursors.DictCursor)
-		sql = 'SELECT count(1) as `num` from `bill_people_ydj`'
+		sql = 'SELECT count(1) as `num` from `ChinsesForeigner`'
 		cursor.execute( sql )
 		tmp = cursor.fetchone()
 		people_num = 0

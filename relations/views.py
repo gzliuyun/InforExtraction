@@ -365,7 +365,7 @@ def relations_search(request):
 		
 		for item in relationInPeople:
 			relId = item[2]
-			relation = Relationlist.objects.filter(r_id = relId).values_list('r_id','r_type')
+			relation = Relationlist.objects.filter(r_id = relId).values_list('r_id','r_aggregation')
 			if relId not in rid2name.keys():
 				rid2name[relId] = relation[0][1]
 

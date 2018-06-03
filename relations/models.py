@@ -66,6 +66,7 @@ class Extractedrelation(models.Model):
 class Relationlist(models.Model):
     r_id = models.AutoField(primary_key=True)
     r_type = models.CharField(unique=True, max_length=255)
+    r_aggregation = models.CharField(max_length=255)
 
     def __str__(self):  # __str__ on Python 3
         return self.r_id
