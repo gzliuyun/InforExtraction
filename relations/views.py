@@ -10,6 +10,7 @@ import os,json
 import codecs
 from jieba import analyse
 from time import strftime, gmtime
+import numpy as np
 # Create your views here.
 relWords = [
 	# man_and_wife
@@ -342,7 +343,12 @@ def relations_search(request):
 
 		relationInfo1 = Peoplerelation.objects.filter(p1_id = p_id).values_list('p1_id','p2_id','r_id')
 		relationInPeople.extend(relationInfo1)
-
+		
+		reserveInfo = Peoplerelation.objects.filter(p2_id = p_id).values_list('p2_id','p1_id','r_id')
+		if len(reserveInfo) > 0:
+			relationInPeople.extend(reserveInfo)
+			relationInfo1 = np.append(relationInfo1,reserveInfo,axis = 0)
+		
 		for item in relationInfo1:
 			p1_id = item[1]
 
@@ -367,7 +373,8 @@ def relations_search(request):
 			relId = item[2]
 			relation = Relationlist.objects.filter(r_id = relId).values_list('r_id','r_aggregation')
 			if relId not in rid2name.keys():
-				rid2name[relId] = relation[0][1]
+				rname = relation[0][1]
+				rid2name[relId] = rname
 
 		path = os.path.split(os.path.realpath(__file__))[0] + '/static/json/relation.json'
 		pid2orderid = {}
@@ -391,11 +398,14 @@ def relations_search(request):
 			dt = {}
 			p1_id = items[0]
 			p2_id = items[1]
+			name1 = pid2name[p1_id]
+			name2 = pid2name[p2_id]
+			
 			relDict = {}
 			idx += 1
 			relDict["idx"] = idx
-			relDict["name1"] = pid2name[p1_id]
-			relDict["name2"] = pid2name[p2_id]
+			relDict["name1"] = name1
+			relDict["name2"] = name2
 			idPair = "" + str(p1_id) + str(p2_id)
 			if idPair in setIdPair:
 				continue
