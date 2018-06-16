@@ -127,6 +127,69 @@ def extract_entity(words,tags,netags):
 
 	index += 1
     return names, places, orgs, times
+
+def text_institution(text):
+    ret = {
+        'foundtime': [],
+        'place': [],
+        'leader': []
+    }
+
+    ### 查找机构建立时间，关键词：创建时间于，始创时间于
+    ftsID = -1
+    fteID = -1
+    if ftsID == -1:
+        ftsID = text.find("创建时间于")
+    if ftsID == -1:
+        ftsID = text.find("始创时间于")
+    if ftsID != -1:
+        if fteID == -1:
+            fteID = text.find("日",ftsID)
+        if fteID == -1:
+            fteID = text.find("月",ftsID)
+        if fteID == -1:
+            fteID = text.find("年",ftsID)
+
+    if ftsID != -1 and fteID != -1:
+        ret['foundtime'] = text[ftsID+5:fteID+1]
+
+    ### 查找机构建立时间，关键词：创建地点于，始创地点于
+    plsID = -1
+    pleID = -1
+    if plsID == -1:
+        plsID = text.find("创建地点于")
+    if plsID == -1:
+        plsID = text.find("始创地点于")
+    if plsID != -1:
+        if pleID == -1:
+            pleID = text.find("，", plsID)
+        if pleID == -1:
+            pleID = text.find("；", plsID)
+        if pleID == -1:
+           pleID = text.find("。", pltsID)
+
+    if ftsID != -1 and fteID != -1:
+        ret['place'] = text[plsID+5:pleID + 1]
+
+    ### 查找机构领导人，
+    ldsID = -1
+    ldeID = -1
+    if ldsID == -1:
+        ldsID = text.find("领导为")
+    if ldsID == -1:
+        ldsID = text.find("领导有")
+    if ldsID != -1:
+        if ldeID == -1:
+            ldeID = text.find("，", ldsID)
+        if ldeID == -1:
+            ldeID = text.find("；", ldsID)
+        if ldeID == -1:
+            ldeID = text.find("。", ldsID)
+    if ldsID != -1 and ldeID != -1:
+        ret['leadr'] = text[ldsID+3:ldeID + 1]
+
+    return ret
+
 def text_to_story(text):
     #print "#######" + text.encode('utf-8').decode('utf-8')
     postagger(segmentor(text))
@@ -147,8 +210,16 @@ def text_to_story(text):
         'birthplace':[],
         'workplace':[],
         'nation':[],
-        'gender':[]
+        'gender':[],
+        'foundtime':[],
+        'place':[],
+        'leader':[]
     }
+
+    ret1 = text_institution(text)
+    result['foundtime'] = ret1['foundtime']
+    result['place'] = ret1['place']
+    result['leader'] = ret1['leader']
 
     tmp_str = ""
     for line in file.readlines():
@@ -339,6 +410,7 @@ def text_to_story(text):
                 result['gender'].append(tmp_str)
                 tmp_str = ""
     file.close()
+
     for key in result:
         result[key] = list(set(result[key]))
     print result

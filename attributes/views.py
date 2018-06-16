@@ -133,7 +133,6 @@ def people_search(request):
     ###results1是一个元祖tuple
     results1 = cur.fetchone()
     results_attributes = OrderedDict()
-    print "#########"
     #print type(results1[1])  ###unicode字符
     ###有序字典
     hasattribute = 0
@@ -167,11 +166,11 @@ def people_search(request):
         if results1[13] is not None:
             results_attributes['性别'] = results1[13].encode('utf8')
         if results1[14] is not None:
-            results_attributes['配偶'] = results1[14].encode('utf8')
+            results_attributes['成立时间'] = results1[14].encode('utf8')
         if results1[15] is not None:
-            results_attributes['儿女'] = results1[15].encode('utf8')
+            results_attributes['机构所在地'] = results1[15].encode('utf8')
         if results1[16] is not None:
-            results_attributes['父母'] = results1[16].encode('utf8')
+            results_attributes['机构领导'] = results1[16].encode('utf8')
 
     cur.execute('select * from Peoplelist where name = "%s"' %name)
     results2 = cur.fetchone()
