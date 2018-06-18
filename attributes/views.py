@@ -141,7 +141,7 @@ def people_search(request):
     else:
         if results1[1] is not None:
             results_attributes['姓名'] = results1[1].encode('utf8')
-            results_attributes['机构领导'] = results1[1].encode('utf8')
+            # results_attributes['机构领导'] = results1[1].encode('utf8')
         if results1[2] is not None:
             results_attributes['大学学校'] = results1[2].encode('utf8')
         if results1[3] is not None:
@@ -162,17 +162,17 @@ def people_search(request):
             results_attributes['出生地'] = results1[10].encode('utf8')
         if results1[11] is not None:
             results_attributes['工作地点'] = results1[11].encode('utf8')
-            results_attributes['机构所在地'] = results1[11].encode('utf8')
+            # results_attributes['机构所在地'] = results1[11].encode('utf8')
         if results1[12] is not None:
             results_attributes['民族'] = results1[12].encode('utf8')
         if results1[13] is not None:
             results_attributes['性别'] = results1[13].encode('utf8')
         if results1[14] is not None:
             results_attributes['成立时间'] = results1[14].encode('utf8')
-        # if results1[15] is not None:
-        #     results_attributes['机构所在地'] = results1[15].encode('utf8')
-        # if results1[16] is not None:
-        #     results_attributes['机构领导'] = results1[16].encode('utf8')
+        if results1[15] is not None:
+            results_attributes['机构所在地'] = results1[15].encode('utf8')
+        if results1[16] is not None:
+            results_attributes['机构领导'] = results1[16].encode('utf8')
 
     cur.execute('select * from Peoplelist where name = "%s"' %name)
     results2 = cur.fetchone()

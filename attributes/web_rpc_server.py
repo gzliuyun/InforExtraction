@@ -233,6 +233,7 @@ def text_to_story(text):
         elif 'name' in curr_char:
             if curr_char[0] == 'S':
                 result['name'].append(line_list[0])
+                result['leader'].append(line_list[0])
             elif curr_char[0] == 'B':
                 tmp_str += line_list[0]
                 continue
@@ -242,6 +243,7 @@ def text_to_story(text):
             elif curr_char[0] == 'E':
                 tmp_str += line_list[0]
                 result['name'].append(tmp_str)
+                result['leader'].append(tmp_str)
                 tmp_str = ""
         ##university属性
         elif 'university' in curr_char:

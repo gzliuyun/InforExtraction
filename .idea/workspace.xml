@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a31303c-399c-4bcc-b691-3b9cb72b1ec9" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/attributes/views.py" afterPath="$PROJECT_DIR$/attributes/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/attributes/web_rpc_server.py" afterPath="$PROJECT_DIR$/attributes/web_rpc_server.py" />
     </list>
@@ -45,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/attributes/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="168" column="66" lean-forward="true" selection-start-line="168" selection-start-column="66" selection-end-line="168" selection-end-column="66" />
+            <state relative-caret-position="357">
+              <caret line="166" column="66" lean-forward="true" selection-start-line="166" selection-start-column="66" selection-end-line="166" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -82,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web_rpc_server.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web_rpc_server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/attributes/web_rpc_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="223" column="16" lean-forward="true" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
+            <state relative-caret-position="222">
+              <caret line="246" column="28" lean-forward="true" selection-start-line="246" selection-start-column="28" selection-end-line="246" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -101,8 +100,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/templates/attributes.html" />
-        <option value="$PROJECT_DIR$/attributes/views.py" />
         <option value="$PROJECT_DIR$/attributes/web_rpc_server.py" />
+        <option value="$PROJECT_DIR$/attributes/views.py" />
       </list>
     </option>
   </component>
@@ -507,14 +506,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/relation/admin.py" />
-    <entry file="file://$PROJECT_DIR$/templates/attributes_network.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/attributes/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -525,10 +516,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/attributes/attribute_extr_client.py">
+    <entry file="file://$PROJECT_DIR$/attributes/web_rpc_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="222">
+          <caret line="246" column="28" lean-forward="true" selection-start-line="246" selection-start-column="28" selection-end-line="246" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -548,18 +539,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/attributes/views.py">
+    <entry file="file://$PROJECT_DIR$/attributes/attribute_extr_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="168" column="66" lean-forward="true" selection-start-line="168" selection-start-column="66" selection-end-line="168" selection-end-column="66" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/attributes/web_rpc_server.py">
+    <entry file="file://$PROJECT_DIR$/templates/attributes_network.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="223" column="16" lean-forward="true" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/attributes/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="166" column="66" lean-forward="true" selection-start-line="166" selection-start-column="66" selection-end-line="166" selection-end-column="66" />
           <folding />
         </state>
       </provider>
