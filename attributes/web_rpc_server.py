@@ -222,9 +222,11 @@ def text_to_story(text):
     result['leader'] = ret1['leader']
 
     tmp_str = ""
+    tottext = ""
     for line in file.readlines():
         line_list = line.split('\t')
         curr_char = line_list[len(line_list) - 1]
+        tottext += line_list[0]
         if curr_char[0] == 'N':
             continue
         ##name属性
